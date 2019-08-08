@@ -1,4 +1,3 @@
-    
 /**
  * Sample React Native App
  * https://github.com/facebook/react-native
@@ -15,7 +14,12 @@ import {
   View,
   Text,
   StatusBar,
-  Button
+  Button,
+  FlatList,
+  ActivityIndicator,
+  TouchableOpacity,
+  ToastAndroid,
+  Image
 } from 'react-native';
 
 import {
@@ -26,14 +30,145 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
-import Icon from 'react-native-vector-icons/EvilIcons';
-import { createStackNavigator, createAppContainer,createDrawerNavigator,router } from "react-navigation";
+//import Icon from 'react-native-vector-icons/EvilIcons';
+import Icon from 'react-native-vector-icons/Feather';
+import { createStackNavigator, createAppContainer, createDrawerNavigator, router } from "react-navigation";
 
-export default class App extends React.Component {
-  render() {
-    return <AppContainer />;
+export default class menuscreen extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      button_toggle: false
+    }
   }
+
+  colorChange = () => {
+    alert("loginAction");
+    const newState = !this.state.button_toggle;
+    this.setState({ button_toggle: newState });
+  }
+
+  render() {
+    const { button_toggle } = this.state;
+    const buttonBg = button_toggle ? "#3700b3" : "#ff00ff"; //dark purple and magenta
+    return (
+      <View style={styles.container}>
+        <View style={{ flexDirection: 'row', borderWidth: 0 }}>
+          <View style={{ flex: 1 }}>
+            <Image style={styles.imageView2} source={require('./1.jpg')} />
+          </View>
+          <View style={{ flex: 3, backgroundColor: 'white' }}>
+
+            <View style={{ flex: 1, alignItems: 'stretch', justifyContent: 'space-around', backgroundColor: 'white' }}>
+              <View style={{ justifyContent: 'space-around', alignItems: 'flex-start', marginLeft: 35 }}>
+                <Text style={{ borderWidth: 0, justifyContent: 'space-around', fontSize: 18, alignItems: 'center' }}>
+                  <Icon name="user" size={15} /> Ramana Sakhavarapu</Text>
+                {/* <Text style={{ fontSize: 10, color: 'grey' }}>NAme</Text> */}
+                {/* <Icon name="award" size={30} /> */}
+              </View>
+            </View>
+
+
+
+            <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
+              <View style={{ alignItems: 'center' }}>
+                <Text>6</Text>
+                <Text style={{ fontSize: 10, color: 'grey' }}>Class</Text>
+              </View>
+              <View style={{ alignItems: 'center' }}>
+                <Text>A</Text>
+                <Text style={{ fontSize: 10, color: 'grey' }}>Section</Text>
+              </View>
+              <View style={{ alignItems: 'center' }}>
+                <Text>112</Text>
+                <Text style={{ fontSize: 10, color: 'grey' }}>Roll</Text>
+              </View>
+            </View>
+
+          </View>
+        </View>
+
+        <View style={{ backgroundColor: 'white', marginTop: 40 }}>
+          <TouchableOpacity style={styles.menuButtons}>
+            <View>
+              {/* <Text style={styles.buttonText} onPress={this.loginAction}>Login</Text> */}
+              <Text style={styles.buttonText}><Icon name="file-text" size={20} />   Notices</Text>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.menuButtons}>
+            <View>
+              {/* <Text style={styles.buttonText} onPress={this.loginAction}>Login</Text> */}
+              <Text style={styles.buttonText}><Icon name="calendar" size={20} />   Attendance</Text>
+
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.menuButtons}>
+            <View>
+              {/* <Text style={styles.buttonText} onPress={this.loginAction}>Login</Text> */}
+              <Text style={styles.buttonText}><Icon name="bar-chart-2" size={20} />   Progress Report</Text>
+
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.menuButtons}>
+            <View>
+              {/* <Text style={styles.buttonText} onPress={this.loginAction}>Login</Text> */}
+              <Text style={styles.buttonText}><Icon name="send" size={20} />   Communication</Text>
+
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.menuButtons}>
+            <View>
+              {/* <Text style={styles.buttonText} onPress={this.loginAction}>Login</Text> */}
+              <Text style={styles.buttonText}><Icon name="briefcase" size={20} />   Fee  Payment</Text>
+              {/* <Icon name="dollar-sign" size={20} />
+            <Icon name="credit-card" size={20} /> */}
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.menuButtons}>
+            <View>
+              {/* <Text style={styles.buttonText} onPress={this.loginAction}>Login</Text> */}
+              <Text style={styles.buttonText}><Icon name="book" size={20} />   Digital Campus Diary </Text>
+              {/* <Icon name="clipboard" size={20} />  */}
+            </View>
+          </TouchableOpacity>
+        </View>
+
+      </View >
+    );
+  }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 class HomeScreen extends React.Component {
@@ -49,17 +184,16 @@ class HomeScreen extends React.Component {
     return (
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
         <Text>Home Screen h</Text>
-        <Text><Icon  name='trophy' size={30}/>icon</Text>
         <Button title="Go to Details"
-        onPress={()=> this.props.navigation.navigate('Details')}/>
+          onPress={() => this.props.navigation.navigate('Details')} />
       </View>
     );
   }
 }
 class DashboardScreen extends React.Component {
-   static navigationOptions={
-    headerStyle:{
-      backgroundColor:'red'
+  static navigationOptions = {
+    headerStyle: {
+      backgroundColor: 'red'
     }
   };
   static navigationOptions = {
@@ -67,10 +201,10 @@ class DashboardScreen extends React.Component {
   };
   render() {
     return (
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center",borderWidth:15,borderColor:'green' }}>
+      <View style={{ flex: 1, alignItems: "center", justifyContent: "center", borderWidth: 15, borderColor: 'green' }}>
         <Text>Dashboard</Text>
         <Button title="Go to Details"
-        onPress={()=> this.props.navigation.navigate('Details')}/>
+          onPress={() => this.props.navigation.navigate('Details')} />
       </View>
     );
   }
@@ -96,49 +230,120 @@ class DetailsScreen extends React.Component {
   }
 }
 
+class NoticeScreen extends React.Component {
+  //export default class NoticeScreen extends React.Component {
+  // static navigationOptions={
+  //   headerStyle:{
+  //     backgroundColor:'red'
+  //   }
+  // };
+  // static navigationOptions = {
+  //   title: 'Notice',
+  // };
+
+  Constructor(props) {
+    Super(props);
+    this.state = {
+      // isLoading: true,
+      // dataSource: []
+    }
+    console.log("dataSource");
+    console.log(dataSource);
+    console.log("dataSource");
+  }//constructor
+
+  renderItem = () => {
+
+  }
+
+  componentDidMount() {
+    fetch('https://jsonplaceholder.typicode.com/posts')
+      .then((response) => response.json())
+      .then((responseJson) => {
+        console.log(responseJson);
+        this.setState({
+          // isLoading: false,
+          // dataSource: responseJson
+        })
+      })
+  }//asdasdad
+
+
+  render() {
+    // if (this.state.isLoading == true) {
+    //   return (
+    //     <View Style={StyleSheet.container}>
+    //       <ActivityIndicator size="Large" animating />
+    //     </View>
+    //   )
+    // } else {
+    return (
+      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }} >
+        <Text>Notice Screen</Text>
+        {/* <Button title="Go to Details"
+                onPress={() => this.props.navigation.navigate('Details')} /> 
+                 //data={this.state.dataSource}
+                 */}
+
+        {/* <FlatList
+          data={[{ key: 'a' }, { key: 'b' }]}
+          renderItem={({ item }) => <Text>{item.key}</Text>}
+        /> */}
+        <FlatList
+          data={this.state.dataSource}
+          renderItem={this.state.renderItem}
+        />
+      </View>
+    );
+    //}else
+
+  }
+}
 
 const AppNavigator = createStackNavigator({
-    Home : HomeScreen,
-    Details:DetailsScreen
+  //Home : HomeScreen,
+  Home: NoticeScreen,
+  Details: DetailsScreen
 },
-{
-  initialRouteName:"Home",
+  {
+    initialRouteName: "Home",
     defaultNavigationOptions: {
-      headerStyle:{
-        backgroundColor:'orange'
+      headerStyle: {
+        backgroundColor: 'orange'
       },
-      headerTintColor:'red',
-      headerTitleStyle:{
-        fontWeight:'bold',
+      headerTintColor: 'red',
+      headerTitleStyle: {
+        fontWeight: 'bold',
       },
-    }  
-}
+    }
+  }
 );
 
 
 
 const AppDrawerNavigator = createDrawerNavigator(
   {
-    Home : HomeScreen,
-    Dashboard:DashboardScreen,
-    Details:DetailsScreen,
-},
-{
-  initialRouteName:"Home",
+    //Home : HomeScreen,
+    Home: NoticeScreen,
+    Dashboard: DashboardScreen,
+    Details: DetailsScreen,
+  },
+  {
+    initialRouteName: "Home",
     defaultNavigationOptions: {
-      headerStyle:{
-        backgroundColor:'blue'
+      headerStyle: {
+        backgroundColor: 'blue'
       },
-      headerTintColor:'pink',
-      headerTitleStyle:{
-        fontWeight:'bold',
+      headerTintColor: 'pink',
+      headerTitleStyle: {
+        fontWeight: 'bold',
       },
-    } 
-}
+    }
+  }
 );
 
 //const AppContainer = createAppContainer(AppDrawerNavigator);
-const AppContainer = createAppContainer(AppNavigator);
+//const AppContainer = createAppContainer(AppNavigator);
 
 
 
@@ -263,7 +468,47 @@ const styles = StyleSheet.create({
     paddingRight: 12,
     textAlign: 'right',
   },
+  buttonText: {
+    fontSize: 18,
+    fontWeight: '900',
+    color: "#fff",
+    textAlign: "center",
+  },
+  container: {
+    backgroundColor: "#fff",
+    marginTop: 15,
+    //justifyContent: "center",
+    alignItems: "center",
+    flex: 1,
+  },
+  menuButtons: {
+    backgroundColor: "#3f51b5",
+    width: 300,
+    paddingVertical: 8,
+    marginVertical: 10,
+    borderRadius: 5,
+    borderWidth: 1,
+    borderColor: "#303f9f"
+  },
+  list: {
+    backgroundColor: "white",
+    width: 500,
+    paddingVertical: 8,
+    marginVertical: 10,
+    borderRadius: 5
+  },
+  imageView: {
+    width: 70,
+    height: 70,
+    borderRadius: 50
+  },
+  imageView2: {
+    width: 75,
+    height: 75,
+    borderRadius: 37.5,
+    marginLeft: 15
+  }
 });
-
 // export default App;
-
+// flexDirection: 'row',
+// flex: 1
