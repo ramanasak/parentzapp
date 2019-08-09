@@ -33,7 +33,7 @@ import {
 //import Icon from 'react-native-vector-icons/EvilIcons';
 import Icon from 'react-native-vector-icons/Feather';
 import { createStackNavigator, createAppContainer, createDrawerNavigator, router } from "react-navigation";
-//default
+
 export class menuscreen extends React.Component {
   constructor(props) {
     super(props)
@@ -139,14 +139,13 @@ export class menuscreen extends React.Component {
   }
 
 }//menuscreen
-
-export default class Notice extends React.Component {
+//default
+export class Notice extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = { isLoading: true }
   }//constructor
-
 
   //https://facebook.github.io/react-native/movies.json
   //https://jsonplaceholder.typicode.com/posts
@@ -256,7 +255,10 @@ export default class Notice extends React.Component {
     if (this.state.isLoading) {
       return (
         <View style={{ flex: 1, padding: 20 }}>
-          <ActivityIndicator />
+          {/* <ActivityIndicator /> */}
+          <View style={[styles.container, styles.horizontal]}>
+            <ActivityIndicator size="large" color="green" />
+          </View>
         </View>
       )
     }
@@ -274,9 +276,10 @@ export default class Notice extends React.Component {
             <View style={{ flex: 1, alignItems: 'stretch', justifyContent: 'space-around', backgroundColor: 'white' }}>
               <View style={{ justifyContent: 'space-around', alignItems: 'flex-start', marginLeft: 35 }}>
                 <Text style={{ borderWidth: 0, justifyContent: 'space-around', fontSize: 18, alignItems: 'center' }}>
-                  <Icon name="user" size={15} /> Ramana Sakhavarapu</Text>
+                  <Icon name="user" size={15} /> Ramana Sakhavarapu     <Icon name="chevron-down" size={15} /></Text>
                 {/* <Text style={{ fontSize: 10, color: 'grey' }}>NAme</Text> */}
                 {/* <Icon name="award" size={30} /> */}
+
               </View>
             </View>
 
@@ -350,7 +353,11 @@ export default class Notice extends React.Component {
 
 
 
-
+export default class App extends React.Component {
+  render() {
+    return <AppContainer />;
+  }
+}
 
 
 
@@ -501,8 +508,8 @@ class NoticeScreen extends React.Component {
 }
 
 const AppNavigator = createStackNavigator({
-  //Home : HomeScreen,
-  Home: NoticeScreen,
+  Home: HomeScreen,
+  //Home: NoticeScreen,
   Details: DetailsScreen
 },
   {
@@ -523,8 +530,8 @@ const AppNavigator = createStackNavigator({
 
 const AppDrawerNavigator = createDrawerNavigator(
   {
-    //Home : HomeScreen,
-    Home: NoticeScreen,
+    Home: HomeScreen,
+    //Home: NoticeScreen,
     Dashboard: DashboardScreen,
     Details: DetailsScreen,
   },
@@ -542,7 +549,7 @@ const AppDrawerNavigator = createDrawerNavigator(
   }
 );
 
-//const AppContainer = createAppContainer(AppDrawerNavigator);
+const AppContainer = createAppContainer(AppDrawerNavigator);
 //const AppContainer = createAppContainer(AppNavigator);
 
 
