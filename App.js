@@ -56,7 +56,7 @@ export class menuscreen extends React.Component {
         <StatusBar backgroundColor="white" barStyle="dark-content" />
         <View style={{ flexDirection: 'row', borderWidth: 0 }}>
           <View style={{ flex: 1 }}>
-            <Image style={styles.imageView2} source={require('./1.jpg')} />
+            <Image style={styles.imageView2} source={require('./studentpic.jpg')} />
           </View>
           <View style={{ flex: 3, backgroundColor: 'white' }}>
 
@@ -267,7 +267,7 @@ export default class Notice extends React.Component {
 
         <View style={{ flexDirection: 'row', borderWidth: 0, backgroundColor: 'white', marginTop: 10 }}>
           <View style={{ flex: 1 }}>
-            <Image style={styles.imageView2} source={require('./1.jpg')} />
+            <Image style={styles.imageView2} source={require('./studentpic.jpg')} />
           </View>
           <View style={{ flex: 3, backgroundColor: 'white' }}>
 
