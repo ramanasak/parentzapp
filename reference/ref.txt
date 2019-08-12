@@ -1,0 +1,10 @@
+<Image resizeMode="contain" source={require{url}}>
+    <Image></Image>
+</Image>
+image inside a image
+contain makes it wont go out of its view
+
+fontWeight: '600'----bold
+fontSize: 10
+letterSpacing: 0.5
+
