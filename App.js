@@ -32,7 +32,18 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 import Icon from 'react-native-vector-icons/Feather';
 import Pdf from 'react-native-pdf';
+import { Calendar, CalendarList, Agenda } from 'react-native-calendars';
 import { createStackNavigator, createAppContainer, createDrawerNavigator, createSwitchNavigator, createBottomTabNavigator, router } from "react-navigation";
+
+//importing screens 
+import GalleryScreen from './screens/GalleryScreen';
+import NoticesDisplayScreen from './screens/NoticesDisplayScreen';
+import StudentInfoScreen from './screens/StudentInfoScreen';
+import NoticesDisplayPdfScreen from './screens/NoticesDisplayPdfScreen';
+import AttendanceScreen from './screens/AttendanceScreen';
+
+//importing styles
+//import Mainstyles from './screens/Mainstyles.js';
 
 export default class App extends React.Component {
   render() {
@@ -71,267 +82,10 @@ class A extends React.Component {
     );
   }
 }
-class B extends React.Component {
-  static navigationOptions = {
-    title: 'B',
-  };
-  render() {
-    return (
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-        {/* <Text>welcome </Text> */}
-        <Button title="B"
-          onPress={() => this.props.navigation.navigate('Dashboard')} />
-        {/* <Button title="SignUp"
-          onPress={() => alert("signup")} /> */}
-      </View>
-    );
-  }
-}
-class NoticesDisplayPdfScreen extends React.Component {
-  static navigationOptions = {
-    //title: 'Home',
-  };
-  render() {
-    const source = { uri: 'http://samples.leanpub.com/thereactnativebook-sample.pdf', cache: true };
-    //const source = require('./test.pdf');  // ios only
-    //const source = {uri:'bundle-assets://test.pdf'};
-
-    //const source = {uri:'file:///sdcard/test.pdf'};
-    //const source = {uri:"data:application/pdf;base64,..."};
-
-    return (
-
-      <View style={styles.pdfcontainer}>
-        <Text>Attached Documents </Text>
-
-
-        <Pdf
-          source={source}
-          onLoadComplete={(numberOfPages, filePath) => {
-            console.log(`number of pages: ${numberOfPages}`);
-          }}
-          onPageChanged={(page, numberOfPages) => {
-            console.log(`current page: ${page}`);
-          }}
-          onError={(error) => {
-            console.log(error);
-          }}
-          style={styles.pdf} />
-        <Text>
-
-          Back button
-
-
-          </Text>
-      </View>
-    )
-  }
-}
-class NoticesDisplayScreen extends React.Component {
-
-  constructor(props) {
-    super(props);
-    this.state = { isLoading: true }
-  }//constructor
-
-  //https://facebook.github.io/react-native/movies.json
-  //https://jsonplaceholder.typicode.com/posts
-
-  renderSeparator = () => {
-    return (
-      <View style={{ height: 1, width: '100%', backgroundColor: 'grey' }}>
-      </View>
-    )
-  }
-  renderItem = ({ item }) => {
-    return (
-      <TouchableOpacity style={styles.list} onPress={() => ToastAndroid.show(item.title, ToastAndroid.SHORT)}>
-        <View style={{ flex: 1, flexDirection: 'row', backgroundColor: 'white', justifyContent: 'center' }}>
-          <View style={{
-            flex: 2, justifyContent: 'center', marginLeft: 15, backgroundColor: 'white',
-            borderColor: 'black', borderWidth: 1, borderRadius: 10, borderColor: 'white'
-          }}>
-            <Text
-              style={{
-                fontSize: 18, color: '#3f51b5', marginBottom: 1, marginTop: 1,
-                justifyContent: 'center', marginLeft: 20
-              }}
-              onPress={() => this.props.navigation.navigate('NoticesDisplayPdfScreen')} >
-              {item.title}, {item.releaseYear} AA
-            </Text>
-            <Text style={{ fontSize: 14, color: '#3f51b5', marginBottom: 5, marginLeft: 20 }}>
-              {item.releaseYear}
-            </Text>
-          </View>
-          <View style={{ flex: 1, justifyContent: 'center', backgroundColor: 'white' }}>
-            <Text style={{ fontSize: 18, color: '#3f51b5', marginBottom: 1, marginTop: 1, justifyContent: 'center' }}>
-              <Icon name="paperclip" size={20} />
-            </Text>
-          </View>
-        </View>
-      </TouchableOpacity>
-
-    )
-  }
-
-  componentDidMount() {
-
-    return fetch('https://facebook.github.io/react-native/movies.json')
-      .then((response) => response.json())
-      .then((responseJson) => {
-        console.log(responseJson);
-        this.setState({
-          dataSource: responseJson.movies,
-          isLoading: false
-        }, function () { }
-        );
-
-      }).catch((error) => {
-        console.log(error)
-      })
-
-  }//asdasdad
-
-
-
-  // componentDidMount() {
-  //   return fetch('https://facebook.github.io/react-native/movies.json')
-  //     .then((response) => response.json())
-  //     .then((responseJson) => {
-
-  //       this.setState({
-  //         isLoading: false,
-  //         dataSource: responseJson.movies,
-  //       }, function () {
-
-  //       });
-
-  //     })
-  //     .catch((error) => {
-  //       console.error(error);
-  //     });
-  // }
-
-  // render() {
-  //   // if (this.state.isLoading == true) {
-  //   //   return (
-  //   //     <View Style={StyleSheet.container}>
-  //   //       <ActivityIndicator size="Large" animating />
-  //   //     </View>
-  //   //   )
-  //   // } else {
-  //   return (
-  //     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }} >
-  //       <Text>Notice Screen</Text>
-  //       {/* <Button title="Go to Details"
-  //                 onPress={() => this.props.navigation.navigate('Details')} /> 
-  //                  //data={this.state.dataSource}
-  //                  */}
-
-  //       {/* <FlatList
-  //           data={[{ key: 'a' }, { key: 'b' }]}
-  //           renderItem={({ item }) => <Text>{item.key}</Text>}
-  //         /> */}
-  //       <FlatList
-  //         data={this.state.dataSource}
-  //         renderItem={this.state.renderItem}
-  //       />
-  //     </View>
-  //   );
-  //   //}else
-
-  // }
-
-  render() {
-
-    if (this.state.isLoading) {
-      return (
-        <View style={{ flex: 1, padding: 20 }}>
-          {/* <ActivityIndicator /> */}
-          <View style={[styles.container, styles.horizontal]}>
-            <ActivityIndicator size="large" color="green" />
-          </View>
-        </View>
-      )
-    }
-    //style={{ backgroundColor: 'white' }}
-    return (
-      <ScrollView style={{ color: "white", fontSize: 18, textAlign: 'center' }}>
-        <StatusBar backgroundColor="#fff" barStyle="dark-content" />
-
-        <View style={{ flexDirection: 'row', borderWidth: 0, backgroundColor: 'white', marginTop: 10 }}>
-          <View style={{ flex: 1 }}>
-            <Image style={styles.imageView2} source={require('./studentpic.jpg')} />
-          </View>
-          <View style={{ flex: 3, backgroundColor: 'white' }}>
-
-            <View style={{ flex: 1, alignItems: 'stretch', justifyContent: 'space-around', backgroundColor: 'white' }}>
-              <View style={{ justifyContent: 'space-around', alignItems: 'flex-start', marginLeft: 35 }}>
-                <Text style={{ borderWidth: 0, justifyContent: 'space-around', fontSize: 18, alignItems: 'center' }}>
-                  <Icon name="user" size={15} /> Ramana Sakhavarapu     <Icon name="chevron-down" size={15} /></Text>
-                {/* <Text style={{ fontSize: 10, color: 'grey' }}>NAme</Text> */}
-                {/* <Icon name="award" size={30} /> */}
-
-              </View>
-            </View>
-
-
-
-            <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-              <View style={{ alignItems: 'center' }}>
-                <Text>6</Text>
-                <Text style={{ fontSize: 10, color: 'grey' }}>Class</Text>
-              </View>
-              <View style={{ alignItems: 'center' }}>
-                <Text>A</Text>
-                <Text style={{ fontSize: 10, color: 'grey' }}>Section</Text>
-              </View>
-              <View style={{ alignItems: 'center' }}>
-                <Text>112</Text>
-                <Text style={{ fontSize: 10, color: 'grey' }}>Roll</Text>
-              </View>
-            </View>
-
-          </View>
-        </View>
 
 
 
 
-
-        <View style={{ marginTop: 10 }}>
-          <Text style={{ color: "#303f9f", fontSize: 20, textAlign: 'center', marginBottom: 15, marginTop: 10 }}>
-            <Icon name="file-text" size={20} />  NOTICES</Text>
-        </View>
-        <View>
-          <FlatList
-            //ItemSeparatorComponent={this.renderSeparator}
-            data={this.state.dataSource}
-            renderItem={this.renderItem}
-            keyExtractor={({ id }, index) => id}
-            ItemSeparatorComponent={this.renderSeparator}
-          />
-        </View>
-        {/* <View style={{ backgroundColor: 'blue', flexDirection: 'row', flex: 1 }}>
-          <View style={{ backgroundColor: 'red', flexDirection: 'row', flex: 1 }}>
-            <View style={{ backgroundColor: 'orange', flexDirection: 'column', flex: 1 }}>
-              <Text style={{ color: "#303f9f", fontSize: 20, textAlign: 'center', marginBottom: 15, marginTop: 10 }}>
-                <Icon name="file-text" size={20} />  test</Text>
-              <Text style={{ color: "#303f9f", fontSize: 20, textAlign: 'center', marginBottom: 15, marginTop: 10 }}>
-                <Icon name="file-text" size={20} />  test</Text>
-            </View>
-          </View>
-          <View style={{ backgroundColor: 'yellow', flexDirection: 'row', flex: 1 }}>
-            <Text style={{ color: "#303f9f", fontSize: 20, textAlign: 'center', marginBottom: 15, marginTop: 10 }}>
-              <Icon name="file-text" size={20} />  test</Text>
-          </View>
-        </View> */}
-
-      </ScrollView>
-    );
-  }
-
-}//notice
 
 class DashboardScreen extends React.Component {
   constructor(props) {
@@ -353,37 +107,7 @@ class DashboardScreen extends React.Component {
     return (
       <View style={styles.container}>
         <StatusBar backgroundColor="white" barStyle="dark-content" />
-        <View style={{ flexDirection: 'row', borderWidth: 0 }}>
-          <View style={{ flex: 1 }}>
-            <Image style={styles.imageView2} source={require('./studentpic.jpg')} />
-          </View>
-          <View style={{ flex: 3, backgroundColor: 'white' }}>
-
-            <View style={{ flex: 1, alignItems: 'stretch', justifyContent: 'space-around', backgroundColor: 'white' }}>
-              <View style={{ justifyContent: 'space-around', alignItems: 'flex-start', marginLeft: 35 }}>
-                <Text style={{ borderWidth: 0, justifyContent: 'space-around', fontSize: 18, alignItems: 'center' }}>
-                  <Icon name="user" size={15} /> Ramana Sakhavarapu</Text>
-              </View>
-            </View>
-
-
-            <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-              <View style={{ alignItems: 'center' }}>
-                <Text>6</Text>
-                <Text style={{ fontSize: 10, color: 'grey' }}>Class</Text>
-              </View>
-              <View style={{ alignItems: 'center' }}>
-                <Text>A</Text>
-                <Text style={{ fontSize: 10, color: 'grey' }}>Section</Text>
-              </View>
-              <View style={{ alignItems: 'center' }}>
-                <Text>112</Text>
-                <Text style={{ fontSize: 10, color: 'grey' }}>Roll</Text>
-              </View>
-            </View>
-
-          </View>
-        </View>
+        <StudentInfoScreen />
 
         <View style={{ backgroundColor: 'white', marginTop: 40 }}>
           <TouchableOpacity style={styles.menuButtons}>
@@ -395,7 +119,13 @@ class DashboardScreen extends React.Component {
           </TouchableOpacity>
           <TouchableOpacity style={styles.menuButtons}>
             <View>
-              <Text style={styles.buttonText} onPress={() => this.props.navigation.navigate('Welcome')} >
+              <Text style={styles.buttonText} onPress={() => this.props.navigation.navigate('Gallery')} >
+                <Icon name="film" size={20} />   Gallery</Text>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.menuButtons}>
+            <View>
+              <Text style={styles.buttonText} onPress={() => this.props.navigation.navigate('Attendance')} >
                 <Icon name="calendar" size={20} />   Attendance</Text>
             </View>
           </TouchableOpacity>
@@ -416,8 +146,8 @@ class DashboardScreen extends React.Component {
             <View>
 
               <Text style={styles.buttonText}
-                onPress={() => this.props.navigation.navigate('ProfileDiplayScreen')} ><Icon name="briefcase" size={20} />
-                Fee  Payment</Text>
+                onPress={() => this.props.navigation.navigate('ProfileDiplayScreen')} >
+                <Icon name="briefcase" size={20} />   Fee  Payment</Text>
               {/* <Icon name="dollar-sign" size={20} />
             <Icon name="credit-card" size={20} /> */}
             </View>
@@ -452,14 +182,32 @@ const DashboardStackNavigator = createStackNavigator(
         headerTitle: routeName
       };
     }
-  }
+  },
+
 );
-const NoticeTabNavigator = createBottomTabNavigator(
+// const NoticeTabNavigator = createBottomTabNavigator(
+//   {
+//     // NoticesDisplayScreen,
+//     // NoticesDisplayPdfScreen
+//     //A,
+//     //B
+//   },
+//   {
+//     navigationOptions: ({ navigation }) => {
+//       const { routeName } = navigation.state.routes[navigation.state.index];
+//       return {
+//         header: null,
+//         headerTitle: routeName
+//       };
+//     }
+//   }
+// );
+
+const NoticesStackNavigator = createStackNavigator(
   {
+    // NoticeTabNavigator: NoticeTabNavigator
     NoticesDisplayScreen,
-    NoticesDisplayPdfScreen,
-    A,
-    B
+    NoticesDisplayPdfScreen
   },
   {
     navigationOptions: ({ navigation }) => {
@@ -471,10 +219,25 @@ const NoticeTabNavigator = createBottomTabNavigator(
     }
   }
 );
-
-const NoticesStackNavigator = createStackNavigator(
+const GalleryStackNavigator = createStackNavigator(
   {
-    NoticeTabNavigator: NoticeTabNavigator
+    // NoticeTabNavigator: NoticeTabNavigator
+    GalleryScreen: { screen: GalleryScreen },
+  },
+  {
+    navigationOptions: ({ navigation }) => {
+      const { routeName } = navigation.state.routes[navigation.state.index];
+      return {
+        header: null,
+        headerTitle: routeName
+      };
+    }
+  }
+);
+const AttendanceStackNavigator = createStackNavigator(
+  {
+    // NoticeTabNavigator: NoticeTabNavigator
+    AttendanceScreen: { screen: AttendanceScreen },
   },
   {
     navigationOptions: ({ navigation }) => {
@@ -492,6 +255,12 @@ const AppDrawerNavigator = createDrawerNavigator({
   },
   Notices: {
     screen: NoticesStackNavigator
+  },
+  Gallery: {
+    screen: GalleryStackNavigator
+  },
+  Attendance: {
+    screen: AttendanceStackNavigator
   }
 });
 
