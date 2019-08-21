@@ -19,7 +19,8 @@ import {
   ActivityIndicator,
   TouchableOpacity,
   ToastAndroid,
-  Image
+  Image,
+  Dimensions
 } from 'react-native';
 
 import {
@@ -30,6 +31,7 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 import Icon from 'react-native-vector-icons/Feather';
+import Pdf from 'react-native-pdf';
 import { createStackNavigator, createAppContainer, createDrawerNavigator, createSwitchNavigator, createBottomTabNavigator, router } from "react-navigation";
 
 export default class App extends React.Component {
@@ -53,7 +55,78 @@ class WelcomeScreen extends React.Component {
     );
   }
 }
+class A extends React.Component {
+  static navigationOptions = {
+    title: 'A',
+  };
+  render() {
+    return (
+      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+        {/* <Text>welcome </Text> */}
+        <Button title="A"
+          onPress={() => this.props.navigation.navigate('Dashboard')} />
+        {/* <Button title="SignUp"
+          onPress={() => alert("signup")} /> */}
+      </View>
+    );
+  }
+}
+class B extends React.Component {
+  static navigationOptions = {
+    title: 'B',
+  };
+  render() {
+    return (
+      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+        {/* <Text>welcome </Text> */}
+        <Button title="B"
+          onPress={() => this.props.navigation.navigate('Dashboard')} />
+        {/* <Button title="SignUp"
+          onPress={() => alert("signup")} /> */}
+      </View>
+    );
+  }
+}
+class NoticesDisplayPdfScreen extends React.Component {
+  static navigationOptions = {
+    //title: 'Home',
+  };
+  render() {
+    const source = { uri: 'http://samples.leanpub.com/thereactnativebook-sample.pdf', cache: true };
+    //const source = require('./test.pdf');  // ios only
+    //const source = {uri:'bundle-assets://test.pdf'};
 
+    //const source = {uri:'file:///sdcard/test.pdf'};
+    //const source = {uri:"data:application/pdf;base64,..."};
+
+    return (
+
+      <View style={styles.pdfcontainer}>
+        <Text>Attached Documents </Text>
+
+
+        <Pdf
+          source={source}
+          onLoadComplete={(numberOfPages, filePath) => {
+            console.log(`number of pages: ${numberOfPages}`);
+          }}
+          onPageChanged={(page, numberOfPages) => {
+            console.log(`current page: ${page}`);
+          }}
+          onError={(error) => {
+            console.log(error);
+          }}
+          style={styles.pdf} />
+        <Text>
+
+          Back button
+
+
+          </Text>
+      </View>
+    )
+  }
+}
 class NoticesDisplayScreen extends React.Component {
 
   constructor(props) {
@@ -78,8 +151,13 @@ class NoticesDisplayScreen extends React.Component {
             flex: 2, justifyContent: 'center', marginLeft: 15, backgroundColor: 'white',
             borderColor: 'black', borderWidth: 1, borderRadius: 10, borderColor: 'white'
           }}>
-            <Text style={{ fontSize: 18, color: '#3f51b5', marginBottom: 1, marginTop: 1, justifyContent: 'center', marginLeft: 20 }}>
-              {item.title}, {item.releaseYear}
+            <Text
+              style={{
+                fontSize: 18, color: '#3f51b5', marginBottom: 1, marginTop: 1,
+                justifyContent: 'center', marginLeft: 20
+              }}
+              onPress={() => this.props.navigation.navigate('NoticesDisplayPdfScreen')} >
+              {item.title}, {item.releaseYear} AA
             </Text>
             <Text style={{ fontSize: 14, color: '#3f51b5', marginBottom: 5, marginLeft: 20 }}>
               {item.releaseYear}
@@ -289,7 +367,6 @@ class DashboardScreen extends React.Component {
             </View>
 
 
-
             <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
               <View style={{ alignItems: 'center' }}>
                 <Text>6</Text>
@@ -326,7 +403,6 @@ class DashboardScreen extends React.Component {
             <View>
               <Text style={styles.buttonText}
                 onPress={() => this.props.navigation.navigate('Welcome')}><Icon name="bar-chart-2" size={20} />   Progress Report</Text>
-
             </View>
           </TouchableOpacity>
           <TouchableOpacity style={styles.menuButtons}>
@@ -360,6 +436,7 @@ class DashboardScreen extends React.Component {
   }
 }
 
+//Navigation 
 
 const DashboardStackNavigator = createStackNavigator(
   {
@@ -368,16 +445,28 @@ const DashboardStackNavigator = createStackNavigator(
   }
   ,
   {
-    defaultNavigationOptions: ({ navigation }) => {
+    navigationOptions: ({ navigation }) => {
+      const { routeName } = navigation.state.routes[navigation.state.index];
       return {
-        headerLeft: (
-          <Icon
-            style={{ paddingLeft: 10 }}
-            onPress={() => navigation.openDrawer()}
-            name="menu"
-            size={30}
-          />
-        )
+        header: null,
+        headerTitle: routeName
+      };
+    }
+  }
+);
+const NoticeTabNavigator = createBottomTabNavigator(
+  {
+    NoticesDisplayScreen,
+    NoticesDisplayPdfScreen,
+    A,
+    B
+  },
+  {
+    navigationOptions: ({ navigation }) => {
+      const { routeName } = navigation.state.routes[navigation.state.index];
+      return {
+        header: null,
+        headerTitle: routeName
       };
     }
   }
@@ -385,20 +474,14 @@ const DashboardStackNavigator = createStackNavigator(
 
 const NoticesStackNavigator = createStackNavigator(
   {
-    NoticesDisplayScreen: NoticesDisplayScreen
-  }
-  ,
+    NoticeTabNavigator: NoticeTabNavigator
+  },
   {
-    defaultNavigationOptions: ({ navigation }) => {
+    navigationOptions: ({ navigation }) => {
+      const { routeName } = navigation.state.routes[navigation.state.index];
       return {
-        headerLeft: (
-          <Icon
-            style={{ paddingLeft: 10 }}
-            onPress={() => navigation.openDrawer()}
-            name="menu"
-            size={30}
-          />
-        )
+        header: null,
+        headerTitle: routeName
       };
     }
   }
@@ -496,5 +579,15 @@ const styles = StyleSheet.create({
     height: 75,
     borderRadius: 37.5,
     marginLeft: 15
+  },
+  pdfcontainer: {
+    flex: 1,
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    marginTop: 25,
+  },
+  pdf: {
+    flex: 1,
+    width: Dimensions.get('window').width,
   }
 });
