@@ -41,6 +41,7 @@ import NoticesDisplayScreen from './screens/NoticesDisplayScreen';
 import StudentInfoScreen from './screens/StudentInfoScreen';
 import NoticesDisplayPdfScreen from './screens/NoticesDisplayPdfScreen';
 import AttendanceScreen from './screens/AttendanceScreen';
+import AttendanceGraphScreen from './screens/AttendanceGraphScreen';
 
 //importing styles
 //import Mainstyles from './screens/Mainstyles.js';
@@ -137,9 +138,7 @@ class DashboardScreen extends React.Component {
           </TouchableOpacity>
           <TouchableOpacity style={styles.menuButtons}>
             <View>
-
               <Text style={styles.buttonText}><Icon name="send" size={20} />   Communication</Text>
-
             </View>
           </TouchableOpacity>
           <TouchableOpacity style={styles.menuButtons}>
@@ -238,6 +237,8 @@ const AttendanceStackNavigator = createStackNavigator(
   {
     // NoticeTabNavigator: NoticeTabNavigator
     AttendanceScreen: { screen: AttendanceScreen },
+    AttendanceGraphScreen: { screen: AttendanceGraphScreen },
+
   },
   {
     navigationOptions: ({ navigation }) => {
@@ -268,7 +269,10 @@ const AppSwitchNavigator = createSwitchNavigator({
   Welcome: { screen: WelcomeScreen },
   Dashboard: { screen: AppDrawerNavigator }
 });
-const AppContainer = createAppContainer(AppSwitchNavigator);
+const AppContainer = createAppContainer(AppSwitchNavigator);//use 
+//const AppContainer = createAppContainer(AttendanceStackNavigator);
+
+
 //const AppContainer = createAppContainer(AppDrawerNavigator);
 //const AppContainer = createAppContainer(DashboardBottomTabNavigator);
 

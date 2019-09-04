@@ -24,7 +24,9 @@ import {
 import Icon from 'react-native-vector-icons/Feather';
 import Pdf from 'react-native-pdf';
 import StudentInfoScreen from './StudentInfoScreen';
+import AttendanceGraphScreen from './AttendanceGraphScreen';
 import { Calendar, CalendarList, Agenda } from 'react-native-calendars';
+
 export default class AttendanceScreen extends React.Component {
     static navigationOptions = {
         title: 'Attendance',
@@ -51,6 +53,14 @@ export default class AttendanceScreen extends React.Component {
                                 '2012-05-19': { disabled: true, disableTouchEvent: true }
                             }}
                         />
+                    </View>
+                    <View style={{ marginTop: 35 }}>
+                        {/* <Text style={{ fontSize: 18, marginTop: 35 }}> AttendanceGraphScreen </Text> */}
+                        <View style={{ alignItems: "center", justifyContent: "center" }}>
+                            <Button title="Graphical View"
+                                onPress={() => this.props.navigation.navigate('AttendanceGraphScreen')} />
+                        </View>
+                        {/* <AttendanceGraphScreen /> */}
                     </View>
                 </View>
             </ScrollView>

@@ -29,10 +29,11 @@ export default class NoticesDisplayPdfScreen extends React.Component {
         //title: 'Home',
     };
     render() {
-        const source = { uri: 'http://samples.leanpub.com/thereactnativebook-sample.pdf', cache: true };
+        const source = { uri: 'http://temp.digitalcampus.in/schoollogos/Barasat Indira Gandhi Memorial High School/NoticeFiles/6-23-04-2019.pdf', cache: true };
         //const source = require('./test.pdf');  // ios only
         //const source = {uri:'bundle-assets://test.pdf'};
-
+        //http://samples.leanpub.com/thereactnativebook-sample.pdf
+        //
         //const source = {uri:'file:///sdcard/test.pdf'};
         //const source = {uri:"data:application/pdf;base64,..."};
 
@@ -43,12 +44,15 @@ export default class NoticesDisplayPdfScreen extends React.Component {
                     source={source}
                     onLoadComplete={(numberOfPages, filePath) => {
                         console.log(`number of pages: ${numberOfPages}`);
+                        //alert("onLoadComplete");
                     }}
                     onPageChanged={(page, numberOfPages) => {
                         console.log(`current page: ${page}`);
+                        //alert("onPageChanged");
                     }}
                     onError={(error) => {
                         console.log(error);
+                        alert(error);
                     }}
                     style={styles.pdf} />
             </View>
