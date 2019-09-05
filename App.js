@@ -84,10 +84,55 @@ class A extends React.Component {
   }
 }
 
+class B extends React.Component {
+  static navigationOptions = {
+    title: 'B',
+  };
+  render() {
+    return (
+      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+        {/* <Text>welcome </Text> */}
+        <Button title="B"
+          onPress={() => this.props.navigation.navigate('Dashboard')} />
+        {/* <Button title="SignUp"
+          onPress={() => alert("signup")} /> */}
+      </View>
+    );
+  }
+}
 
-
-
-
+class Fee1 extends React.Component {
+  static navigationOptions = {
+    title: 'Fee1',
+  };
+  render() {
+    return (
+      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+        {/* <Text>welcome </Text> */}
+        <Button title="Fee1"
+          onPress={() => this.props.navigation.navigate('Fee2')} />
+        {/* <Button title="SignUp"
+          onPress={() => alert("signup")} /> */}
+      </View>
+    );
+  }
+}
+class Fee2 extends React.Component {
+  static navigationOptions = {
+    title: 'Fee2',
+  };
+  render() {
+    return (
+      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+        {/* <Text>welcome </Text> */}
+        <Button title="Fee2"
+          onPress={() => this.props.navigation.navigate('Fee1')} />
+        {/* <Button title="SignUp"
+          onPress={() => alert("signup")} /> */}
+      </View>
+    );
+  }
+}
 class DashboardScreen extends React.Component {
   constructor(props) {
     super(props)
@@ -145,7 +190,7 @@ class DashboardScreen extends React.Component {
             <View>
 
               <Text style={styles.buttonText}
-                onPress={() => this.props.navigation.navigate('ProfileDiplayScreen')} >
+                onPress={() => this.props.navigation.navigate('Fee')} >
                 <Icon name="briefcase" size={20} />   Fee  Payment</Text>
               {/* <Icon name="dollar-sign" size={20} />
             <Icon name="credit-card" size={20} /> */}
@@ -184,6 +229,7 @@ const DashboardStackNavigator = createStackNavigator(
   },
 
 );
+
 // const NoticeTabNavigator = createBottomTabNavigator(
 //   {
 //     // NoticesDisplayScreen,
@@ -201,6 +247,37 @@ const DashboardStackNavigator = createStackNavigator(
 //     }
 //   }
 // );
+
+const FeeTransactions = createStackNavigator(
+  {
+    Fee1: Fee1,
+    Fee2: Fee2
+  },
+  {
+    navigationOptions: ({ navigation }) => {
+      const { routeName } = navigation.state.routes[navigation.state.index];
+      return {
+        header: null,
+        headerTitle: routeName
+      };
+    }
+  }
+);
+const FeeTabNavigator = createBottomTabNavigator(
+  {
+    FeeTransactions,
+    B
+  },
+  {
+    navigationOptions: ({ navigation }) => {
+      const { routeName } = navigation.state.routes[navigation.state.index];
+      return {
+        header: null,
+        headerTitle: routeName
+      };
+    }
+  }
+);
 
 const NoticesStackNavigator = createStackNavigator(
   {
@@ -262,6 +339,9 @@ const AppDrawerNavigator = createDrawerNavigator({
   },
   Attendance: {
     screen: AttendanceStackNavigator
+  },
+  Fee: {
+    screen: FeeTabNavigator
   }
 });
 
@@ -270,7 +350,7 @@ const AppSwitchNavigator = createSwitchNavigator({
   Dashboard: { screen: AppDrawerNavigator }
 });
 const AppContainer = createAppContainer(AppSwitchNavigator);//use 
-//const AppContainer = createAppContainer(AttendanceStackNavigator);
+//const AppContainer = createAppContainer(FeeTabNavigator);
 
 
 //const AppContainer = createAppContainer(AppDrawerNavigator);
