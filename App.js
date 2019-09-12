@@ -850,9 +850,9 @@ const AppSwitchNavigator = createSwitchNavigator({
   Dashboard: { screen: AppDrawerNavigator }
 });
 
-//const AppContainer = createAppContainer(AppSwitchNavigator);//use main
+const AppContainer = createAppContainer(AppSwitchNavigator);//use main
 
-const AppContainer = createAppContainer(FeeTabNavigator);
+//const AppContainer = createAppContainer(FeeTabNavigator);
 //const AppContainer = createAppContainer(AppDrawerNavigator);
 //const AppContainer = createAppContainer(DashboardBottomTabNavigator);
 
