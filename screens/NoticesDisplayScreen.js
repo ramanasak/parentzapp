@@ -86,8 +86,7 @@ export default class NoticesDisplayScreen extends React.Component {
             }).catch((error) => {
                 console.log(error)
             })
-
-    }//asdasdad
+    }//compo
 
 
 
@@ -136,7 +135,6 @@ export default class NoticesDisplayScreen extends React.Component {
     //     </View>
     //   );
     //   //}else
-
     // }
 
     render() {
@@ -157,11 +155,6 @@ export default class NoticesDisplayScreen extends React.Component {
                 <StatusBar backgroundColor="#fff" barStyle="dark-content" />
 
                 <StudentInfoScreen />
-
-
-
-
-
                 <View style={{ marginTop: 10 }}>
                     <Text style={{ color: "#303f9f", fontSize: 20, textAlign: 'center', marginBottom: 15, marginTop: 10 }}>
                         <Icon name="file-text" size={20} />  NOTICES</Text>
