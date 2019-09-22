@@ -33,7 +33,10 @@ export default class NoticesDisplayScreen extends React.Component {
 
     //https://facebook.github.io/react-native/movies.json
     //https://jsonplaceholder.typicode.com/posts
-
+    // static navigationOptions = {
+    //     title: 'Notices',
+        
+    // };
     renderSeparator = () => {
         return (
             <View style={{ height: 1, width: '100%', backgroundColor: 'grey' }}>

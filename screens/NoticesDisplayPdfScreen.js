@@ -25,10 +25,12 @@ import {
 import Icon from 'react-native-vector-icons/Feather';
 import Pdf from 'react-native-pdf';
 export default class NoticesDisplayPdfScreen extends React.Component {
+
     static navigationOptions = {
-        //title: 'Home',
+        title: 'Home',
     };
     render() {
+      
         const source = { uri: 'http://temp.digitalcampus.in/schoollogos/Barasat Indira Gandhi Memorial High School/NoticeFiles/6-23-04-2019.pdf', cache: true };
         //const source = require('./test.pdf');  // ios only
         //const source = {uri:'bundle-assets://test.pdf'};
@@ -59,7 +61,13 @@ export default class NoticesDisplayPdfScreen extends React.Component {
         )
     }
 }
-
+const HeaderComponent=()=>{
+    return(
+      <View style={{flex:1,justifyContent:'center',alignItems:'center',backgroundColor:'white',paddingRight:50}}>
+        <Text style={{fontSize:18,justifyContent:'center',alignItems:'center',fontWeight:'bold'}}>Parentz App</Text>
+      </View>
+    )
+  }
 const styles = StyleSheet.create({
     scrollView: {
         backgroundColor: Colors.lighter,

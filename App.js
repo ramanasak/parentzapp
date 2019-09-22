@@ -55,6 +55,7 @@ import FeeDues from './screens/FeeDues';
 import PayuScreen from './screens/PayuScreen';
 import SiblingInfoScreen from './screens/SiblingInfoScreen';
 import FeeDetailsView from './screens/FeeDetailsView';
+import ContentComponent from './screens/ContentComponent';
 //importing styles
 //import Mainstyles from './screens/Mainstyles.js';
 
@@ -510,22 +511,39 @@ class Test extends React.Component {
   }
 
 }//test
-
+const HeaderComponent=()=>{
+  return(
+    <View style={{flex:1,justifyContent:'center',alignItems:'center',backgroundColor:'white',paddingRight:50}}>
+      <Text style={{fontSize:18,justifyContent:'center',alignItems:'center',fontWeight:'bold',
+    color:'black'}}>Parentz App</Text>
+    </View>
+  )
+}
 const DashboardStackNavigator = createStackNavigator(
   {
     //DashboardTabNavigator: DashboardTabNavigator
     DashboardScreen: DashboardScreen
+  }
+  ,{
+    defaultNavigationOptions: ({ navigation }) => {
+      return {
+        headerLeft:<Icon name="menu" size={30}
+        style={{paddingLeft:10}}
+        onPress={()=>navigation.openDrawer()}/>,
+        headerTitle:<HeaderComponent/>
+      };
+    }
   }
   ,
   {
     navigationOptions: ({ navigation }) => {
       const { routeName } = navigation.state.routes[navigation.state.index];
       return {
-        header: null,
+       // header: null,
         headerTitle: routeName
       };
     }
-  },
+  }
 
 );
 
@@ -549,11 +567,6 @@ const TestStack = createStackNavigator(
   }
 );
 
-
-
-
-
-
 const FeeTransactionsStack = createStackNavigator(
   {
     FeeTransactions: FeeTransactions,
@@ -563,45 +576,49 @@ const FeeTransactionsStack = createStackNavigator(
     Fee2: Fee2,
     Test: Test,
   }
-  ,
-  {
-    navigationOptions: ({ navigation }) => {
-      const { routeName } = navigation.state.routes[navigation.state.index];
-      return {
-        header: null,
-        headerTitle: routeName
-      };
-    }
-  }
+  // ,
+  // {
+  //   navigationOptions: ({ navigation }) => {
+  //     const { routeName } = navigation.state.routes[navigation.state.index];
+  //     return {
+  //       header: null,
+  //       headerTitle: routeName
+  //     };
+  //   }
+  // }
 );
 const FeeDetails = createStackNavigator(
   {
     FeeDetailsView: FeeDetailsView,
-  },
-  {
-    navigationOptions: ({ navigation }) => {
-      const { routeName } = navigation.state.routes[navigation.state.index];
-      return {
-        header: null,
-        headerTitle: routeName
-      };
-    }
-  }
+   }
+   //,
+  // {
+  //   navigationOptions: ({ navigation }) => {
+  //     const { routeName } = navigation.state.routes[navigation.state.index];
+  //     return {
+  //       header: null,
+  //       headerTitle: routeName
+  //     };
+  //   }
+  // }
 );
 const FeeTabNavigator = createMaterialTopTabNavigator(
   {
-    FeeTransactionsStack,
+     Transactions: {
+        screen:FeeTransactionsStack
+    } ,
     FeeDetails
-  },
-  {
-    navigationOptions: ({ navigation }) => {
-      const { routeName } = navigation.state.routes[navigation.state.index];
-      return {
-        header: null,
-        headerTitle: routeName
-      };
-    }
   }
+  // ,
+  // {
+  //   navigationOptions: ({ navigation }) => {
+  //     const { routeName } = navigation.state.routes[navigation.state.index];
+  //     return {
+  //       header: null,
+  //       headerTitle: routeName
+  //     };
+  //   }
+  // }
 );
 
 const NoticesStackNavigator = createStackNavigator(
@@ -609,13 +626,30 @@ const NoticesStackNavigator = createStackNavigator(
     // NoticeTabNavigator: NoticeTabNavigator
     NoticesDisplayScreen,
     NoticesDisplayPdfScreen
-  },
+   }
+   ,
+   {
+     defaultNavigationOptions: ({ navigation }) => {
+       return {
+         headerLeft:<Icon name="home" size={30}
+         style={{paddingLeft:10}}
+         onPress={() => navigation.navigate('Dashboard')}/>,
+         //headerTitle:<HeaderComponent/>,
+        //  headerRight: (
+        //   <Button
+        //     onPress={() => alert('This is a button!')}
+        //     title="Info"
+        //     color="#fff"
+        //   />
+        // ),
+       };
+     }
+   },
   {
     navigationOptions: ({ navigation }) => {
       const { routeName } = navigation.state.routes[navigation.state.index];
       return {
-        header: null,
-        headerTitle: routeName
+        headerTitle: routeName,
       };
     }
   }
@@ -624,16 +658,17 @@ const GalleryStackNavigator = createStackNavigator(
   {
     // NoticeTabNavigator: NoticeTabNavigator
     GalleryScreen: { screen: GalleryScreen },
-  },
-  {
-    navigationOptions: ({ navigation }) => {
-      const { routeName } = navigation.state.routes[navigation.state.index];
-      return {
-        header: null,
-        headerTitle: routeName
-      };
-    }
   }
+  //,
+  // {
+  //   navigationOptions: ({ navigation }) => {
+  //     const { routeName } = navigation.state.routes[navigation.state.index];
+  //     return {
+  //       header: null,
+  //       headerTitle: routeName
+  //     };
+  //   }
+  // }
 );
 const AttendanceStackNavigator = createStackNavigator(
   {
@@ -641,16 +676,17 @@ const AttendanceStackNavigator = createStackNavigator(
     AttendanceScreen: { screen: AttendanceScreen },
     AttendanceGraphScreen: { screen: AttendanceGraphScreen },
 
-  },
-  {
-    navigationOptions: ({ navigation }) => {
-      const { routeName } = navigation.state.routes[navigation.state.index];
-      return {
-        header: null,
-        headerTitle: routeName
-      };
-    }
-  }
+   }
+  //,
+  // {
+  //   navigationOptions: ({ navigation }) => {
+  //     const { routeName } = navigation.state.routes[navigation.state.index];
+  //     return {
+  //       header: null,
+  //       headerTitle: routeName
+  //     };
+  //   }
+  // }
 );
 const AppDrawerNavigator = createDrawerNavigator({
   Dashboard: {
@@ -668,15 +704,23 @@ const AppDrawerNavigator = createDrawerNavigator({
   Fee: {
     screen: FeeTabNavigator
   }
-});
+},{
+  //initialRouteName:'Notices',
+  contentComponent:ContentComponent,
+  drawerWidth:300,
+  //drawerWidth:Dimensions.get('window').width-100,
+  drawerPosition:'left',
+  //drawerBackgroundColor:'transparent',
+}
+);
 
 const AppSwitchNavigator = createSwitchNavigator({
   Welcome: { screen: WelcomeScreen },
   Dashboard: { screen: AppDrawerNavigator }
 });
 
-//const AppContainer = createAppContainer(AppSwitchNavigator);//use main
-const AppContainer = createAppContainer(TestStack);
+const AppContainer = createAppContainer(AppSwitchNavigator);//use main
+//const AppContainer = createAppContainer(TestStack);
 //const AppContainer = createAppContainer(FeeTabNavigator);
 //const AppContainer = createAppContainer(AppDrawerNavigator);
 //const AppContainer = createAppContainer(DashboardBottomTabNavigator);

@@ -29,7 +29,7 @@ import { Calendar, CalendarList, Agenda } from 'react-native-calendars';
 
 export default class AttendanceScreen extends React.Component {
     static navigationOptions = {
-        title: 'Attendance',
+        //title: 'Attendance',
     };
     render() {
         return (
