@@ -61,9 +61,21 @@ export default class DashboardScreen extends React.Component {
         return (
             <View style={styles.container}>
                 <StatusBar backgroundColor="white" barStyle="dark-content" />
+                <View style={{ backgroundColor: 'white', alignSelf: 'stretch' }}>
+                    <View style={{ backgroundColor: 'white', alignSelf: 'center' }}>
+                        <Text style={{ fontSize: 18 }}>
+                            <Icon name="award" size={20} /> VERSION DEMO SCHOOL</Text>
+                    </View>
+                </View>
                 <StudentInfoScreen />
 
-                <View style={{ backgroundColor: 'white', marginTop: 40 }}>
+
+
+
+
+
+
+                <View style={{ backgroundColor: 'white', marginTop: 30 }}>
                     <TouchableOpacity style={styles.menuButtons}>
                         <View>
                             {/* <Text style={styles.buttonText} onPress={this.loginAction}>Login</Text> */}
@@ -91,7 +103,8 @@ export default class DashboardScreen extends React.Component {
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.menuButtons}>
                         <View>
-                            <Text style={styles.buttonText}><Icon name="send" size={20} />   Communication</Text>
+                            <Text style={styles.buttonText}><Icon name="send" size={20} />
+                                Communication</Text>
                         </View>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.menuButtons}>
@@ -162,7 +175,7 @@ const styles = StyleSheet.create({
     },
     container: {
         backgroundColor: "#fff",
-        marginTop: 15,
+        marginTop: 5,
         //justifyContent: "center",
         alignItems: "center",
         flex: 1,
