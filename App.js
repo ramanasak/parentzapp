@@ -70,20 +70,16 @@ import ContentComponent from './components/ContentComponent';
 
 //http://192.168.1.99:8080//digitalcampus.in/ParentzApp/parentapp_login.jsp?username=6284&password=Digital@1&schoolcode=MER-BJ1920
 
-//http://192.168.1.99:8080//digitalcampus.in/ParentzApp/parentapp_login.jsp?username=4681&password=gaurav&schoolcode=MER-BJ1920 single student 
+//http://192.168.1.99:8080//digitalcampus.in/ParentzApp/parentapp_login.jsp?username=4681&password=gaurav&schoolcode=MER-BJ1920 single student
 
 
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      R: 'Ramana',
-    }
-    console.log("App js" + R);
   }//constructor
   render() {
-    return <AppContainer screenProps={{ R: this.state.R }} />;
+    return <AppContainer />;
   }
 }
 class WelcomeScreen extends React.Component {
@@ -803,7 +799,7 @@ const AppDrawerNavigator = createDrawerNavigator({
 
 const AppSwitchNavigator = createSwitchNavigator({
   //Welcome: { screen: WelcomeScreen },
-  // LoginScreen: { screen: LoginForm },
+  LoginScreen: { screen: LoginForm },
   Dashboard: { screen: AppDrawerNavigator }
 });
 

@@ -83,6 +83,7 @@ export default class DashboardScreen extends React.Component {
         const schoolLogo = this.props.navigation.getParam("schoolLogo");
         const studentPhotoId = this.props.navigation.getParam("studentPhotoId");
         const schoolCode = this.props.navigation.getParam("schoolCode");
+
         console.log("studentName=====" + studentName);
         console.log("studentRollNumber=====" + studentRollNumber);
         console.log("classId=====" + classId);
@@ -93,6 +94,7 @@ export default class DashboardScreen extends React.Component {
         console.log("studentRollNumber=====" + studentRollNumber);
         console.log("studentRollNumber=====" + studentRollNumber);
         console.log("K=====" + K);
+
 
 
 
