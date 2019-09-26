@@ -104,7 +104,7 @@ export default class DashboardScreen extends React.Component {
         // console.log("myJSON=====" + myJSON);
         console.log("Login=" + Login);
         // console.log("test=" + myJSON.test);
-        //console.log("studentInfo [0] studentName=" + myJSON.studentInfo[0].studentName);
+        console.log("studentInfo [0] studentName=" + myJSON.studentInfo[0].studentName);
         // console.log("dashboard 3");
         //console.log("db myJSON stringify =====" + JSON.stringify(myJSON.studentInfo[0].siblingName));
         //console.log("test-" + responseJson.test[0].A);

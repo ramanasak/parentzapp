@@ -39,11 +39,6 @@ export default class LoginForm extends React.Component {
         //     ],
         //     { cancelable: false },
         // );
-
-        console.log("LOGIN FORM ");
-        const R = this.props.navigation.getParam("R");
-        console.log("R " + R);
-
         const newState = !this.state.button_toggle;
         this.setState({ button_toggle: newState });
         console.log("ACTION");
@@ -93,24 +88,27 @@ export default class LoginForm extends React.Component {
                 else if (responseJson.Login == "Success" && responseJson.count == 1) {
                     alert("Login Successful 1");
                     this.setState({ button_toggle: false });
-                    this.props.navigation.navigate('Dashboard', {
+                    this.props.navigation.navigate('R', {
                         //myJSON: responseJson.studentInfo[0],
                         myJSON: responseJson,
                         Login: responseJson.Login,
                         studentName: responseJson.studentInfo[0].studentName,
-                        studentId: responseJson.studentInfo[0].studentId,
+                        studentId: responseJson.studentInfo[0].studentName,
                         studentRollNumber: responseJson.studentInfo[0].studentRollNumber,
                         studentImage: responseJson.studentInfo[0].studentImage,
                         userName: responseJson.studentInfo[0].userName,
                         classDescription: responseJson.studentInfo[0].classDescription,
                         studentSection: responseJson.studentInfo[0].studentSection,
                         classId: responseJson.studentInfo[0].classId,
-                        password: responseJson.studentInfo[0].password,
-                        studentGender: responseJson.studentInfo[0].studentGender,
-                        schoolName: responseJson.studentInfo[0].schoolName,
-                        schoolLogo: responseJson.studentInfo[0].schoolLogo,
-                        studentPhotoId: responseJson.studentInfo[0].studentPhotoId,
-                        schoolCode: responseJson.studentInfo[0].schoolCode,
+                        password: responseJson.studentInfo[0].studentName,
+                        studentGender: responseJson.studentInfo[0].studentName,
+                        schoolName: responseJson.studentInfo[0].studentName,
+                        schoolLogo: responseJson.studentInfo[0].studentName,
+                        studentPhotoId: responseJson.studentInfo[0].studentName,
+                        schoolCode: responseJson.studentInfo[0].studentName,
+                        schoolName: responseJson.studentInfo[0].studentName,
+                        K: "works"
+
 
                     })
                 } else {

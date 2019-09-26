@@ -70,6 +70,22 @@ export default class ContentContainer extends Component {
                   </View>
                 </View>
               </View>
+              <View
+                style={{
+                  borderBottomColor: 'grey',
+                  borderBottomWidth: 0.5,
+                  marginBottom: 5,
+                  marginTop: 15,
+                }}
+              />
+              <View style={{ flex: 3, marginLeft: 5, alignItems: "flex-start", backgroundColor: "white", flexDirection: 'row' }}>
+                <View style={{ flex: 2, alignItems: "flex-start", backgroundColor: "white " }} >
+                  <Text style={{ fontSize: 15 }}>
+                    <Icon name="award" size={15} color='orange' /> VERSION DEMO SCHOOL</Text>
+                </View>
+
+              </View>
+
 
 
             </View>
@@ -80,7 +96,7 @@ export default class ContentContainer extends Component {
               style={{
                 borderBottomColor: 'grey',
                 borderBottomWidth: 0.5,
-                marginBottom: 15,
+                marginBottom: 5,
                 marginTop: 15,
               }}
             />
