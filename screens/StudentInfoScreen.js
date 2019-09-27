@@ -27,6 +27,12 @@ import Pdf from 'react-native-pdf';
 
 export default class StudentInfoScreen extends React.Component {
     render() {
+        console.log("StudentInfoScreen=====" + this.props.studentName);
+
+
+
+
+
         return (
             <View style={{ flexDirection: 'row', borderWidth: 0, backgroundColor: 'white', marginTop: 10 }}>
                 <View style={{ flex: 1 }}>
@@ -37,7 +43,7 @@ export default class StudentInfoScreen extends React.Component {
                     <View style={{ flex: 1, alignItems: 'stretch', justifyContent: 'space-around', backgroundColor: 'white' }}>
                         <View style={{ justifyContent: 'space-around', alignItems: 'flex-start', marginLeft: 35 }}>
                             <Text style={{ borderWidth: 0, justifyContent: 'space-around', fontSize: 18, alignItems: 'center' }}>
-                                <Icon name="user" size={15} /> Ramana Sakhavarapu     <Icon name="chevron-down" size={15} /></Text>
+                                <Icon name="user" size={15} /> {this.props.studentName}     <Icon name="chevron-down" size={15} /></Text>
                             {/* <Text style={{ fontSize: 10, color: 'grey' }}>NAme</Text> */}
                             {/* <Icon name="award" size={30} /> */}
 
@@ -46,15 +52,15 @@ export default class StudentInfoScreen extends React.Component {
 
                     <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
                         <View style={{ alignItems: 'center' }}>
-                            <Text>6</Text>
+                            <Text>{this.props.classDescription}</Text>
                             <Text style={{ fontSize: 10, color: 'grey' }}>Class</Text>
                         </View>
                         <View style={{ alignItems: 'center' }}>
-                            <Text>A</Text>
+                            <Text>{this.props.studentSection}</Text>
                             <Text style={{ fontSize: 10, color: 'grey' }}>Section</Text>
                         </View>
                         <View style={{ alignItems: 'center' }}>
-                            <Text>112</Text>
+                            <Text>{this.props.studentRollNumber}</Text>
                             <Text style={{ fontSize: 10, color: 'grey' }}>Roll</Text>
                         </View>
                     </View>

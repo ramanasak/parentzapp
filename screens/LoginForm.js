@@ -78,21 +78,22 @@ export default class LoginForm extends React.Component {
             })
             .then((response) => response.json())
             .then((responseJson) => {
-                alert("response");
+                //alert("response");
                 console.log(responseJson);
                 console.log("=======" + responseJson.studentInfo[0]);
                 console.log("N=" + responseJson.studentInfo[0].studentName);
                 console.log("test-" + responseJson.test[0].A);
                 console.log("test-" + responseJson.test[0].B);
                 console.log("test-" + responseJson.test[0].C);
-                const res = responseJson;
+                global.res = responseJson;
                 if (responseJson.Login == "Success" && responseJson.count == 21) {
-                    alert("Login Successful 2");
+                    //alert("Login Successful 2");
                     this.setState({ button_toggle: false });
                 }
                 else if (responseJson.Login == "Success" && responseJson.count == 1) {
-                    alert("Login Successful 1");
+                    //alert("Login Successful 1");
                     this.setState({ button_toggle: false });
+                    this.props.navigation.setParams({ otherParam: responseJson.studentInfo[0].studentName });
                     this.props.navigation.navigate('Dashboard', {
                         //myJSON: responseJson.studentInfo[0],
                         myJSON: responseJson,
@@ -113,6 +114,7 @@ export default class LoginForm extends React.Component {
                         schoolCode: responseJson.studentInfo[0].schoolCode,
 
                     })
+                    
                 } else {
                     alert("Login Failed ");
                     this.setState({ button_toggle: false });

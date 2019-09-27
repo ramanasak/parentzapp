@@ -28,7 +28,19 @@ import {
 import Icon from 'react-native-vector-icons/Feather';
 import { BottomTabBar } from "react-navigation";
 export default class ContentContainer extends Component {
+  constructor(props) {
+    super(props)
+
+  }
+
+
   render() {
+    const studentName = this.props.navigation.dangerouslyGetParent("studentName");
+    console.log(" ContentContainer studentName=====" + this.props.studentName);
+    console.log(" ContentContainer res from content component =====" + global.res);
+    console.log(" ContentContainer res from content component =====" + global.res.studentInfo[0].studentName);
+
+
     return (
       <TouchableOpacity activeOpacity={1}>
         <TouchableOpacity activeOpacity={1}>
