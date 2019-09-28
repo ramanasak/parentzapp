@@ -52,32 +52,14 @@ import Form from './screens/Form';
 import FeeTransactions from './screens/FeeTransactions';
 import DashboardScreen from './screens/DashboardScreen';
 import FeeDues from './screens/FeeDues';
-import ModalExp from './screens/ModalExp';
 import PayuScreen from './screens/PayuScreen';
 import SiblingInfoScreen from './screens/SiblingInfoScreen';
 import FeeDetailsView from './screens/FeeDetailsView';
-import LoginForm from './screens/LoginForm';
-import R from './screens/R';
-import S from './screens/S';
-import LoginScreen from './screens/LoginScreen';
-import LoginTest from './screens/LoginTest';
-import FirstPage from './screens/FirstPage';
-import SecondPage from './screens/SecondPage';
-import ContentComponent from './components/ContentComponent';
+import ContentComponent from './screens/ContentComponent';
 //importing styles
 //import Mainstyles from './screens/Mainstyles.js';
 
-
-//http://192.168.1.99:8080//digitalcampus.in/ParentzApp/parentapp_login.jsp?username=6284&password=Digital@1&schoolcode=MER-BJ1920
-
-//http://192.168.1.99:8080//digitalcampus.in/ParentzApp/parentapp_login.jsp?username=4681&password=gaurav&schoolcode=MER-BJ1920 single student
-
-
-
 export default class App extends React.Component {
-  constructor(props) {
-    super(props);
-  }//constructor
   render() {
     return <AppContainer />;
   }
@@ -98,9 +80,6 @@ class WelcomeScreen extends React.Component {
     );
   }
 }
-
-
-
 class A extends React.Component {
   static navigationOptions = {
     title: 'A',
@@ -242,18 +221,12 @@ class SiblingSelect extends React.Component {
   render() {
     const { navigation } = this.props;
     const res = navigation.getParam("res");
-    const myJSON = navigation.getParam("myJSON");
-    const studentInfo = navigation.getParam("studentInfo");
     const dataSource = res.siblings;
     console.log("res=====" + res);
-    console.log("myJSON=====" + myJSON);
-    console.log("Login=" + myJSON.Login);
-    console.log("test=" + myJSON.test);
-    console.log("studentInfo =" + studentInfo);
-    console.log("studentInfo [0] studentName=" + myJSON.studentInfo[0].studentName);
+    //console.log("res====l=" + res.login);
     //console.log("res====c=" + res.count);
-    //console.log("dataSource=====" + dataSource);
-    // console.log("res====n=" + JSON.stringify(res.siblings[0].siblingName));
+    console.log("dataSource=====" + dataSource);
+    console.log("res====n=" + JSON.stringify(res.siblings[0].siblingName));
 
     return (
       <ScrollView >
@@ -354,30 +327,6 @@ class success extends React.Component {
   }
 }
 
-
-class AndroidFonts extends React.Component {
-  render() {
-    return (
-      <ScrollView style={styles.scroller}>
-        <Text style={{ fontFamily: 'normal', fontSize: 20 }}>  ParentzApp </Text>
-        <Text style={{ fontFamily: 'notoserif', fontSize: 20 }}>  ParentzApp </Text>
-        <Text style={{ fontFamily: 'sans-serif', fontSize: 20 }}>  ParentzApp </Text>
-        <Text style={{ fontFamily: 'sans-serif-light', fontSize: 20 }}>  ParentzApp </Text>
-        <Text style={{ fontFamily: 'sans-serif-thin', fontSize: 20 }}>  ParentzApp</Text>
-        <Text style={{ fontFamily: 'sans-serif-condensed', fontSize: 20 }}>  ParentzApp</Text>
-        <Text style={{ fontFamily: 'sans-serif-medium', fontSize: 20 }}> ParentzApp </Text>
-        <Text style={{ fontFamily: 'serif', fontSize: 20 }}>  ParentzApp </Text>
-        <Text style={{ fontFamily: 'Roboto', fontSize: 20 }}>  ParentzApp </Text>
-        <Text style={{ fontFamily: 'monospace', fontSize: 20 }}>  ParentzApp </Text>
-      </ScrollView>
-    );
-  }
-}
-
-//AppRegistry.registerComponent('AndroidFonts', () => AndroidFonts);
-
-
-
 class Test extends React.Component {
 
   constructor(props) {
@@ -444,27 +393,28 @@ class Test extends React.Component {
   // }//compo
 
   componentDidMount() {
-    return fetch('http://192.168.1.99:8080//digitalcampus.in/ParentzApp/parentapp_login.jsp?username=4681&password=gaurav&schoolcode=MER-BJ1920')
+    return fetch('http://192.168.1.99:8080//digitalcampus.in/ParentzApp/parentapp_login.jsp?username=11350&password=Digital@123&schoolcode=VERSION-DEMO')
       .then((response) => response.json())
       .then((responseJson) => {
         //alert("response");
         console.log(responseJson);
         const res = responseJson;
-        if (responseJson.Login == "Success" && responseJson.count == 1) {
+        if (responseJson.login == "success" && responseJson.count == 2) {
           //alert("Login Successful");
           //this.setState({ button_toggle: false });
           this.props.navigation.navigate('SiblingSelect', {
             studentCount: responseJson.count,
             myJSON: responseJson,
-            studentInfo: responseJson.studentInfo,
+            siblings: responseJson.siblings,
             res: res
+
           })
         } else {
           alert("Login Failed ");
           // this.setState({ button_toggle: false });
         }
         this.setState({
-          dataSource: responseJson.studentInfo,
+          dataSource: responseJson.siblings,
           isLoading: false
         }, function () { }
         );
@@ -561,30 +511,26 @@ class Test extends React.Component {
   }
 
 }//test
-const HeaderComponent = () => {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'white', paddingRight: 50 }}>
-      <Text style={{
-        fontSize: 18, justifyContent: 'center', alignItems: 'center', fontWeight: 'bold',
-        color: '#4f7528'
-      }}>Parentz App</Text>
+const HeaderComponent=()=>{
+  return(
+    <View style={{flex:1,justifyContent:'center',alignItems:'center',backgroundColor:'white',paddingRight:50}}>
+      <Text style={{fontSize:18,justifyContent:'center',alignItems:'center',fontWeight:'bold',
+    color:'black'}}>Parentz App</Text>
     </View>
   )
 }
 const DashboardStackNavigator = createStackNavigator(
   {
     //DashboardTabNavigator: DashboardTabNavigator
-    DashboardScreen: {
-      screen: props => <DashboardScreen {...props} />,
-    }
+    DashboardScreen: DashboardScreen
   }
-  , {
+  ,{
     defaultNavigationOptions: ({ navigation }) => {
       return {
-        headerLeft: <Icon name="menu" size={30}
-          style={{ paddingLeft: 10 }}
-          onPress={() => navigation.openDrawer()} />,
-        headerTitle: <HeaderComponent />
+        headerLeft:<Icon name="menu" size={30}
+        style={{paddingLeft:10}}
+        onPress={()=>navigation.openDrawer()}/>,
+        headerTitle:<HeaderComponent/>
       };
     }
   }
@@ -593,7 +539,7 @@ const DashboardStackNavigator = createStackNavigator(
     navigationOptions: ({ navigation }) => {
       const { routeName } = navigation.state.routes[navigation.state.index];
       return {
-        // header: null,
+       // header: null,
         headerTitle: routeName
       };
     }
@@ -605,11 +551,6 @@ const DashboardStackNavigator = createStackNavigator(
 
 const TestStack = createStackNavigator(
   {
-    //ModalExp: ModalExp,
-    // LoginForm: LoginForm,
-    //AndroidFonts: AndroidFonts,
-    //Firstpage: FirstPage,
-    //SecondPage: SecondPage,
     Test: Test,
     success: success,
     SiblingSelect: SiblingSelect
@@ -625,28 +566,7 @@ const TestStack = createStackNavigator(
     }
   }
 );
-const ParamStack = createStackNavigator(
-  {
-    //ModalExp: ModalExp,
-    // LoginForm: LoginForm,
-    //AndroidFonts: AndroidFonts,
-    //Firstpage: FirstPage,
-    //SecondPage: SecondPage,
-    S: S,
-    R: R,
 
-  }
-  ,
-  {
-    navigationOptions: ({ navigation }) => {
-      const { routeName } = navigation.state.routes[navigation.state.index];
-      return {
-        header: null,
-        headerTitle: routeName
-      };
-    }
-  }
-);
 const FeeTransactionsStack = createStackNavigator(
   {
     FeeTransactions: FeeTransactions,
@@ -670,8 +590,8 @@ const FeeTransactionsStack = createStackNavigator(
 const FeeDetails = createStackNavigator(
   {
     FeeDetailsView: FeeDetailsView,
-  }
-  //,
+   }
+   //,
   // {
   //   navigationOptions: ({ navigation }) => {
   //     const { routeName } = navigation.state.routes[navigation.state.index];
@@ -684,9 +604,9 @@ const FeeDetails = createStackNavigator(
 );
 const FeeTabNavigator = createMaterialTopTabNavigator(
   {
-    Transactions: {
-      screen: FeeTransactionsStack
-    },
+     Transactions: {
+        screen:FeeTransactionsStack
+    } ,
     FeeDetails
   }
   // ,
@@ -706,15 +626,15 @@ const NoticesStackNavigator = createStackNavigator(
     // NoticeTabNavigator: NoticeTabNavigator
     NoticesDisplayScreen,
     NoticesDisplayPdfScreen
-  }
-  ,
-  {
-    defaultNavigationOptions: ({ navigation }) => {
-      return {
-        headerLeft: <Icon name="home" size={30}
-          style={{ paddingLeft: 10 }}
-          onPress={() => navigation.navigate('Dashboard')} />,
-        //headerTitle:<HeaderComponent/>,
+   }
+   ,
+   {
+     defaultNavigationOptions: ({ navigation }) => {
+       return {
+         headerLeft:<Icon name="home" size={30}
+         style={{paddingLeft:10}}
+         onPress={() => navigation.navigate('Dashboard')}/>,
+         //headerTitle:<HeaderComponent/>,
         //  headerRight: (
         //   <Button
         //     onPress={() => alert('This is a button!')}
@@ -722,9 +642,9 @@ const NoticesStackNavigator = createStackNavigator(
         //     color="#fff"
         //   />
         // ),
-      };
-    }
-  },
+       };
+     }
+   },
   {
     navigationOptions: ({ navigation }) => {
       const { routeName } = navigation.state.routes[navigation.state.index];
@@ -755,7 +675,8 @@ const AttendanceStackNavigator = createStackNavigator(
     // NoticeTabNavigator: NoticeTabNavigator
     AttendanceScreen: { screen: AttendanceScreen },
     AttendanceGraphScreen: { screen: AttendanceGraphScreen },
-  }
+
+   }
   //,
   // {
   //   navigationOptions: ({ navigation }) => {
@@ -782,28 +703,23 @@ const AppDrawerNavigator = createDrawerNavigator({
   },
   Fee: {
     screen: FeeTabNavigator
-  },
-  Test: {
-    screen: TestStack
   }
-}, {
-    //initialRouteName:'Notices',
-    contentComponent: ContentComponent,
-    drawerWidth: 300,
-    //drawerWidth:Dimensions.get('window').width-100,
-    drawerPosition: 'left',
-    //drawerBackgroundColor:'transparent',
-  }
+},{
+  //initialRouteName:'Notices',
+  contentComponent:ContentComponent,
+  drawerWidth:300,
+  //drawerWidth:Dimensions.get('window').width-100,
+  drawerPosition:'left',
+  //drawerBackgroundColor:'transparent',
+}
 );
 
 const AppSwitchNavigator = createSwitchNavigator({
-  //Welcome: { screen: WelcomeScreen },
-  LoginScreen: { screen: LoginForm },
+  Welcome: { screen: WelcomeScreen },
   Dashboard: { screen: AppDrawerNavigator }
 });
 
 const AppContainer = createAppContainer(AppSwitchNavigator);//use main
-//const AppContainer = createAppContainer(ParamStack);
 //const AppContainer = createAppContainer(TestStack);
 //const AppContainer = createAppContainer(FeeTabNavigator);
 //const AppContainer = createAppContainer(AppDrawerNavigator);

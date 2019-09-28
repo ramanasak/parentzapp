@@ -58,9 +58,7 @@ export default class DashboardScreen extends React.Component {
     }
 
     render() {
-        console.log("R");
         const { navigation } = this.props;
-        console.log("R 1");
         const myJSON = this.props.navigation.dangerouslyGetParent().getParam("myJSON");
         //const { state } = props.navigation;
         //console.log("PROPS =" + state.params.Login);

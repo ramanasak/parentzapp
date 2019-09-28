@@ -131,7 +131,7 @@ export default class LoginForm extends React.Component {
     // <Text style={{ color: "black", fontSize: 18 }}>Parent login</Text>
     render() {
         const { button_toggle } = this.state;
-        //const buttonBg = button_toggle ? "#3700b3" : "#ff00ff"; //dark purple and magenta
+      //const buttonBg = button_toggle ? "#3700b3" : "#ff00ff"; //dark purple and magenta
         const buttonBg = button_toggle ? "#2b388f" : "#3f51b5"; //dark purple and magenta
         return (
             <View style={styles.container}>
@@ -213,7 +213,7 @@ const styles = StyleSheet.create({
     },
     buttonText: {
         fontSize: 16,
-        fontWeight: '500',
+        fontWeight: 'bold',
         color: "white",
         textAlign: "center",
     },
