@@ -108,7 +108,7 @@ export default class DashboardScreen extends React.Component {
         //console.log("db myJSON=====" + myJSON.studentInfo[0]);
         //console.log("M=" + myJSON.studentInfo[0].studentName);
         //console.log("X=" + res.studentInfo[0].studentName);
-        console.log("global.res from dashboardScreen ="+global.res.studentInfo[0].studentName);
+        //console.log("global.res from dashboardScreen ="+global.res.studentInfo[0].studentName);
         console.log("experiment =" + this.props.navigation.dangerouslyGetParent().getParam("otherParam"));
 
 

@@ -35,10 +35,12 @@ export default class ContentContainer extends Component {
 
 
   render() {
-    const studentName = this.props.navigation.dangerouslyGetParent("studentName");
-    console.log(" ContentContainer studentName=====" + this.props.studentName);
-    console.log(" ContentContainer res from content component =====" + global.res);
-    console.log(" ContentContainer res from content component =====" + global.res.studentInfo[0].studentName);
+
+    console.log("global.student_res="+global.student_res);
+    const myObjStr = JSON.stringify(global.student_res);
+    console.log("myObjStr="+myObjStr);
+    const school_name=global.student_res.studentInfo[0].schoolName;
+    const student_name=global.student_res.studentInfo[0].studentName;
 
 
     return (
@@ -74,7 +76,7 @@ export default class ContentContainer extends Component {
                 </View>
                 <View style={{ flex: 3, marginLeft: 5, alignItems: "flex-start", backgroundColor: "white", flexDirection: 'row' }}>
                   <View style={{ flex: 2, alignItems: "flex-start", backgroundColor: "white" }} >
-                    <Text style={{ fontSize: 14, fontWeight: 'bold' }}>RAMANA</Text>
+                    <Text style={{ fontSize: 14, fontWeight: 'bold' }}>{student_name}</Text>
                   </View>
 
                   <View style={{ flex: 1, alignItems: "center", backgroundColor: "white" }} >
@@ -93,7 +95,7 @@ export default class ContentContainer extends Component {
               <View style={{ flex: 3, marginLeft: 5, alignItems: "flex-start", backgroundColor: "white", flexDirection: 'row' }}>
                 <View style={{ flex: 2, alignItems: "flex-start", backgroundColor: "white " }} >
                   <Text style={{ fontSize: 15 }}>
-                    <Icon name="award" size={15} color='orange' /> VERSION DEMO SCHOOL</Text>
+                    <Icon name="award" size={15} color='orange' /> {school_name}</Text>
                 </View>
 
               </View>

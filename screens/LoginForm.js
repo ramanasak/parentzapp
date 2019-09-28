@@ -9,13 +9,19 @@ export default class LoginForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            //userName: '6284',
-            //userPassword: 'Digital@1',
+            //userName: '6284',//local double
+            //userPassword: 'Digital@1',//local double
 
-            userName: '4681',
-            userPassword: 'gaurav',
+            //userName: '4681',//local single
+            //userPassword: 'gaurav',//local single
 
-            schoolCode: 'MER-BJ1920',
+           // schoolCode: 'MER-BJ1920',//local 
+
+            userName: '1387',//online single
+            userPassword: 'weghak',//online single
+
+            schoolCode: 'MER-KP',//online 
+
             // userName: '',
             // userPassword: '',
             // schoolCode: '',
@@ -56,13 +62,13 @@ export default class LoginForm extends React.Component {
         console.log({ userName });
         console.log({ userPassword });
         console.log({ schoolCode });
-
+        
         //"http://192.168.1.99:8080/school.digitalcampus.in/returnjson.jsp?userName="userName"&password="userPassword"&schoolCode="schoolCode""
         //var url = 'exampleapi/parameter?class='+this.state.classid+'&section='this.state.secid;
         //local url 
         //var url = 'http://192.168.1.99:8080/school.digitalcampus.in/returnjson.jsp?userName='+this.state.userName+'&password='+this.state.userPassword+'&schoolCode='+this.state.schoolCode;
 
-        fetch('http://192.168.1.99:8080//digitalcampus.in/ParentzApp/parentapp_login.jsp?username=' + this.state.userName + '&password=' + this.state.userPassword + '&schoolcode=' + this.state.schoolCode,
+        fetch('http://digitalcampus.in/ParentzApp/parentapp_login.jsp?username=' + this.state.userName + '&password=' + this.state.userPassword + '&schoolcode=' + this.state.schoolCode,
             {
                 method: 'post',
                 header: {
@@ -85,7 +91,7 @@ export default class LoginForm extends React.Component {
                 console.log("test-" + responseJson.test[0].A);
                 console.log("test-" + responseJson.test[0].B);
                 console.log("test-" + responseJson.test[0].C);
-                global.res = responseJson;
+                global.student_res = responseJson;
                 if (responseJson.Login == "Success" && responseJson.count == 21) {
                     //alert("Login Successful 2");
                     this.setState({ button_toggle: false });
@@ -102,6 +108,7 @@ export default class LoginForm extends React.Component {
                         studentId: responseJson.studentInfo[0].studentId,
                         studentRollNumber: responseJson.studentInfo[0].studentRollNumber,
                         studentImage: responseJson.studentInfo[0].studentImage,
+                        //studentImage: "",
                         userName: responseJson.studentInfo[0].userName,
                         classDescription: responseJson.studentInfo[0].classDescription,
                         studentSection: responseJson.studentInfo[0].studentSection,
