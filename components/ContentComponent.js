@@ -28,7 +28,21 @@ import {
 import Icon from 'react-native-vector-icons/Feather';
 import { BottomTabBar } from "react-navigation";
 export default class ContentContainer extends Component {
+  constructor(props) {
+    super(props)
+
+  }
+
+
   render() {
+
+    console.log("global.student_res="+global.student_res);
+    const myObjStr = JSON.stringify(global.student_res);
+    console.log("myObjStr="+myObjStr);
+    const school_name=global.student_res.studentInfo[0].schoolName;
+    const student_name=global.student_res.studentInfo[0].studentName;
+
+
     return (
       <TouchableOpacity activeOpacity={1}>
         <TouchableOpacity activeOpacity={1}>
@@ -62,7 +76,7 @@ export default class ContentContainer extends Component {
                 </View>
                 <View style={{ flex: 3, marginLeft: 5, alignItems: "flex-start", backgroundColor: "white", flexDirection: 'row' }}>
                   <View style={{ flex: 2, alignItems: "flex-start", backgroundColor: "white" }} >
-                    <Text style={{ fontSize: 14, fontWeight: 'bold' }}>RAMANA</Text>
+                    <Text style={{ fontSize: 14, fontWeight: 'bold' }}>{student_name}</Text>
                   </View>
 
                   <View style={{ flex: 1, alignItems: "center", backgroundColor: "white" }} >
@@ -81,7 +95,7 @@ export default class ContentContainer extends Component {
               <View style={{ flex: 3, marginLeft: 5, alignItems: "flex-start", backgroundColor: "white", flexDirection: 'row' }}>
                 <View style={{ flex: 2, alignItems: "flex-start", backgroundColor: "white " }} >
                   <Text style={{ fontSize: 15 }}>
-                    <Icon name="award" size={15} color='orange' /> VERSION DEMO SCHOOL</Text>
+                    <Icon name="award" size={15} color='orange' /> {school_name}</Text>
                 </View>
 
               </View>

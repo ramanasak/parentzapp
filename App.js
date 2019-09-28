@@ -82,6 +82,7 @@ export default class App extends React.Component {
     return <AppContainer />;
   }
 }
+
 class WelcomeScreen extends React.Component {
   static navigationOptions = {
     title: 'Home',
@@ -771,24 +772,15 @@ const AppDrawerNavigator = createDrawerNavigator({
   Dashboard: {
     screen: DashboardStackNavigator
   },
-  Notices: {
-    screen: NoticesStackNavigator
-  },
-  Gallery: {
-    screen: GalleryStackNavigator
-  },
-  Attendance: {
-    screen: AttendanceStackNavigator
-  },
-  Fee: {
-    screen: FeeTabNavigator
-  },
-  Test: {
-    screen: TestStack
-  }
+  Notices: { screen: NoticesStackNavigator },
+  Gallery: { screen: GalleryStackNavigator },
+  Attendance: { screen: AttendanceStackNavigator },
+  Fee: { screen: FeeTabNavigator },
+  Test: { screen: TestStack }
 }, {
     //initialRouteName:'Notices',
-    contentComponent: ContentComponent,
+    //contentComponent: ContentComponent,
+    contentComponent: (props) => <ContentComponent {...props} />,
     drawerWidth: 300,
     //drawerWidth:Dimensions.get('window').width-100,
     drawerPosition: 'left',

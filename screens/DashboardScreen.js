@@ -58,8 +58,10 @@ export default class DashboardScreen extends React.Component {
     }
 
     render() {
+        console.log("R");
         const { navigation } = this.props;
-        const myJSON = this.props.navigation.dangerouslyGetParent().getParam("myJSON");
+        console.log("R 1");
+        const myJSON = this.props.navigation.dangerouslyGetParent().getParam("responseJson");
         //const { state } = props.navigation;
         //console.log("PROPS =" + state.params.Login);
 
@@ -68,39 +70,34 @@ export default class DashboardScreen extends React.Component {
         const Login = this.props.navigation.dangerouslyGetParent().getParam("Login");
         const K = this.props.navigation.dangerouslyGetParent().getParam("K");
         const studentName = this.props.navigation.dangerouslyGetParent().getParam("studentName");
-        const studentId = this.props.navigation.getParam("studentId");
+        const studentId = this.props.navigation.dangerouslyGetParent().getParam("studentId");
         const studentRollNumber = this.props.navigation.dangerouslyGetParent().getParam("studentRollNumber");
-        const studentImage = this.props.navigation.getParam("studentImage");
-        const userName = this.props.navigation.getParam("userName");
-        const classDescription = this.props.navigation.getParam("classDescription");
-        const studentSection = this.props.navigation.getParam("studentSection");
-        const classId = this.props.navigation.getParam("classId");
-        const password = this.props.navigation.getParam("password");
-        const studentGender = this.props.navigation.getParam("studentGender");
-        const schoolName = this.props.navigation.getParam("schoolName");
-        const schoolLogo = this.props.navigation.getParam("schoolLogo");
-        const studentPhotoId = this.props.navigation.getParam("studentPhotoId");
-        const schoolCode = this.props.navigation.getParam("schoolCode");
-        console.log("studentName=====" + studentName);
-        console.log("studentRollNumber=====" + studentRollNumber);
-        console.log("classId=====" + classId);
-        console.log("studentRollNumber=====" + studentRollNumber);
-        console.log("studentRollNumber=====" + studentRollNumber);
-        console.log("studentRollNumber=====" + studentRollNumber);
-        console.log("studentRollNumber=====" + studentRollNumber);
-        console.log("studentRollNumber=====" + studentRollNumber);
-        console.log("studentRollNumber=====" + studentRollNumber);
-        console.log("K=====" + K);
+        const studentImage = this.props.navigation.dangerouslyGetParent().getParam("studentImage");
+        const userName = this.props.navigation.dangerouslyGetParent().getParam("userName");
+        const classDescription = this.props.navigation.dangerouslyGetParent().getParam("classDescription");
+        const studentSection = this.props.navigation.dangerouslyGetParent().getParam("studentSection");
+        const classId = this.props.navigation.dangerouslyGetParent().getParam("classId");
+        const password = this.props.navigation.dangerouslyGetParent().getParam("password");
+        const studentGender = this.props.navigation.dangerouslyGetParent().getParam("studentGender");
+        const schoolName = this.props.navigation.dangerouslyGetParent().getParam("schoolName");
+        const schoolLogo = this.props.navigation.dangerouslyGetParent().getParam("schoolLogo");
+        const studentPhotoId = this.props.navigation.dangerouslyGetParent().getParam("studentPhotoId");
+        const schoolCode = this.props.navigation.dangerouslyGetParent().getParam("schoolCode");
 
 
-
-        console.log("dashboard 2");
-
-
+        //console.log("studentName=====" + studentName);
+        //console.log("studentRollNumber=====" + studentRollNumber);
+       // console.log("classId=====" + classId);
+       // console.log("studentRollNumber=====" + studentRollNumber);
+       // console.log("studentRollNumber=====" + studentRollNumber);
+       // console.log("studentRollNumber=====" + studentRollNumber);
+       // console.log("studentRollNumber=====" + studentRollNumber);
+       // console.log("studentRollNumber=====" + studentRollNumber);
+       // console.log("studentRollNumber=====" + studentRollNumber);
+      //  console.log("K=====" + K);
+      //  console.log("dashboard 2");
         //console.log("db myJSON=====" + responseJson.Login);
-        // console.log("dbLogin=====" + Login);
-        // console.log("myJSON=====" + myJSON);
-        console.log("Login=" + Login);
+       // console.log("dbLogin=====" + Login);
         // console.log("test=" + myJSON.test);
         //console.log("studentInfo [0] studentName=" + myJSON.studentInfo[0].studentName);
         // console.log("dashboard 3");
@@ -111,6 +108,8 @@ export default class DashboardScreen extends React.Component {
         //console.log("db myJSON=====" + myJSON.studentInfo[0]);
         //console.log("M=" + myJSON.studentInfo[0].studentName);
         //console.log("X=" + res.studentInfo[0].studentName);
+        //console.log("global.res from dashboardScreen ="+global.res.studentInfo[0].studentName);
+        console.log("experiment =" + this.props.navigation.dangerouslyGetParent().getParam("otherParam"));
 
 
 
@@ -128,7 +127,13 @@ export default class DashboardScreen extends React.Component {
                             <Icon name="award" size={20} /> VERSION DEMO SCHOOL</Text>
                     </View>
                 </View> */}
-                <StudentInfoScreen />
+                <StudentInfoScreen studentName={studentName}
+                    studentRollNumber={studentRollNumber}
+                    classDescription={classDescription}
+                    studentSection={studentSection}
+                    studentImage={studentImage}
+                    studentGender={studentGender}
+                />
 
 
 

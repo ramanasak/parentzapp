@@ -27,34 +27,64 @@ import Pdf from 'react-native-pdf';
 
 export default class StudentInfoScreen extends React.Component {
     render() {
+        console.log("StudentInfoScreen=====" + this.props.studentImage);
+        console.log("StudentInfoScreen=====" + this.props.studentImage);
+
+
+//<Image source={{ uri: this.props.studentImage}} />
+//<Image source={{ uri: 'file:///path/to/image' }} />
+///source={require('./../studentpic.jpg')}
+http://school.digitalcampus.in/schoollogos/MERIDIAN%20SCHOOL%20KUKATPALLY/S1387.jpg
+var studentImageUrl='';
+if(this.props.studentImage==""){
+    if(this.props.studentGender==2)
+    {
+        studentImageUrl=require('../images/girl.png');
+    }
+    else{
+        studentImageUrl=require('../images/boy.png');
+    }   
+}
+else{
+    //studentImageUrl= "{ uri:http://"+this.props.studentImage+"}";  // "'uri:"http://"+this.props.studentImage';
+    //studentImageUrl=require("http://"+this.props.studentImage); // "'uri:"http://"+this.props.studentImage';
+}
+
+console.log("studentImageUrl=====" +studentImageUrl);
+
+
+
         return (
             <View style={{ flexDirection: 'row', borderWidth: 0, backgroundColor: 'white', marginTop: 10 }}>
                 <View style={{ flex: 1 }}>
-                    <Image style={styles.imageView2} source={require('./../studentpic.jpg')} />
+                    <Image style={styles.imageView2} source={studentImageUrl} />
                 </View>
                 <View style={{ flex: 3, backgroundColor: 'white' }}>
 
-                    <View style={{ flex: 1, alignItems: 'stretch', justifyContent: 'space-around', backgroundColor: 'white' }}>
-                        <View style={{ justifyContent: 'space-around', alignItems: 'flex-start', marginLeft: 35 }}>
+                    <View style={{ flex: 1, alignItems: 'stretch',flexDirection:"row" ,justifyContent: 'space-around', backgroundColor: 'white' }}>
+                        <View style={{ justifyContent: 'space-around', alignItems: 'flex-start',}}>
                             <Text style={{ borderWidth: 0, justifyContent: 'space-around', fontSize: 18, alignItems: 'center' }}>
-                                <Icon name="user" size={15} /> Ramana Sakhavarapu     <Icon name="chevron-down" size={15} /></Text>
+                                <Icon name="user" size={15} /> {this.props.studentName}</Text>
                             {/* <Text style={{ fontSize: 10, color: 'grey' }}>NAme</Text> */}
                             {/* <Icon name="award" size={30} /> */}
 
+                        </View>
+                        <View style={{  flex: 1,justifyContent: 'space-around', alignItems: 'center', backgroundColor: 'white',marginLeft:5}}>
+                               <Icon name="chevron-down" size={15} />
                         </View>
                     </View>
 
                     <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
                         <View style={{ alignItems: 'center' }}>
-                            <Text>6</Text>
+                            <Text>{this.props.classDescription}</Text>
                             <Text style={{ fontSize: 10, color: 'grey' }}>Class</Text>
                         </View>
                         <View style={{ alignItems: 'center' }}>
-                            <Text>A</Text>
+                            <Text>{this.props.studentSection}</Text>
                             <Text style={{ fontSize: 10, color: 'grey' }}>Section</Text>
                         </View>
                         <View style={{ alignItems: 'center' }}>
-                            <Text>112</Text>
+                            <Text>{this.props.studentRollNumber}</Text>
                             <Text style={{ fontSize: 10, color: 'grey' }}>Roll</Text>
                         </View>
                     </View>

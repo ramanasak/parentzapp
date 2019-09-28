@@ -30,7 +30,6 @@ export default class SiblingInfoScreen extends React.Component {
 
 
 
-
         return (
             <View style={{ flexDirection: 'row', borderWidth: 0, backgroundColor: 'red', marginTop: 10 }}>
                 <View style={{ flex: 1 }}>
