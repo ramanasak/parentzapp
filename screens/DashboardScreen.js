@@ -85,13 +85,13 @@ export default class DashboardScreen extends React.Component {
         const schoolCode = this.props.navigation.dangerouslyGetParent().getParam("schoolCode");
 
 
-        //console.log("studentName=====" + studentName);
-        //console.log("studentRollNumber=====" + studentRollNumber);
+        console.log("dash board studentName=====" + studentName);
+        console.log("studentRollNumber=====" + studentRollNumber);
        // console.log("classId=====" + classId);
-       // console.log("studentRollNumber=====" + studentRollNumber);
-       // console.log("studentRollNumber=====" + studentRollNumber);
-       // console.log("studentRollNumber=====" + studentRollNumber);
-       // console.log("studentRollNumber=====" + studentRollNumber);
+        console.log("studentRollNumber=====" + studentRollNumber);
+        console.log("studentRollNumber=====" + studentRollNumber);
+        console.log("studentRollNumber=====" + studentRollNumber);
+        console.log("studentRollNumber=====" + studentRollNumber);
        // console.log("studentRollNumber=====" + studentRollNumber);
        // console.log("studentRollNumber=====" + studentRollNumber);
       //  console.log("K=====" + K);
@@ -109,7 +109,7 @@ export default class DashboardScreen extends React.Component {
         //console.log("M=" + myJSON.studentInfo[0].studentName);
         //console.log("X=" + res.studentInfo[0].studentName);
         //console.log("global.res from dashboardScreen ="+global.res.studentInfo[0].studentName);
-        console.log("experiment =" + this.props.navigation.dangerouslyGetParent().getParam("otherParam"));
+        //console.log("experiment =" + this.props.navigation.dangerouslyGetParent().getParam("otherParam"));
 
 
 

@@ -91,7 +91,8 @@ export default class LoginForm extends React.Component {
                 console.log("test-" + responseJson.test[0].A);
                 console.log("test-" + responseJson.test[0].B);
                 console.log("test-" + responseJson.test[0].C);
-                global.student_res = responseJson;
+                global.student_res.Json = responseJson;
+                console.log("student_res-" + student_res);
                 if (responseJson.Login == "Success" && responseJson.count == 21) {
                     //alert("Login Successful 2");
                     this.setState({ button_toggle: false });
@@ -140,7 +141,7 @@ export default class LoginForm extends React.Component {
     // <Text style={{ color: "black", fontSize: 18 }}>Parent login</Text>
     render() {
         const { button_toggle } = this.state;
-      //const buttonBg = button_toggle ? "#3700b3" : "#ff00ff"; //dark purple and magenta
+        //const buttonBg = button_toggle ? "#3700b3" : "#ff00ff"; //dark purple and magenta
         const buttonBg = button_toggle ? "#2b388f" : "#3f51b5"; //dark purple and magenta
         return (
             <View style={styles.container}>
@@ -222,7 +223,7 @@ const styles = StyleSheet.create({
     },
     buttonText: {
         fontSize: 16,
-        fontWeight: 'bold',
+        fontWeight: '500',
         color: "white",
         textAlign: "center",
     },

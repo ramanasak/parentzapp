@@ -48,9 +48,11 @@ if(this.props.studentImage==""){
 else{
     //studentImageUrl= "{ uri:http://"+this.props.studentImage+"}";  // "'uri:"http://"+this.props.studentImage';
     //studentImageUrl=require("http://"+this.props.studentImage); // "'uri:"http://"+this.props.studentImage';
+    studentImageUrl=require('../images/boy.png');
 }
 
 console.log("studentImageUrl=====" +studentImageUrl);
+console.log("stu info studentName=====" +this.props.studentName);
 
 
 
