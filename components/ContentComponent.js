@@ -23,25 +23,23 @@ import {
   LearnMoreLinks,
   Colors,
   DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-import Icon from 'react-native-vector-icons/Feather';
+  ReloadInstructions
+} from "react-native/Libraries/NewAppScreen";
+import Icon from "react-native-vector-icons/Feather";
 import { BottomTabBar } from "react-navigation";
 export default class ContentContainer extends Component {
   constructor(props) {
-    super(props)
-
+    super(props);
   }
 
-
   render() {
-
-    console.log("global.student_res="+global.student_res);
+    console.log("global.student_res=" + global.student_res);
     const myObjStr = JSON.stringify(global.student_res);
-    console.log("myObjStr="+myObjStr);
-    const school_name=global.student_res.studentInfo[0].schoolName;
-    const student_name=global.student_res.studentInfo[0].studentName;
+    console.log("myObjStr=" + myObjStr);
+    //const school_name=global.student_res.studentInfo[0].schoolName;
+    //const student_name=global.student_res.studentInfo[0].studentName;
 
+    console.log("myObjStr=" + myObjStr);
 
     return (
       <TouchableOpacity activeOpacity={1}>
@@ -54,218 +52,306 @@ export default class ContentContainer extends Component {
                 alignItems: "flex-start"
               }}
             >
-
-
               <View
                 style={{
                   flex: 2,
                   backgroundColor: "white",
                   alignItems: "center",
-                  flexDirection: 'row', marginTop: 5, justifyContent: 'center'
-
+                  flexDirection: "row",
+                  marginTop: 5,
+                  justifyContent: "center"
                 }}
               >
-                <View style={{ flex: 1, alignItems: "flex-start", backgroundColor: "white" }}>
+                <View
+                  style={{
+                    flex: 1,
+                    alignItems: "flex-start",
+                    backgroundColor: "white"
+                  }}
+                >
                   <Image
-                    source={require("./../studentpic.jpg")}
+                    source={{ uri: global.studentImageUrl }}
                     style={{
-                      width: 50, height: 50, marginTop: 5, borderRadius: 37.5
-                      , marginLeft: 15
+                      width: 50,
+                      height: 50,
+                      marginTop: 5,
+                      borderRadius: 37.5,
+                      marginLeft: 15
                     }}
                   />
                 </View>
-                <View style={{ flex: 3, marginLeft: 5, alignItems: "flex-start", backgroundColor: "white", flexDirection: 'row' }}>
-                  <View style={{ flex: 2, alignItems: "flex-start", backgroundColor: "white" }} >
-                    <Text style={{ fontSize: 14, fontWeight: 'bold' }}>{student_name}</Text>
+                <View
+                  style={{
+                    flex: 3,
+                    marginLeft: 5,
+                    alignItems: "flex-start",
+                    backgroundColor: "white",
+                    flexDirection: "row"
+                  }}
+                >
+                  <View
+                    style={{
+                      flex: 2,
+                      alignItems: "flex-start",
+                      backgroundColor: "white"
+                    }}
+                  >
+                    <Text style={{ fontSize: 14, fontWeight: "bold" }}>
+                      {studentName}
+                    </Text>
                   </View>
 
-                  <View style={{ flex: 1, alignItems: "center", backgroundColor: "white" }} >
-                    <Icon name="chevron-down" size={20} color={'blue'} />
+                  <View
+                    style={{
+                      flex: 1,
+                      alignItems: "center",
+                      backgroundColor: "white"
+                    }}
+                  >
+                    <Icon name="chevron-down" size={20} color={"blue"} />
                   </View>
                 </View>
               </View>
               <View
                 style={{
-                  borderBottomColor: 'grey',
+                  borderBottomColor: "grey",
                   borderBottomWidth: 0.5,
                   marginBottom: 5,
-                  marginTop: 15,
+                  marginTop: 15
                 }}
               />
-              <View style={{ flex: 3, marginLeft: 5, alignItems: "flex-start", backgroundColor: "white", flexDirection: 'row' }}>
-                <View style={{ flex: 2, alignItems: "flex-start", backgroundColor: "white " }} >
+              <View
+                style={{
+                  flex: 3,
+                  marginLeft: 5,
+                  alignItems: "flex-start",
+                  backgroundColor: "white",
+                  flexDirection: "row"
+                }}
+              >
+                <View
+                  style={{
+                    flex: 2,
+                    alignItems: "flex-start",
+                    backgroundColor: "white "
+                  }}
+                >
                   <Text style={{ fontSize: 15 }}>
-                    <Icon name="award" size={15} color='orange' /> {school_name}</Text>
+                    <Icon name="award" size={15} color="orange" /> {schoolName}
+                  </Text>
                 </View>
-
               </View>
-
-
-
             </View>
-
-
 
             <View
               style={{
-                borderBottomColor: 'grey',
+                borderBottomColor: "grey",
                 borderBottomWidth: 0.5,
                 marginBottom: 5,
-                marginTop: 15,
+                marginTop: 15
               }}
             />
 
-
-
-
-            <View style={{
-              flex: 1,
-              backgroundColor: "white",
-              alignItems: "flex-start",
-              height: 40,
-              justifyContent: 'center',
-              marginLeft: 20, marginBottom: 10
-            }}>
-              <TouchableHighlight underColor={"rgba(0,0,0,0.2)"} >
-                <View tyle={{
-                  //flex: 1,
-                  flexDirection: 'row',
-                  backgroundColor: "black",
-                  //alignItems: "center"
-                }}>
-                  <Text style={styles.buttonText} onPress={() => this.props.navigation.navigate('Notices')} >
-                    <Icon name="file-text" size={20} />   Notices</Text>
+            <View
+              style={{
+                flex: 1,
+                backgroundColor: "white",
+                alignItems: "flex-start",
+                height: 40,
+                justifyContent: "center",
+                marginLeft: 20,
+                marginBottom: 10
+              }}
+            >
+              <TouchableHighlight underColor={"rgba(0,0,0,0.2)"}>
+                <View
+                  tyle={{
+                    //flex: 1,
+                    flexDirection: "row",
+                    backgroundColor: "black"
+                    //alignItems: "center"
+                  }}
+                >
+                  <Text
+                    style={styles.buttonText}
+                    onPress={() => this.props.navigation.navigate("Notices")}
+                  >
+                    <Icon name="file-text" size={20} /> Notices
+                  </Text>
                 </View>
               </TouchableHighlight>
             </View>
 
-
-
-
-            <View style={{
-              flex: 1,
-              backgroundColor: "white",
-              alignItems: "flex-start",
-              height: 40,
-              justifyContent: 'center',
-              marginLeft: 20, marginBottom: 10
-            }}>
-              <TouchableHighlight underColor={"rgba(0,0,0,0.2)"} >
-                <View tyle={{
-                  //flex: 1,
-                  flexDirection: 'row',
-                  backgroundColor: "black",
-                  //alignItems: "center"
-                }}>
-                  <Text style={styles.buttonText} onPress={() => this.props.navigation.navigate('Gallery')} >
-                    <Icon name="film" size={20} />   Gallery</Text>
+            <View
+              style={{
+                flex: 1,
+                backgroundColor: "white",
+                alignItems: "flex-start",
+                height: 40,
+                justifyContent: "center",
+                marginLeft: 20,
+                marginBottom: 10
+              }}
+            >
+              <TouchableHighlight underColor={"rgba(0,0,0,0.2)"}>
+                <View
+                  tyle={{
+                    //flex: 1,
+                    flexDirection: "row",
+                    backgroundColor: "black"
+                    //alignItems: "center"
+                  }}
+                >
+                  <Text
+                    style={styles.buttonText}
+                    onPress={() => this.props.navigation.navigate("Gallery")}
+                  >
+                    <Icon name="film" size={20} /> Gallery
+                  </Text>
                 </View>
               </TouchableHighlight>
             </View>
 
-            <View style={{
-              flex: 1,
-              backgroundColor: "white",
-              alignItems: "flex-start",
-              height: 40,
-              justifyContent: 'center',
-              marginLeft: 20, marginBottom: 10
-            }}>
-              <TouchableHighlight underColor={"rgba(0,0,0,0.2)"} >
-                <View tyle={{
-                  //flex: 1,
-                  flexDirection: 'row',
-                  backgroundColor: "black",
-                  //alignItems: "center"
-                }}>
-                  <Text style={styles.buttonText} onPress={() => this.props.navigation.navigate('Attendance')} >
-                    <Icon name="calendar" size={20} />   Attendance</Text>
+            <View
+              style={{
+                flex: 1,
+                backgroundColor: "white",
+                alignItems: "flex-start",
+                height: 40,
+                justifyContent: "center",
+                marginLeft: 20,
+                marginBottom: 10
+              }}
+            >
+              <TouchableHighlight underColor={"rgba(0,0,0,0.2)"}>
+                <View
+                  tyle={{
+                    //flex: 1,
+                    flexDirection: "row",
+                    backgroundColor: "black"
+                    //alignItems: "center"
+                  }}
+                >
+                  <Text
+                    style={styles.buttonText}
+                    onPress={() => this.props.navigation.navigate("Attendance")}
+                  >
+                    <Icon name="calendar" size={20} /> Attendance
+                  </Text>
                 </View>
               </TouchableHighlight>
             </View>
 
-            <View style={{
-              flex: 1,
-              backgroundColor: "white",
-              alignItems: "flex-start",
-              height: 40,
-              justifyContent: 'center',
-              marginLeft: 20, marginBottom: 10
-            }}>
-              <TouchableHighlight underColor={"rgba(0,0,0,0.2)"} >
-                <View tyle={{
-                  //flex: 1,
-                  flexDirection: 'row',
-                  backgroundColor: "black",
-                  //alignItems: "center"
-                }}>
-                  <Text style={styles.buttonText}
-                    onPress={() => this.props.navigation.navigate('Welcome')}>
-                    <Icon name="bar-chart-2" size={20} />  Progress Report</Text>
+            <View
+              style={{
+                flex: 1,
+                backgroundColor: "white",
+                alignItems: "flex-start",
+                height: 40,
+                justifyContent: "center",
+                marginLeft: 20,
+                marginBottom: 10
+              }}
+            >
+              <TouchableHighlight underColor={"rgba(0,0,0,0.2)"}>
+                <View
+                  tyle={{
+                    //flex: 1,
+                    flexDirection: "row",
+                    backgroundColor: "black"
+                    //alignItems: "center"
+                  }}
+                >
+                  <Text
+                    style={styles.buttonText}
+                    onPress={() => this.props.navigation.navigate("Welcome")}
+                  >
+                    <Icon name="bar-chart-2" size={20} /> Progress Report
+                  </Text>
                 </View>
               </TouchableHighlight>
             </View>
 
-
-            <View style={{
-              flex: 1,
-              backgroundColor: "white",
-              alignItems: "flex-start",
-              height: 40,
-              justifyContent: 'center',
-              marginLeft: 20, marginBottom: 10
-            }}>
-              <TouchableHighlight underColor={"rgba(0,0,0,0.2)"} >
-                <View tyle={{
-                  //flex: 1,
-                  flexDirection: 'row',
-                  backgroundColor: "black",
-                  //alignItems: "center"
-                }}>
-                  <Text style={styles.buttonText}><Icon name="send" size={20} />  Communication</Text>
+            <View
+              style={{
+                flex: 1,
+                backgroundColor: "white",
+                alignItems: "flex-start",
+                height: 40,
+                justifyContent: "center",
+                marginLeft: 20,
+                marginBottom: 10
+              }}
+            >
+              <TouchableHighlight underColor={"rgba(0,0,0,0.2)"}>
+                <View
+                  tyle={{
+                    //flex: 1,
+                    flexDirection: "row",
+                    backgroundColor: "black"
+                    //alignItems: "center"
+                  }}
+                >
+                  <Text style={styles.buttonText}>
+                    <Icon name="send" size={20} /> Communication
+                  </Text>
                 </View>
               </TouchableHighlight>
             </View>
 
-            <View style={{
-              flex: 1,
-              backgroundColor: "white",
-              alignItems: "flex-start",
-              height: 40,
-              justifyContent: 'center',
-              marginLeft: 20, marginBottom: 10
-            }}>
-              <TouchableHighlight underColor={"rgba(0,0,0,0.2)"} >
-                <View tyle={{
-                  //flex: 1,
-                  flexDirection: 'row',
-                  backgroundColor: "black",
-                  //alignItems: "center"
-                }}>
-                  <Text style={styles.buttonText}
-                    onPress={() => this.props.navigation.navigate('Fee')} >
-                    <Icon name="briefcase" size={20} />   Fee  Payment</Text>
+            <View
+              style={{
+                flex: 1,
+                backgroundColor: "white",
+                alignItems: "flex-start",
+                height: 40,
+                justifyContent: "center",
+                marginLeft: 20,
+                marginBottom: 10
+              }}
+            >
+              <TouchableHighlight underColor={"rgba(0,0,0,0.2)"}>
+                <View
+                  tyle={{
+                    //flex: 1,
+                    flexDirection: "row",
+                    backgroundColor: "black"
+                    //alignItems: "center"
+                  }}
+                >
+                  <Text
+                    style={styles.buttonText}
+                    onPress={() => this.props.navigation.navigate("Fee")}
+                  >
+                    <Icon name="briefcase" size={20} /> Fee Payment
+                  </Text>
                 </View>
               </TouchableHighlight>
             </View>
 
-
-            <View style={{
-              flex: 1,
-              backgroundColor: "white",
-              alignItems: "flex-start",
-              height: 40,
-              justifyContent: 'center',
-              marginLeft: 20, marginBottom: 10
-            }}>
-              <TouchableHighlight underColor={"rgba(0,0,0,0.2)"} >
-                <View tyle={{
-                  //flex: 1,
-                  flexDirection: 'row',
-                  backgroundColor: "black",
-                  //alignItems: "center"
-                }}>
-                  <Text style={styles.buttonText}><Icon name="book" size={20} />   Digital Campus Diary </Text>
+            <View
+              style={{
+                flex: 1,
+                backgroundColor: "white",
+                alignItems: "flex-start",
+                height: 40,
+                justifyContent: "center",
+                marginLeft: 20,
+                marginBottom: 10
+              }}
+            >
+              <TouchableHighlight underColor={"rgba(0,0,0,0.2)"}>
+                <View
+                  tyle={{
+                    //flex: 1,
+                    flexDirection: "row",
+                    backgroundColor: "black"
+                    //alignItems: "center"
+                  }}
+                >
+                  <Text style={styles.buttonText}>
+                    <Icon name="book" size={20} /> Digital Campus Diary
+                  </Text>
                 </View>
               </TouchableHighlight>
             </View>
@@ -277,10 +363,36 @@ export default class ContentContainer extends Component {
                 borderBottomWidth: 0.5,
                 marginBottom: 15,
                 marginTop: 50,
-                margin: 10,
+                margin: 10
               }}
             />
 
+            <View
+              style={{
+                flex: 1,
+                backgroundColor: "white",
+                alignItems: "flex-start",
+                height: 40,
+                justifyContent: "center",
+                marginLeft: 20,
+                marginBottom: 10
+              }}
+            >
+              <TouchableHighlight underColor={"rgba(0,0,0,0.2)"}>
+                <View
+                  tyle={{
+                    //flex: 1,
+                    flexDirection: "row",
+                    backgroundColor: "black"
+                    //alignItems: "center"
+                  }}
+                >
+                  <Text style={styles.buttonText} onPress={() => this.props.navigation.navigate("LoginScreen")}>
+                    <Icon name="power" size={20} /> Logout
+                  </Text>
+                </View>
+              </TouchableHighlight>
+            </View>
           </ScrollView>
         </TouchableOpacity>
       </TouchableOpacity>
@@ -289,53 +401,53 @@ export default class ContentContainer extends Component {
 }
 const styles = StyleSheet.create({
   scrollView: {
-    backgroundColor: Colors.lighter,
+    backgroundColor: Colors.lighter
   },
   engine: {
-    position: 'absolute',
-    right: 0,
+    position: "absolute",
+    right: 0
   },
   body: {
-    backgroundColor: Colors.white,
+    backgroundColor: Colors.white
   },
   sectionContainer: {
     marginTop: 32,
-    paddingHorizontal: 24,
+    paddingHorizontal: 24
   },
   sectionTitle: {
     fontSize: 24,
-    fontWeight: '600',
-    color: Colors.black,
+    fontWeight: "600",
+    color: Colors.black
   },
   sectionDescription: {
     marginTop: 8,
     fontSize: 18,
-    fontWeight: '400',
-    color: Colors.dark,
+    fontWeight: "400",
+    color: Colors.dark
   },
   highlight: {
-    fontWeight: '700',
+    fontWeight: "700"
   },
   footer: {
     color: Colors.dark,
     fontSize: 12,
-    fontWeight: '600',
+    fontWeight: "600",
     padding: 4,
     paddingRight: 12,
-    textAlign: 'right',
+    textAlign: "right"
   },
   buttonText: {
     fontSize: 18,
-    fontWeight: '900',
+    fontWeight: "900",
     //color: "grey",
-    textAlign: "center",
+    textAlign: "center"
   },
   container: {
     backgroundColor: "#fff",
     marginTop: 15,
     //justifyContent: "center",
     alignItems: "center",
-    flex: 1,
+    flex: 1
   },
   menuButtons: {
     backgroundColor: "#3f51b5",
@@ -375,20 +487,18 @@ const styles = StyleSheet.create({
   },
   pdfcontainer: {
     flex: 1,
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-    marginTop: 25,
+    justifyContent: "flex-start",
+    alignItems: "center",
+    marginTop: 25
   },
   pdf: {
     flex: 1,
-    width: Dimensions.get('window').width,
-  }
-  ,
+    width: Dimensions.get("window").width
+  },
   modalView: {
     backgroundColor: "#aaa",
     height: 150,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center"
   }
 });
-

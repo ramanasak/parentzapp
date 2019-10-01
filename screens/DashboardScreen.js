@@ -67,28 +67,28 @@ export default class DashboardScreen extends React.Component {
 
 
 
-        const Login = this.props.navigation.dangerouslyGetParent().getParam("Login");
-        const K = this.props.navigation.dangerouslyGetParent().getParam("K");
-        const studentName = this.props.navigation.dangerouslyGetParent().getParam("studentName");
-        const studentId = this.props.navigation.dangerouslyGetParent().getParam("studentId");
-        const studentRollNumber = this.props.navigation.dangerouslyGetParent().getParam("studentRollNumber");
-        const studentImage = this.props.navigation.dangerouslyGetParent().getParam("studentImage");
-        const userName = this.props.navigation.dangerouslyGetParent().getParam("userName");
-        const classDescription = this.props.navigation.dangerouslyGetParent().getParam("classDescription");
-        const studentSection = this.props.navigation.dangerouslyGetParent().getParam("studentSection");
-        const classId = this.props.navigation.dangerouslyGetParent().getParam("classId");
-        const password = this.props.navigation.dangerouslyGetParent().getParam("password");
-        const studentGender = this.props.navigation.dangerouslyGetParent().getParam("studentGender");
-        const schoolName = this.props.navigation.dangerouslyGetParent().getParam("schoolName");
-        const schoolLogo = this.props.navigation.dangerouslyGetParent().getParam("schoolLogo");
-        const studentPhotoId = this.props.navigation.dangerouslyGetParent().getParam("studentPhotoId");
-        const schoolCode = this.props.navigation.dangerouslyGetParent().getParam("schoolCode");
+        // const Login = this.props.navigation.dangerouslyGetParent().getParam("Login");
+        // const K = this.props.navigation.dangerouslyGetParent().getParam("K");
+        // const studentName = this.props.navigation.dangerouslyGetParent().getParam("studentName");
+        // const studentId = this.props.navigation.dangerouslyGetParent().getParam("studentId");
+        // const studentRollNumber = this.props.navigation.dangerouslyGetParent().getParam("studentRollNumber");
+        // const studentImage = this.props.navigation.dangerouslyGetParent().getParam("studentImage");
+        // const userName = this.props.navigation.dangerouslyGetParent().getParam("userName");
+        // const classDescription = this.props.navigation.dangerouslyGetParent().getParam("classDescription");
+        // const studentSection = this.props.navigation.dangerouslyGetParent().getParam("studentSection");
+        // const classId = this.props.navigation.dangerouslyGetParent().getParam("classId");
+        // const password = this.props.navigation.dangerouslyGetParent().getParam("password");
+        // const studentGender = this.props.navigation.dangerouslyGetParent().getParam("studentGender");
+        // const schoolName = this.props.navigation.dangerouslyGetParent().getParam("schoolName");
+        // const schoolLogo = this.props.navigation.dangerouslyGetParent().getParam("schoolLogo");
+        // const studentPhotoId = this.props.navigation.dangerouslyGetParent().getParam("studentPhotoId");
+        // const schoolCode = this.props.navigation.dangerouslyGetParent().getParam("schoolCode");
 
 
         console.log("dash board studentName=====" + studentName);
-        console.log("studentRollNumber=====" + studentRollNumber);
+        console.log("classDescription=====" + classDescription);
        // console.log("classId=====" + classId);
-        console.log("studentRollNumber=====" + studentRollNumber);
+        console.log("schoolName=====" + schoolName);
         console.log("studentRollNumber=====" + studentRollNumber);
         console.log("studentRollNumber=====" + studentRollNumber);
         console.log("studentRollNumber=====" + studentRollNumber);
@@ -107,7 +107,6 @@ export default class DashboardScreen extends React.Component {
         //console.log("test-" + responseJson.test[0].C);
         //console.log("db myJSON=====" + myJSON.studentInfo[0]);
         //console.log("M=" + myJSON.studentInfo[0].studentName);
-        //console.log("X=" + res.studentInfo[0].studentName);
         //console.log("global.res from dashboardScreen ="+global.res.studentInfo[0].studentName);
         //console.log("experiment =" + this.props.navigation.dangerouslyGetParent().getParam("otherParam"));
 

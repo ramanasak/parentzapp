@@ -27,11 +27,14 @@ import Pdf from 'react-native-pdf';
 export default class NoticesDisplayPdfScreen extends React.Component {
 
     static navigationOptions = {
-        title: 'Home',
+        title: 'Attachments',
     };
     render() {
-      
-        const source = { uri: 'http://temp.digitalcampus.in/schoollogos/Barasat Indira Gandhi Memorial High School/NoticeFiles/6-23-04-2019.pdf', cache: true };
+        const pdfUrl = this.props.navigation.getParam("pdfUrl");
+        console.log("pdfUrl====" + pdfUrl);
+        //const source = { uri: 'http://temp.digitalcampus.in/schoollogos/Barasat Indira Gandhi Memorial High School/NoticeFiles/6-23-04-2019.pdf', cache: true };
+        const source = { uri: pdfUrl, cache: true };
+
         //const source = require('./test.pdf');  // ios only
         //const source = {uri:'bundle-assets://test.pdf'};
         //http://samples.leanpub.com/thereactnativebook-sample.pdf
@@ -41,7 +44,7 @@ export default class NoticesDisplayPdfScreen extends React.Component {
 
         return (
             <View style={styles.pdfcontainer}>
-                <Text>Attached Documents </Text>
+                {/* <Text>Attached Documents </Text> */}
                 <Pdf
                     source={source}
                     onLoadComplete={(numberOfPages, filePath) => {
@@ -55,19 +58,20 @@ export default class NoticesDisplayPdfScreen extends React.Component {
                     onError={(error) => {
                         console.log(error);
                         alert(error);
+                        this.props.navigation.goBack();
                     }}
                     style={styles.pdf} />
             </View>
         )
     }
 }
-const HeaderComponent=()=>{
-    return(
-      <View style={{flex:1,justifyContent:'center',alignItems:'center',backgroundColor:'white',paddingRight:50}}>
-        <Text style={{fontSize:18,justifyContent:'center',alignItems:'center',fontWeight:'bold'}}>Parentz App</Text>
-      </View>
+const HeaderComponent = () => {
+    return (
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'white', paddingRight: 50 }}>
+            <Text style={{ fontSize: 18, justifyContent: 'center', alignItems: 'center', fontWeight: 'bold' }}>Parentz App</Text>
+        </View>
     )
-  }
+}
 const styles = StyleSheet.create({
     scrollView: {
         backgroundColor: Colors.lighter,
