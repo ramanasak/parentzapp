@@ -70,6 +70,7 @@ import LoginScreen from "./screens/LoginScreen";
 import LoginTest from "./screens/LoginTest";
 import FirstPage from "./screens/FirstPage";
 import SecondPage from "./screens/SecondPage";
+import InboxScreen from "./screens/InboxScreen";
 import ContentComponent from "./components/ContentComponent";
 //importing styles
 //import Mainstyles from './screens/Mainstyles.js';
@@ -996,19 +997,55 @@ const NoticesStackNavigator = createStackNavigator(
     }
   }
 );
-
-//Navigation
-const NoticeTabNavigator = createBottomTabNavigator(
+const InboxStack = createStackNavigator(
   {
-    NoticesStackNavigator,
-    //A,
-    B
+    // NoticeTabNavigator: NoticeTabNavigator
+    InboxScreen
+  },
+  {
+    defaultNavigationOptions: ({ navigation }) => {
+      return {
+        headerLeft: (
+          <Icon
+            name="home"
+            size={30}
+            style={{ paddingLeft: 10 }}
+            onPress={() => navigation.navigate("Dashboard")}
+          />
+        ),//woring
+        // headerTitle: <HeaderComponent />,
+        // headerRight: (
+        //   <Button
+        //     onPress={() => alert('This is a button!')}
+        //     title="Info"
+        //     color="#fff"
+        //   />
+        // ),//working
+      };
+    }
   },
   {
     navigationOptions: ({ navigation }) => {
       const { routeName } = navigation.state.routes[navigation.state.index];
       return {
-        header: null,
+        headerTitle: routeName
+      };
+    }
+  }
+);
+//Navigation
+const NoticeTabNavigator = createBottomTabNavigator(
+  {
+    Inbox: { screen: InboxStack },
+    Notices: { screen: NoticesStackNavigator }
+    //A,
+    
+  },
+  {
+    navigationOptions: ({ navigation }) => {
+      const { routeName } = navigation.state.routes[navigation.state.index];
+      return {
+        //header: null,
         headerTitle: routeName
       };
     }

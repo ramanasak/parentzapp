@@ -112,7 +112,8 @@ export default class SiblingInfoScreen extends React.Component {
             marginBottom: 5,
             justifyContent: "center",
             width: Dimensions.get("window").width,
-            borderColor: 'grey',
+            height:50,
+            borderColor: 'blue',
             borderWidth: 0.2,
             borderRadius: 20,
           }}
@@ -164,7 +165,7 @@ export default class SiblingInfoScreen extends React.Component {
                 backgroundColor: "white"
               }}
             >
-              <Icon name="chevron-right" size={30} color={"black"} />
+              <Icon name="chevron-right" size={30} color={"green"} />
             </View>
           </View>
         </View>

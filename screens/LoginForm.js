@@ -26,13 +26,13 @@ export default class LoginForm extends React.Component {
 
       // schoolCode: 'MER-BJ1920',//local
 
-      userName: '1387',//online single
-      userPassword: 'weghak',//online single
-      schoolCode: 'MER-KP',//online
+      //userName: '1387',//online single
+      //userPassword: 'weghak',//online single
+      //schoolCode: 'MER-KP',//online
 
-      //userName: "11352", //online double
-      //userPassword: "Digital@123", //online double
-      //schoolCode: "VERSION-DEMO", //online double
+      userName: "11352", //online double
+      userPassword: "Digital@123", //online double
+      schoolCode: "VERSION-DEMO", //online double
 
       // userName: '',
       // userPassword: '',
@@ -95,7 +95,7 @@ export default class LoginForm extends React.Component {
         },
         body: JSON.stringify({
           //passing param
-          userName: userName,
+          username: userName,
           password: userPassword,
           schoolCode: schoolCode
         })

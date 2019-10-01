@@ -28,8 +28,7 @@ import Pdf from "react-native-pdf";
 
 export default class StudentInfoScreen extends React.Component {
   render() {
-    console.log("StudentInfoScreen=====" + this.props.studentImage);
-    console.log("StudentInfoScreen=====" + this.props.studentImage);
+
 
     //<Image source={{ uri: this.props.studentImage}} />
     //<Image source={{ uri: 'file:///path/to/image' }} />
