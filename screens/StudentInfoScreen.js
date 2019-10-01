@@ -25,6 +25,7 @@ import {
 import Icon from 'react-native-vector-icons/Feather';
 import Pdf from 'react-native-pdf';
 
+
 export default class StudentInfoScreen extends React.Component {
     render() {
         console.log("StudentInfoScreen=====" + this.props.studentImage);

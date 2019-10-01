@@ -91,7 +91,10 @@ export default class LoginForm extends React.Component {
                 console.log("test-" + responseJson.test[0].A);
                 console.log("test-" + responseJson.test[0].B);
                 console.log("test-" + responseJson.test[0].C);
-                global.student_res.Json = responseJson;
+                global.student_res = JSON.stringify(responseJson);
+                console.log("student_res-" + student_res);
+                
+                student_res=responseJson;
                 console.log("student_res-" + student_res);
                 if (responseJson.Login == "Success" && responseJson.count == 21) {
                     //alert("Login Successful 2");
