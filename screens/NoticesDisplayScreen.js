@@ -35,17 +35,25 @@ export default class NoticesDisplayScreen extends React.Component {
     //https://jsonplaceholder.typicode.com/posts
     // static navigationOptions = {
     //     title: 'Notices',
-        
+
     // };
     renderSeparator = () => {
         return (
-            <View style={{ height: 1, width: '100%', backgroundColor: 'grey' }}>
-            </View>
+            // <View style={{ height: 1, width: '100%', backgroundColor: 'grey' }}>
+            // </View>
+            <View
+                style={{
+                    borderBottomColor: "grey",
+                    borderBottomWidth: 0.5,
+                    marginBottom: 5,
+                    marginTop: 5
+                }}
+            />
         )
     }
     renderItem = ({ item }) => {
         return (
-            <TouchableOpacity style={styles.list} onPress={() => ToastAndroid.show(item.title, ToastAndroid.SHORT)}>
+            <TouchableOpacity style={styles.list} onPress={() => ToastAndroid.show(item.PdfNoticeHeading, ToastAndroid.SHORT)}>
                 <View style={{ flex: 1, flexDirection: 'row', backgroundColor: 'white', justifyContent: 'center' }}>
                     <View style={{
                         flex: 2, justifyContent: 'center', marginLeft: 15, backgroundColor: 'white',
@@ -53,19 +61,22 @@ export default class NoticesDisplayScreen extends React.Component {
                     }}>
                         <Text
                             style={{
-                                fontSize: 18, color: '#3f51b5', marginBottom: 1, marginTop: 1,
+                                fontSize: 18, color: 'black', marginBottom: 1, marginTop: 1,
                                 justifyContent: 'center', marginLeft: 20
                             }}
-                            onPress={() => this.props.navigation.navigate('NoticesDisplayPdfScreen')} >
-                            {item.title}, {item.releaseYear} AA
-              </Text>
-                        <Text style={{ fontSize: 14, color: '#3f51b5', marginBottom: 5, marginLeft: 20 }}>
-                            {item.releaseYear}
+                        >
+                            {item.PdfNoticeHeading}
+                        </Text>
+                        <Text style={{ fontSize: 14, color: 'green', marginBottom: 5, marginLeft: 20 }}>
+                            {item.pdfNoticeDate}
                         </Text>
                     </View>
                     <View style={{ flex: 1, justifyContent: 'center', backgroundColor: 'white' }}>
                         <Text style={{ fontSize: 18, color: '#3f51b5', marginBottom: 1, marginTop: 1, justifyContent: 'center' }}>
-                            <Icon name="paperclip" size={20} />
+                            <Icon name="paperclip" size={20} color={"#004ea8"}
+                                onPress={() => this.props.navigation.navigate('NoticesDisplayPdfScreen', {
+                                    pdfUrl: item.pdfUrl
+                                })} />
                         </Text>
                     </View>
                 </View>
@@ -73,15 +84,17 @@ export default class NoticesDisplayScreen extends React.Component {
 
         )
     }
-
+    //digitalcampus.in/ParentzApp/notices.jsp?
+    //studentId=13207&password=Digital@123&schoolCode=VERSION-DEMO&classNo=31&section=A
     componentDidMount() {
 
-        return fetch('https://facebook.github.io/react-native/movies.json')
+        return fetch('http://digitalcampus.in/ParentzApp/notices.jsp?studentId=13207&password=Digital@123&schoolCode=VERSION-DEMO&classNo=31&section=A')
             .then((response) => response.json())
             .then((responseJson) => {
+                console.log("Notices");
                 console.log(responseJson);
                 this.setState({
-                    dataSource: responseJson.movies,
+                    dataSource: responseJson.studentNoticePdf,
                     isLoading: false
                 }, function () { }
                 );
