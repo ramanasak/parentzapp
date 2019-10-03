@@ -27,7 +27,7 @@ import StudentInfoScreen from './StudentInfoScreen';
 
 export default class InboxScreen extends React.Component {
     static navigationOptions = {
-        title: "Fee2"
+        title: " "
       };
     constructor(props) {
         super(props);

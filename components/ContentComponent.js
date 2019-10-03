@@ -165,10 +165,10 @@ export default class ContentContainer extends Component {
             >
               <TouchableHighlight underColor={"rgba(0,0,0,0.2)"}>
                 <View
-                  tyle={{
+                  style={{
                     //flex: 1,
                     flexDirection: "row",
-                    backgroundColor: "black"
+                    backgroundColor: "white"
                     //alignItems: "center"
                   }}
                 >
@@ -176,7 +176,7 @@ export default class ContentContainer extends Component {
                     style={styles.buttonText}
                     onPress={() => this.props.navigation.navigate("Notices")}
                   >
-                    <Icon name="file-text" size={20} /> Notices
+                    <Icon name="file-text" size={20} color={'#008080'} /> Notices
                   </Text>
                 </View>
               </TouchableHighlight>
@@ -195,10 +195,10 @@ export default class ContentContainer extends Component {
             >
               <TouchableHighlight underColor={"rgba(0,0,0,0.2)"}>
                 <View
-                  tyle={{
+                  style={{
                     //flex: 1,
                     flexDirection: "row",
-                    backgroundColor: "black"
+                    backgroundColor: "white"
                     //alignItems: "center"
                   }}
                 >
@@ -206,7 +206,7 @@ export default class ContentContainer extends Component {
                     style={styles.buttonText}
                     onPress={() => this.props.navigation.navigate("Gallery")}
                   >
-                    <Icon name="film" size={20} /> Gallery
+                    <Icon name="film" size={20} color={'#660066'} /> Gallery
                   </Text>
                 </View>
               </TouchableHighlight>
@@ -225,10 +225,10 @@ export default class ContentContainer extends Component {
             >
               <TouchableHighlight underColor={"rgba(0,0,0,0.2)"}>
                 <View
-                  tyle={{
+                  style={{
                     //flex: 1,
                     flexDirection: "row",
-                    backgroundColor: "black"
+                    backgroundColor: "white"
                     //alignItems: "center"
                   }}
                 >
@@ -236,7 +236,7 @@ export default class ContentContainer extends Component {
                     style={styles.buttonText}
                     onPress={() => this.props.navigation.navigate("Attendance")}
                   >
-                    <Icon name="calendar" size={20} /> Attendance
+                    <Icon name="calendar" size={20} color={'#0000ff'} /> Attendance
                   </Text>
                 </View>
               </TouchableHighlight>
@@ -255,10 +255,10 @@ export default class ContentContainer extends Component {
             >
               <TouchableHighlight underColor={"rgba(0,0,0,0.2)"}>
                 <View
-                  tyle={{
+                  style={{
                     //flex: 1,
                     flexDirection: "row",
-                    backgroundColor: "black"
+                    backgroundColor: "white"
                     //alignItems: "center"
                   }}
                 >
@@ -266,7 +266,7 @@ export default class ContentContainer extends Component {
                     style={styles.buttonText}
                     onPress={() => this.props.navigation.navigate("Welcome")}
                   >
-                    <Icon name="bar-chart-2" size={20} /> Progress Report
+                    <Icon name="bar-chart-2" size={20} color={'#f7347a'}/> Progress Report
                   </Text>
                 </View>
               </TouchableHighlight>
@@ -285,15 +285,15 @@ export default class ContentContainer extends Component {
             >
               <TouchableHighlight underColor={"rgba(0,0,0,0.2)"}>
                 <View
-                  tyle={{
+                  style={{
                     //flex: 1,
                     flexDirection: "row",
-                    backgroundColor: "black"
+                    backgroundColor: "white"
                     //alignItems: "center"
                   }}
                 >
                   <Text style={styles.buttonText}>
-                    <Icon name="send" size={20} /> Communication
+                    <Icon name="send" size={20} color={'#ffa500'}/> Communication
                   </Text>
                 </View>
               </TouchableHighlight>
@@ -312,10 +312,10 @@ export default class ContentContainer extends Component {
             >
               <TouchableHighlight underColor={"rgba(0,0,0,0.2)"}>
                 <View
-                  tyle={{
+                  style={{
                     //flex: 1,
                     flexDirection: "row",
-                    backgroundColor: "black"
+                    backgroundColor: "white"
                     //alignItems: "center"
                   }}
                 >
@@ -323,7 +323,7 @@ export default class ContentContainer extends Component {
                     style={styles.buttonText}
                     onPress={() => this.props.navigation.navigate("Fee")}
                   >
-                    <Icon name="briefcase" size={20} /> Fee Payment
+                    <Icon name="briefcase" size={20} color={'green'}/> Fee Payment
                   </Text>
                 </View>
               </TouchableHighlight>
@@ -342,15 +342,15 @@ export default class ContentContainer extends Component {
             >
               <TouchableHighlight underColor={"rgba(0,0,0,0.2)"}>
                 <View
-                  tyle={{
+                  style={{
                     //flex: 1,
                     flexDirection: "row",
-                    backgroundColor: "black"
+                    backgroundColor: "white"
                     //alignItems: "center"
                   }}
                 >
                   <Text style={styles.buttonText}>
-                    <Icon name="book" size={20} /> Digital Campus Diary
+                    <Icon name="book" size={20} color={'#660066'} /> Digital Campus Diary
                   </Text>
                 </View>
               </TouchableHighlight>
@@ -380,15 +380,15 @@ export default class ContentContainer extends Component {
             >
               <TouchableHighlight underColor={"rgba(0,0,0,0.2)"}>
                 <View
-                  tyle={{
+                  style={{
                     //flex: 1,
                     flexDirection: "row",
-                    backgroundColor: "black"
+                    backgroundColor: "white"
                     //alignItems: "center"
                   }}
                 >
                   <Text style={styles.buttonText} onPress={() => this.props.navigation.navigate("LoginScreen")}>
-                    <Icon name="power" size={20} /> Logout
+                    <Icon name="power" size={20} color={'red'}/> Logout
                   </Text>
                 </View>
               </TouchableHighlight>
@@ -438,7 +438,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontSize: 18,
-    fontWeight: "900",
+    //fontWeight: "900",
     //color: "grey",
     textAlign: "center"
   },

@@ -114,7 +114,7 @@ export default class SiblingInfoScreen extends React.Component {
             width: Dimensions.get("window").width,
             height:50,
             borderColor: 'blue',
-            borderWidth: 0.2,
+            borderWidth: 0,
             borderRadius: 20,
           }}
         >
