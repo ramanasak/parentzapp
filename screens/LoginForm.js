@@ -30,13 +30,13 @@ export default class LoginForm extends React.Component {
       //userPassword: 'weghak',//online single
       //schoolCode: 'MER-KP',//online
 
-      userName: "11352", //online double
-      userPassword: "Digital@123", //online double
-      schoolCode: "VERSION-DEMO", //online double
+      // userName: "11352", //online double
+      // userPassword: "Digital@123", //online double
+      // schoolCode: "VERSION-DEMO", //online double
 
-      // userName: '',
-      // userPassword: '',
-      // schoolCode: '',
+      userName: '',
+      userPassword: '',
+      schoolCode: '',
       loading: false,
       button_toggle: false
     };
