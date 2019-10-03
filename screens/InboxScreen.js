@@ -28,7 +28,7 @@ import StudentInfoScreen from './StudentInfoScreen';
 export default class InboxScreen extends React.Component {
     static navigationOptions = {
         title: " "
-      };
+    };
     constructor(props) {
         super(props);
         this.state = { isLoading: true }
@@ -57,14 +57,14 @@ export default class InboxScreen extends React.Component {
     renderItem = ({ item }) => {
         return (
             <TouchableOpacity style={styles.list} onPress={() => ToastAndroid.show(item.noticeHeading, ToastAndroid.SHORT)}>
-                
+
                 <View style={{ flex: 1, flexDirection: 'row', backgroundColor: 'white', justifyContent: 'center' }}>
-                    <View style={{ flex: 1, justifyContent: 'center', backgroundColor: 'white',alignItems:'center' }}>
+                    <View style={{ flex: 1, justifyContent: 'center', backgroundColor: 'white', alignItems: 'center' }}>
                         <Text style={{ fontSize: 18, color: '#3f51b5', marginBottom: 1, marginTop: 1, justifyContent: 'center' }}>
-                             <Icon name="message-square" size={20} color={"#004ea8"} />
+                            <Icon name="message-square" size={20} color={"#004ea8"} />
                         </Text>
                     </View>
-                    
+
                     <View style={{
                         flex: 11, justifyContent: 'flex-start', marginLeft: 1, backgroundColor: 'white',
                         borderColor: 'black', borderWidth: 1, borderRadius: 10, borderColor: 'white'
@@ -75,7 +75,7 @@ export default class InboxScreen extends React.Component {
                                 justifyContent: 'center', marginLeft: 2
                             }}
                         >
-                            {item.noticeHeading}   
+                            {item.noticeHeading}
                         </Text>
                         <Text style={{ fontSize: 14, color: 'green', marginBottom: 5, marginLeft: 2 }}>
                             {item.noticeContent}
@@ -95,7 +95,7 @@ export default class InboxScreen extends React.Component {
     //studentId=13207&password=Digital@123&schoolCode=VERSION-DEMO&classNo=31&section=A
     componentDidMount() {
 
-        return fetch("http://digitalcampus.in/ParentzApp/notices.jsp?studentId="+studentId+"&schoolCode="+schoolCode+"&classNo="+classId+"&section="+studentSection)
+        return fetch("http://digitalcampus.in/ParentzApp/notices.jsp?studentId=" + studentId + "&schoolCode=" + schoolCode + "&classNo=" + classId + "&section=" + studentSection)
             .then((response) => response.json())
             .then((responseJson) => {
                 console.log("Notices");
