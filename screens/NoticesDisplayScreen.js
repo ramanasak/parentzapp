@@ -88,7 +88,7 @@ export default class NoticesDisplayScreen extends React.Component {
     //studentId=13207&password=Digital@123&schoolCode=VERSION-DEMO&classNo=31&section=A
     componentDidMount() {
 
-        return fetch("http://digitalcampus.in/ParentzApp/notices.jsp?studentId="+studentId+"&schoolCode="+schoolCode+"&classNo="+classId+"&section="+studentSection)
+        return fetch("http://www.digitalcampus.in/ParentzApp/notices.jsp?studentId=" + studentId + "&schoolCode=" + schoolCode + "&classNo=" + classId + "&section=" + studentSection)
             .then((response) => response.json())
             .then((responseJson) => {
                 console.log("Notices");

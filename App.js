@@ -25,7 +25,7 @@ import {
   CheckBox,
   Modal,
   TouchableHighlight,
-  Slider
+  Slider, AsyncStorage
 } from "react-native";
 
 import {
@@ -822,7 +822,35 @@ const HeaderComponent = () => {
     </View>
   );
 };
+class AuthLoadingScreen extends React.Component {
+  constructor(props) {
+    super(props);
+    console.log("Constructor");
+    this._loadData();
+    //console.log("isLoggedIn= 2 " + _loadData());
+  }
+  // componentDidMount(){
+  //   this._loadData();
+  // }
+  render() {
+    //console.log("isLoggedIn 1=" + this._loadData());
+    return (
+      <View>
+        <Text> AuthLoadingScreen s</Text>
+        <ActivityIndicator />
 
+      </View>
+    );
+  }
+  _loadData = async () => {
+    console.log("_loadData");
+    const isLoggedIn = await AsyncStorage.getItem('isLoggedIn');
+    const R = await AsyncStorage.getItem('R');
+    console.log("isLoggedIn 3 =" + isLoggedIn);
+    console.log("R 3 =" + R);
+    this.props.navigation.navigate(isLoggedIn !== '1' ? 'LoginScreen' : 'Dashboard')
+  }
+}
 
 
 
@@ -1039,7 +1067,7 @@ const NoticeTabNavigator = createBottomTabNavigator(
     Inbox: { screen: InboxStack },
     Notices: { screen: NoticesStackNavigator }
     //A,
-    
+
   },
   {
     navigationOptions: ({ navigation }) => {
@@ -1089,6 +1117,13 @@ const AttendanceStackNavigator = createStackNavigator(
   //   }
   // }
 );
+const AuthStack = createStackNavigator(
+  {
+    AuthLoading: { screen: AuthLoadingScreen },
+    LoginScreen: { screen: LoginForm },
+  }
+
+);
 const AppDrawerNavigator = createDrawerNavigator(
   {
     //LoginScreen: { screen: LoginForm },
@@ -1116,6 +1151,7 @@ const AppDrawerNavigator = createDrawerNavigator(
 const AppSwitchNavigator = createSwitchNavigator({
   //Welcome: { screen: WelcomeScreen },
   //A: { screen: A },
+  AuthLoading: AuthLoadingScreen,
   LoginScreen: { screen: LoginForm },
   Dashboard: { screen: AppDrawerNavigator },
   SiblingInfoScreen: { screen: SiblingInfoScreen }

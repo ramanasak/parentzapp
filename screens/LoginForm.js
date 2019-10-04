@@ -11,7 +11,7 @@ import {
   TouchableNativeFeedback,
   TouchableHighlight,
   Alert,
-  ScrollView
+  ScrollView, AsyncStorage
 } from "react-native";
 
 export default class LoginForm extends React.Component {
@@ -25,13 +25,13 @@ export default class LoginForm extends React.Component {
       //userPassword: 'gaurav',//local single
       // schoolCode: 'MER-BJ1920',//local
 
-      userName: '1387',//online single
-      userPassword: 'weghak',//online single
-      schoolCode: 'MER-KP',//online
+      // userName: '1387',//online single
+      // userPassword: 'weghak',//online single
+      // schoolCode: 'MER-KP',//online
 
-      // userName: "11352", //online double
-      // userPassword: "Digital@123", //online double
-      // schoolCode: "VERSION-DEMO", //online double
+      userName: "11352", //online double
+      userPassword: "Digital@123", //online double
+      schoolCode: "VERSION-DEMO", //online double
 
       // userName: '',
       // userPassword: '',
@@ -39,9 +39,19 @@ export default class LoginForm extends React.Component {
       loading: false,
       button_toggle: false
     };
-  }
+    let userObj = {
 
-  loginAction = () => {
+    }
+  }
+  _storeData = async () => {
+    try {
+      await AsyncStorage.setItem('isLoggedin', 'lol');
+      await AsyncStorage.setItem('R', 'ramana');
+    } catch (error) {
+      // Error saving data
+    }
+  };
+  loginAction = async () => {
     // Alert.alert(
     //     'Alert Title',
     //     'My Alert Msg',
@@ -80,7 +90,7 @@ export default class LoginForm extends React.Component {
     //var url = 'http://192.168.1.99:8080/school.digitalcampus.in/returnjson.jsp?userName='+this.state.userName+'&password='+this.state.userPassword+'&schoolCode='+this.state.schoolCode;
 
     fetch(
-      "http://digitalcampus.in/ParentzApp/parentapp_login.jsp?username=" +
+      "http://www.digitalcampus.in/ParentzApp/parentapp_login.jsp?username=" +
       this.state.userName +
       "&password=" +
       this.state.userPassword +
@@ -118,8 +128,8 @@ export default class LoginForm extends React.Component {
         if (responseJson.Login == "Success" && responseJson.count == 2) {
           //alert("Login Successful 2");
           this.setState({ button_toggle: false });
+          this._storeData;
 
-          this.setState({ button_toggle: false });
           this.props.navigation.navigate("SiblingInfoScreen");
         } else if (responseJson.Login == "Success" && responseJson.count == 1) {
           //alert("Login Successful 1");
@@ -156,7 +166,7 @@ export default class LoginForm extends React.Component {
         }
       })
       .catch(error => {
-        console.log(error);
+        //console.log(error);
         //alert("" + error);
       });
   }; //ACTION
