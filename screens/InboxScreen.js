@@ -58,7 +58,10 @@ export default class InboxScreen extends React.Component {
         return (
             <TouchableOpacity style={styles.list} onPress={() => ToastAndroid.show(item.noticeHeading, ToastAndroid.SHORT)}>
 
-                <View style={{ flex: 1, flexDirection: 'row', backgroundColor: 'white', justifyContent: 'center' }}>
+                <View style={{
+                    flex: 1, flexDirection: 'row', backgroundColor: 'white', justifyContent: 'center',
+                    width: Dimensions.get("window").width
+                }}>
                     <View style={{ flex: 1, justifyContent: 'center', backgroundColor: 'white', alignItems: 'center' }}>
                         <Text style={{ fontSize: 18, color: '#3f51b5', marginBottom: 1, marginTop: 1, justifyContent: 'center' }}>
                             <Icon name="message-square" size={20} color={"#004ea8"} />
@@ -67,7 +70,7 @@ export default class InboxScreen extends React.Component {
 
                     <View style={{
                         flex: 11, justifyContent: 'flex-start', marginLeft: 1, backgroundColor: 'white',
-                        borderColor: 'black', borderWidth: 1, borderRadius: 10, borderColor: 'white'
+                        borderColor: 'black', borderWidth: 1, borderRadius: 10, borderColor: 'white',
                     }}>
                         <Text
                             style={{
@@ -77,7 +80,8 @@ export default class InboxScreen extends React.Component {
                         >
                             {item.noticeHeading}
                         </Text>
-                        <Text style={{ fontSize: 14, color: 'green', marginBottom: 5, marginLeft: 2 }}>
+
+                        <Text style={{ fontSize: 14, color: 'green', marginBottom: 5, marginLeft: 2, flexWrap: "wrap" }}>
                             {item.noticeContent}
                         </Text>
                     </View>
@@ -87,7 +91,7 @@ export default class InboxScreen extends React.Component {
                         </Text>
                     </View> */}
                 </View>
-            </TouchableOpacity>
+            </TouchableOpacity >
 
         )
     }

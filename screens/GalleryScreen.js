@@ -61,7 +61,7 @@ export default class GalleryScreen extends React.Component {
                         <Icon name="file-text" size={20} />  Gallery</Text>
                 </View>
                 <ScrollView style={{ flex: 1 }}>
-                    <Image style={styles.imageView2} source={require('./../galleryimages/17.png')} />
+                    {/* <Image style={styles.imageView2} source={require('./../galleryimages/17.png')} />
                     <Image style={styles.imageView2} source={require('./../galleryimages/2.jpg')} />
                     <Image style={styles.imageView2} source={require('./../galleryimages/3.jpg')} />
                     <Image style={styles.imageView2} source={require('./../galleryimages/4.jpg')} />
@@ -71,7 +71,7 @@ export default class GalleryScreen extends React.Component {
                     <Image style={styles.imageView2} source={require('./../galleryimages/8.jpg')} />
                     <Image style={styles.imageView2} source={require('./../galleryimages/9.jpg')} />
                     <Image style={styles.imageView2} source={require('./../galleryimages/10.jpg')} />
-                    <Image style={styles.imageView2} source={require('./../galleryimages/11.jpg')} />
+                    <Image style={styles.imageView2} source={require('./../galleryimages/11.jpg')} /> */}
                 </ScrollView>
 
 

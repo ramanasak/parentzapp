@@ -1005,7 +1005,7 @@ const NoticesStackNavigator = createStackNavigator(
             onPress={() => navigation.navigate("Dashboard")}
           />
         ),//woring
-        // headerTitle: <HeaderComponent />,
+        headerTitle: <HeaderComponent />,
         // headerRight: (
         //   <Button
         //     onPress={() => alert('This is a button!')}
@@ -1025,6 +1025,12 @@ const NoticesStackNavigator = createStackNavigator(
     }
   }
 );
+
+
+
+
+
+
 const InboxStack = createStackNavigator(
   {
     // NoticeTabNavigator: NoticeTabNavigator
@@ -1041,7 +1047,7 @@ const InboxStack = createStackNavigator(
             onPress={() => navigation.navigate("Dashboard")}
           />
         ),//woring
-        // headerTitle: <HeaderComponent />,
+        headerTitle: <HeaderComponent />,
         // headerRight: (
         //   <Button
         //     onPress={() => alert('This is a button!')}
@@ -1061,11 +1067,36 @@ const InboxStack = createStackNavigator(
     }
   }
 );
-//Navigation
+
+// Home: {
+//   screen: HomeScreen,
+//   navigationOptions: {
+//     tabBarLabel: 'Home',
+//     tabBarIcon: ({ tintColor }) => (
+//       <Icon name="ios-home" color={tintColor} size={24} />
+//     )
+//   }
+// },
 const NoticeTabNavigator = createBottomTabNavigator(
   {
-    Inbox: { screen: InboxStack },
-    Notices: { screen: NoticesStackNavigator }
+    Inbox: {
+      screen: InboxStack,
+      navigationOptions: {
+        tabBarLabel: 'Inbox',
+        tabBarIcon: ({ tintColor }) => (
+          <Icon name="mail" color={tintColor} size={24} />
+        )
+      }
+    },
+    Notices: {
+      screen: NoticesStackNavigator,
+      navigationOptions: {
+        tabBarLabel: 'Notices',
+        tabBarIcon: ({ tintColor }) => (
+          <Icon name="file-text" color={tintColor} size={24} />
+        )
+      }
+    }
     //A,
 
   },
@@ -1151,7 +1182,7 @@ const AppDrawerNavigator = createDrawerNavigator(
 const AppSwitchNavigator = createSwitchNavigator({
   //Welcome: { screen: WelcomeScreen },
   //A: { screen: A },
-  AuthLoading: AuthLoadingScreen,
+  //AuthLoading: AuthLoadingScreen,
   LoginScreen: { screen: LoginForm },
   Dashboard: { screen: AppDrawerNavigator },
   SiblingInfoScreen: { screen: SiblingInfoScreen }

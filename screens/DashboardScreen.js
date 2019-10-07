@@ -87,17 +87,17 @@ export default class DashboardScreen extends React.Component {
 
         console.log("dash board studentName=====" + studentName);
         console.log("classDescription=====" + classDescription);
-       // console.log("classId=====" + classId);
+        // console.log("classId=====" + classId);
         console.log("schoolName=====" + schoolName);
         console.log("studentRollNumber=====" + studentRollNumber);
         console.log("studentRollNumber=====" + studentRollNumber);
         console.log("studentRollNumber=====" + studentRollNumber);
-       // console.log("studentRollNumber=====" + studentRollNumber);
-       // console.log("studentRollNumber=====" + studentRollNumber);
-      //  console.log("K=====" + K);
-      //  console.log("dashboard 2");
+        // console.log("studentRollNumber=====" + studentRollNumber);
+        // console.log("studentRollNumber=====" + studentRollNumber);
+        //  console.log("K=====" + K);
+        //  console.log("dashboard 2");
         //console.log("db myJSON=====" + responseJson.Login);
-       // console.log("dbLogin=====" + Login);
+        // console.log("dbLogin=====" + Login);
         // console.log("test=" + myJSON.test);
         //console.log("studentInfo [0] studentName=" + myJSON.studentInfo[0].studentName);
         // console.log("dashboard 3");
@@ -138,7 +138,11 @@ export default class DashboardScreen extends React.Component {
 
 
 
+                {/* 
+onPress={() => this.props.navigation.navigate('Gallery')} 
 
+onPress={() => this.props.navigation.navigate('Welcome')}
+onPress={() => this.props.navigation.navigate('Fee')}  */}
 
                 <View style={{ backgroundColor: 'white', marginTop: 30 }}>
                     <TouchableOpacity style={styles.menuButtons}>
@@ -150,7 +154,7 @@ export default class DashboardScreen extends React.Component {
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.menuButtons}>
                         <View>
-                            <Text style={styles.buttonText} onPress={() => this.props.navigation.navigate('Gallery')} >
+                            <Text style={styles.buttonText} >
                                 <Icon name="film" size={20} />   Gallery</Text>
                         </View>
                     </TouchableOpacity>
@@ -163,7 +167,7 @@ export default class DashboardScreen extends React.Component {
                     <TouchableOpacity style={styles.menuButtons}>
                         <View>
                             <Text style={styles.buttonText}
-                                onPress={() => this.props.navigation.navigate('Welcome')}><Icon name="bar-chart-2" size={20} />   Progress Report</Text>
+                            ><Icon name="bar-chart-2" size={20} />   Progress Report</Text>
                         </View>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.menuButtons}>
@@ -175,8 +179,7 @@ export default class DashboardScreen extends React.Component {
                     <TouchableOpacity style={styles.menuButtons}>
                         <View>
 
-                            <Text style={styles.buttonText}
-                                onPress={() => this.props.navigation.navigate('Fee')} >
+                            <Text style={styles.buttonText}>
                                 <Icon name="briefcase" size={20} />   Fee  Payment</Text>
                             {/* <Icon name="dollar-sign" size={20} />
               <Icon name="credit-card" size={20} /> */}

@@ -108,7 +108,9 @@ export default class ContentContainer extends Component {
                       backgroundColor: "white"
                     }}
                   >
-                    <Icon name="chevron-down" size={20} color={"blue"} />
+                    <TouchableOpacity onPress={() => this.props.navigation.navigate("SiblingInfoScreen")}>
+                      <Icon name="chevron-down" size={20} color={"blue"} />
+                    </TouchableOpacity>
                   </View>
                 </View>
               </View>
@@ -202,9 +204,10 @@ export default class ContentContainer extends Component {
                     //alignItems: "center"
                   }}
                 >
+
                   <Text
                     style={styles.buttonText}
-                    onPress={() => this.props.navigation.navigate("Gallery")}
+
                   >
                     <Icon name="film" size={20} color={'#660066'} /> Gallery
                   </Text>
@@ -232,9 +235,13 @@ export default class ContentContainer extends Component {
                     //alignItems: "center"
                   }}
                 >
+                  {/* onPress={() => this.props.navigation.navigate("Gallery")}
+                onPress={() => this.props.navigation.navigate("Attendance")}
+                onPress={() => this.props.navigation.navigate("Welcome")}
+                onPress={() => this.props.navigation.navigate("Fee")} */}
                   <Text
                     style={styles.buttonText}
-                    onPress={() => this.props.navigation.navigate("Attendance")}
+
                   >
                     <Icon name="calendar" size={20} color={'#0000ff'} /> Attendance
                   </Text>
@@ -264,9 +271,9 @@ export default class ContentContainer extends Component {
                 >
                   <Text
                     style={styles.buttonText}
-                    onPress={() => this.props.navigation.navigate("Welcome")}
+
                   >
-                    <Icon name="bar-chart-2" size={20} color={'#f7347a'}/> Progress Report
+                    <Icon name="bar-chart-2" size={20} color={'#f7347a'} /> Progress Report
                   </Text>
                 </View>
               </TouchableHighlight>
@@ -293,7 +300,7 @@ export default class ContentContainer extends Component {
                   }}
                 >
                   <Text style={styles.buttonText}>
-                    <Icon name="send" size={20} color={'#ffa500'}/> Communication
+                    <Icon name="send" size={20} color={'#ffa500'} /> Communication
                   </Text>
                 </View>
               </TouchableHighlight>
@@ -321,9 +328,9 @@ export default class ContentContainer extends Component {
                 >
                   <Text
                     style={styles.buttonText}
-                    onPress={() => this.props.navigation.navigate("Fee")}
+
                   >
-                    <Icon name="briefcase" size={20} color={'green'}/> Fee Payment
+                    <Icon name="briefcase" size={20} color={'green'} /> Fee Payment
                   </Text>
                 </View>
               </TouchableHighlight>
@@ -388,7 +395,7 @@ export default class ContentContainer extends Component {
                   }}
                 >
                   <Text style={styles.buttonText} onPress={() => this.props.navigation.navigate("LoginScreen")}>
-                    <Icon name="power" size={20} color={'red'}/> Logout
+                    <Icon name="power" size={20} color={'red'} /> Logout
                   </Text>
                 </View>
               </TouchableHighlight>
