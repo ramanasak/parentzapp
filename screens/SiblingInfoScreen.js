@@ -12,7 +12,8 @@ import {
   TouchableOpacity,
   ToastAndroid,
   Image,
-  Dimensions
+  Dimensions,
+  AsyncStorage
 } from "react-native";
 import {
   Header,
@@ -29,6 +30,7 @@ export default class SiblingInfoScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = { isLoading: true };
+    let studentResponse;
   } //constructor
 
   //https://facebook.github.io/react-native/movies.json
@@ -67,14 +69,44 @@ export default class SiblingInfoScreen extends React.Component {
     this.props.navigation.navigate("Dashboard");
   }; //ACTION
 
+  _retrieveData = async () => {
+    try {
+      //studentResponse = JSON.parse(await AsyncStorage.getItem('studentResponse'));
+      studentResponse = await AsyncStorage.getItem('studentResponse');
 
-  componentDidMount() {
-    console.log(global.student_res);
+      const isLoggedIn = await AsyncStorage.getItem('isLoggedIn');
+      if (studentResponse !== null) {
+        // We have data!!
+        console.log("studentResponse=" + studentResponse);
+        console.log("studentResponse=" + studentResponse.Login);
+        console.log("studentResponse=" + studentResponse.count);
+        console.log("isLoggedIn=" + isLoggedIn);
+        global.student_res = JSON.parse(studentResponse);
+        console.log(" global.student_res set in retrive data sib info screen =" + global.student_res);
+        console.log(" global.student_res =" + global.student_res.studentInfo[0]);
+      }
+    } catch (error) {
+      // Error retrieving data
+      console.log(error);
+    }
+
     this.setState({
       dataSource: global.student_res.studentInfo,
       isLoading: false
     });
+
+
+  };
+
+  componentDidMount() {
+    //console.log(global.student_res);
+
+    console.log("_retrieveData=");
+    this._retrieveData();
+    console.log("_retrieveData   2");
+
   } //compo
+
 
   // renderSeparator = () => {
   //   return (
@@ -112,7 +144,7 @@ export default class SiblingInfoScreen extends React.Component {
             marginBottom: 5,
             justifyContent: "center",
             width: Dimensions.get("window").width,
-            height:50,
+            height: 50,
             borderColor: 'blue',
             borderWidth: 0,
             borderRadius: 20,

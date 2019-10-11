@@ -180,40 +180,76 @@ import {
 import { ExpandableCalendar, AgendaList, CalendarProvider, Calendar } from 'react-native-calendars';
 
 
-const today = new Date().toISOString().split('T')[0];
-const fastDate = getPastDate(3);
-const futureDates = getFutureDates(9);
-const dates = [fastDate, today].concat(futureDates);
+// const today = new Date().toISOString().split('T')[0];
+// const fastDate = getPastDate(3);
+// const futureDates = getFutureDates(9);
+// const dates = [fastDate, today].concat(futureDates);
 
-function getFutureDates(days) {
-    const array = [];
-    for (let index = 1; index <= days; index++) {
-        const date = new Date(Date.now() + (864e5 * index)); // 864e5 == 86400000 == 24*60*60*1000
-        const dateString = date.toISOString().split('T')[0];
-        array.push(dateString);
-    }
-    return array;
-}
+// function getFutureDates(days) {
+//     const array = [];
+//     for (let index = 1; index <= days; index++) {
+//         const date = new Date(Date.now() + (864e5 * index)); // 864e5 == 86400000 == 24*60*60*1000
+//         const dateString = date.toISOString().split('T')[0];
+//         array.push(dateString);
+//     }
+//     return array;
+// }
 
-function getPastDate(days) {
-    return new Date(Date.now() - (864e5 * days)).toISOString().split('T')[0];
-}
+// function getPastDate(days) {
+//     return new Date(Date.now() - (864e5 * days)).toISOString().split('T')[0];
+// }
 
-const ITEMS = [
-    { title: dates[0], data: [{ hour: '12am', duration: '1h', title: 'Ashtanga Yoga' }] },
-    { title: dates[1], data: [{ hour: '4pm', duration: '1h', title: 'Pilates ABC' }, { hour: '5pm', duration: '1h', title: 'Vinyasa Yoga' }] },
-    { title: dates[2], data: [{ hour: '1pm', duration: '1h', title: 'Ashtanga Yoga' }, { hour: '2pm', duration: '1h', title: 'Deep Streches' }, { hour: '3pm', duration: '1h', title: 'Private Yoga' }] },
-    { title: dates[3], data: [{ hour: '12am', duration: '1h', title: 'Ashtanga Yoga' }] },
-    { title: dates[4], data: [{}] },
-    { title: dates[5], data: [{ hour: '9pm', duration: '1h', title: 'Pilates Reformer' }, { hour: '10pm', duration: '1h', title: 'Ashtanga' }, { hour: '11pm', duration: '1h', title: 'TRX' }, { hour: '12pm', duration: '1h', title: 'Running Group' }] },
-    { title: dates[6], data: [{ hour: '12am', duration: '1h', title: 'Ashtanga Yoga' }] },
-    { title: dates[7], data: [{}] },
-    { title: dates[8], data: [{ hour: '9pm', duration: '1h', title: 'Pilates Reformer' }, { hour: '10pm', duration: '1h', title: 'Ashtanga' }, { hour: '11pm', duration: '1h', title: 'TRX' }, { hour: '12pm', duration: '1h', title: 'Running Group' }] },
-    { title: dates[9], data: [{ hour: '1pm', duration: '1h', title: 'Ashtanga Yoga' }, { hour: '2pm', duration: '1h', title: 'Deep Streches' }, { hour: '3pm', duration: '1h', title: 'Private Yoga' }] },
-    { title: dates[10], data: [{ hour: '12am', duration: '1h', title: 'Ashtanga Yoga' }] }
-];
-
+// const ITEMS = [
+//     { title: dates[0], data: [{ hour: '12am', duration: '1h', title: 'Ashtanga Yoga' }] },
+//     { title: dates[1], data: [{ hour: '4pm', duration: '1h', title: 'Pilates ABC' }, { hour: '5pm', duration: '1h', title: 'Vinyasa Yoga' }] },
+//     { title: dates[2], data: [{ hour: '1pm', duration: '1h', title: 'Ashtanga Yoga' }, { hour: '2pm', duration: '1h', title: 'Deep Streches' }, { hour: '3pm', duration: '1h', title: 'Private Yoga' }] },
+//     { title: dates[3], data: [{ hour: '12am', duration: '1h', title: 'Ashtanga Yoga' }] },
+//     { title: dates[4], data: [{}] },
+//     { title: dates[5], data: [{ hour: '9pm', duration: '1h', title: 'Pilates Reformer' }, { hour: '10pm', duration: '1h', title: 'Ashtanga' }, { hour: '11pm', duration: '1h', title: 'TRX' }, { hour: '12pm', duration: '1h', title: 'Running Group' }] },
+//     { title: dates[6], data: [{ hour: '12am', duration: '1h', title: 'Ashtanga Yoga' }] },
+//     { title: dates[7], data: [{}] },
+//     { title: dates[8], data: [{ hour: '9pm', duration: '1h', title: 'Pilates Reformer' }, { hour: '10pm', duration: '1h', title: 'Ashtanga' }, { hour: '11pm', duration: '1h', title: 'TRX' }, { hour: '12pm', duration: '1h', title: 'Running Group' }] },
+//     { title: dates[9], data: [{ hour: '1pm', duration: '1h', title: 'Ashtanga Yoga' }, { hour: '2pm', duration: '1h', title: 'Deep Streches' }, { hour: '3pm', duration: '1h', title: 'Private Yoga' }] },
+//     { title: dates[10], data: [{ hour: '12am', duration: '1h', title: 'Ashtanga Yoga' }] }
+// ];
+//let ITEMS = [];
 export default class AttendanceScreen extends Component {
+
+    componentDidMount() {
+
+        return fetch("http://192.168.1.99:8080/digitalcampus.in/ParentzApp/studentAttendanceReport.jsp?studentId=PP1203&schoolCode=MER-MP1819")
+            .then((response) => response.json())
+            .then((responseJson) => {
+                console.log("attendance");
+                console.log(responseJson);
+                this.setState({
+                    dataSource: responseJson.AbsentDates,
+                    isLoading: false
+                }, function () { }
+                );
+                console.log("dataSource=" + this.state.dataSource);
+                //ITEMS = this.state.dataSource.Attendance;
+                //ITEMS = this.state.dataSource.Attendance;
+                const ITEMS = [
+                    { title: "10-10-2019" },
+                    { title: this.state.dataSource.Attendance[0].date },
+                    { title: this.state.dataSource.Attendance[1].date },
+                    { title: this.state.dataSource.Attendance[2].date },
+                ];
+                console.log("ITEMS=" + JSON.stringify(ITEMS));
+            }).catch((error) => {
+                console.log(error)
+            })
+    }//compo
+
+
+
+
+
+
+
+
+
 
     onDateChanged = (/* date, updateSource */) => {
         // console.warn('ExpandableCalendarScreen onDateChanged: ', date, updateSource);
@@ -240,80 +276,99 @@ export default class AttendanceScreen extends Component {
         );
     }
 
-    renderItem = ({ item }) => {
-        if (_.isEmpty(item)) {
-            return this.renderEmptyItem();
-        }
+    // renderItem = ({ item }) => {
+    //     if (_.isEmpty(item)) {
+    //         return this.renderEmptyItem();
+    //     }
 
-        return (
-            <TouchableOpacity
-                onPress={() => this.itemPressed(item.title)}
-                style={styles.item}
-            >
-                <View>
-                    <Text style={styles.itemHourText}>{item.hour}</Text>
-                    <Text style={styles.itemDurationText}>{item.duration}</Text>
-                </View>
-                <Text style={styles.itemTitleText}>{item.title}</Text>
-                <View style={styles.itemButtonContainer}>
-                    <Button title={'Info'} onPress={this.buttonPressed} />
-                </View>
-            </TouchableOpacity>
-        );
-    }
+    //     return (
+    //         <TouchableOpacity
+    //             onPress={() => this.itemPressed(item.title)}
+    //             style={styles.item}
+    //         >
+    //             <View>
+    //                 <Text style={styles.itemHourText}>{item.hour}</Text>
+    //                 <Text style={styles.itemDurationText}>{item.duration}</Text>
+    //             </View>
+    //             <Text style={styles.itemTitleText}>{item.title}</Text>
+    //             <View style={styles.itemButtonContainer}>
+    //                 <Button title={'Info'} onPress={this.buttonPressed} />
+    //             </View>
+    //         </TouchableOpacity>
+    //     );
+    // }
 
+
+
+    // getTheme = () => {
+    //     const themeColor = '#0059ff';
+    //     const lightThemeColor = '#e6efff';
+    //     const disabledColor = '#a6acb1';
+    //     const black = '#20303c';
+    //     const white = '#ffffff';
+
+    //     return {
+    //         // arrows
+    //         arrowColor: black,
+    //         arrowStyle: { padding: 0 },
+    //         // month
+    //         monthTextColor: black,
+    //         textMonthFontSize: 16,
+    //         textMonthFontFamily: 'HelveticaNeue',
+    //         textMonthFontWeight: 'bold',
+    //         // day names
+    //         textSectionTitleColor: black,
+    //         textDayHeaderFontSize: 12,
+    //         textDayHeaderFontFamily: 'HelveticaNeue',
+    //         textDayHeaderFontWeight: 'normal',
+    //         // today
+    //         todayBackgroundColor: lightThemeColor,
+    //         todayTextColor: themeColor,
+    //         // dates
+    //         dayTextColor: themeColor,
+    //         textDayFontSize: 18,
+    //         textDayFontFamily: 'HelveticaNeue',
+    //         textDayFontWeight: '500',
+    //         textDayStyle: { marginTop: Platform.OS === 'android' ? 2 : 4 },
+    //         // selected date
+    //         selectedDayBackgroundColor: themeColor,
+    //         selectedDayTextColor: white,
+    //         // disabled date
+    //         textDisabledColor: disabledColor,
+    //         // dot (marked date)
+    //         dotColor: themeColor,
+    //         selectedDotColor: white,
+    //         disabledDotColor: disabledColor,
+    //         dotStyle: { marginTop: -2 }
+    //     };
+    // }
+
+    // getMarkedDates = () => {
+    //     const marked = {};
+    //     ITEMS.forEach(item => {
+    //         // only mark dates with data
+    //         if (item.data && item.data.length > 0 && !_.isEmpty(item.data[0])) {
+    //             marked[item.title] = { marked: true, dotColor: 'red' };
+    //         }
+    //     });
+    //     return marked;
+    // }
+    //PP1203&schoolCode=MER-MP1819
     getMarkedDates = () => {
+        console.log("getMarkedDates");
+        console.log("getMarkedDates ITEMS =" + ITEMS);
         const marked = {};
         ITEMS.forEach(item => {
             // only mark dates with data
-            if (item.data && item.data.length > 0 && !_.isEmpty(item.data[0])) {
-                marked[item.title] = { marked: true, dotColor: 'red' };
-            }
+            //if (item.date && item.date.length > 0 && !_.isEmpty(item.Attendance[0])) {
+            console.log("getMarkedDates 1");
+            console.log("getMarkedDates item =" + item);
+            console.log("getMarkedDates item =" + item.date);
+            marked[item.title] = { marked: true, dotColor: 'red' };
+            //}
         });
+        console.log("getMarkedDates return" + marked);
         return marked;
-    }
-
-    getTheme = () => {
-        const themeColor = '#0059ff';
-        const lightThemeColor = '#e6efff';
-        const disabledColor = '#a6acb1';
-        const black = '#20303c';
-        const white = '#ffffff';
-
-        return {
-            // arrows
-            arrowColor: black,
-            arrowStyle: { padding: 0 },
-            // month
-            monthTextColor: black,
-            textMonthFontSize: 16,
-            textMonthFontFamily: 'HelveticaNeue',
-            textMonthFontWeight: 'bold',
-            // day names
-            textSectionTitleColor: black,
-            textDayHeaderFontSize: 12,
-            textDayHeaderFontFamily: 'HelveticaNeue',
-            textDayHeaderFontWeight: 'normal',
-            // today
-            todayBackgroundColor: lightThemeColor,
-            todayTextColor: themeColor,
-            // dates
-            dayTextColor: themeColor,
-            textDayFontSize: 18,
-            textDayFontFamily: 'HelveticaNeue',
-            textDayFontWeight: '500',
-            textDayStyle: { marginTop: Platform.OS === 'android' ? 2 : 4 },
-            // selected date
-            selectedDayBackgroundColor: themeColor,
-            selectedDayTextColor: white,
-            // disabled date
-            textDisabledColor: disabledColor,
-            // dot (marked date)
-            dotColor: themeColor,
-            selectedDotColor: white,
-            disabledDotColor: disabledColor,
-            dotStyle: { marginTop: -2 }
-        };
     }
 
     render() {

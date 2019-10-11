@@ -16,7 +16,8 @@ import {
   Switch,
   CheckBox,
   Modal,
-  TouchableHighlight
+  TouchableHighlight,
+  AsyncStorage
 } from "react-native";
 import {
   Header,
@@ -31,15 +32,19 @@ export default class ContentContainer extends Component {
   constructor(props) {
     super(props);
   }
-
+  _Logout = async () => {
+    console.log("_Logout");
+    AsyncStorage.clear();
+    this.props.navigation.navigate('LoginScreen')
+  }
   render() {
-    console.log("global.student_res=" + global.student_res);
+    //console.log("global.student_res=" + global.student_res);
     const myObjStr = JSON.stringify(global.student_res);
-    console.log("myObjStr=" + myObjStr);
+    //console.log("myObjStr=" + myObjStr);
     //const school_name=global.student_res.studentInfo[0].schoolName;
     //const student_name=global.student_res.studentInfo[0].studentName;
 
-    console.log("myObjStr=" + myObjStr);
+    // console.log("myObjStr=" + myObjStr);
 
     return (
       <TouchableOpacity activeOpacity={1}>
@@ -394,7 +399,7 @@ export default class ContentContainer extends Component {
                     //alignItems: "center"
                   }}
                 >
-                  <Text style={styles.buttonText} onPress={() => this.props.navigation.navigate("LoginScreen")}>
+                  <Text style={styles.buttonText} onPress={() => this._Logout()}>
                     <Icon name="power" size={20} color={'red'} /> Logout
                   </Text>
                 </View>

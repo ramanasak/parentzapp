@@ -43,12 +43,22 @@ export default class LoginForm extends React.Component {
 
     }
   }
-  _storeData = async () => {
+  _storeData = async (responseJson) => {
     try {
-      await AsyncStorage.setItem('isLoggedin', 'lol');
+      //AsyncStorage.clear();
+      await AsyncStorage.setItem('studentResponse', responseJson);
       await AsyncStorage.setItem('R', 'ramana');
     } catch (error) {
       // Error saving data
+      console.log("error storedata =" + error);
+    }
+  };
+  _storeLoginStatus = async (responseJson) => {
+    try {
+      await AsyncStorage.setItem('isLoggedIn', '1');
+    } catch (error) {
+      // Error saving data
+      console.log("error storedata =" + error);
     }
   };
   loginAction = async () => {
@@ -113,28 +123,31 @@ export default class LoginForm extends React.Component {
       .then(response => response.json())
       .then(responseJson => {
         //alert("response");
-        console.log(responseJson);
+        //console.log(responseJson);
         //console.log("=======" + responseJson.studentInfo[0]);
         //console.log("N=" + responseJson.studentInfo[0].studentName);
-        console.log("test-" + responseJson.test[0].A);
-        console.log("test-" + responseJson.test[0].B);
-        console.log("test-" + responseJson.test[0].C);
-        global.student_res = responseJson;
+        // console.log("test-" + responseJson.test[0].A);
+        // console.log("test-" + responseJson.test[0].B);
+        // console.log("test-" + responseJson.test[0].C);
+
+        //global.student_res = responseJson;//IMP WORKING REMV FOR ASYNC IN SIB INFO SCREEN
+        console.log("STORE CALL");
+        this._storeData(JSON.stringify(responseJson));
+        console.log("STORE CALL 2");
 
 
-
-
-        console.log("student_res-" + student_res);
+        //console.log("student_res-" + student_res);
         if (responseJson.Login == "Success" && responseJson.count == 2) {
           //alert("Login Successful 2");
           this.setState({ button_toggle: false });
-          this._storeData;
-
+          // this._storeData;
+          this._storeLoginStatus();
           this.props.navigation.navigate("SiblingInfoScreen");
         } else if (responseJson.Login == "Success" && responseJson.count == 1) {
           //alert("Login Successful 1");
 
           //myJSON: responseJson,
+          this._storeLoginStatus();
           (global.Login = responseJson.Login),
             (global.studentName = responseJson.studentInfo[0].studentName),
             (global.studentId = responseJson.studentInfo[0].studentId),
@@ -157,7 +170,7 @@ export default class LoginForm extends React.Component {
             (global.schoolCode = responseJson.studentInfo[0].schoolCode),
             this.setState({ button_toggle: false });
           this.props.navigation.navigate("Dashboard");
-          console.log("schoolName-" + responseJson.studentInfo[0].studentName);
+          //console.log("schoolName-" + responseJson.studentInfo[0].studentName);
         } else if (responseJson.Login == "Invalid Inputs") {
           alert("Invalid Inputs");
         } else {
@@ -178,52 +191,62 @@ export default class LoginForm extends React.Component {
     //const buttonBg = button_toggle ? "#3700b3" : "#ff00ff"; //dark purple and magenta
     const buttonBg = button_toggle ? "#2b388f" : "#3f51b5"; //dark purple and magenta
     return (
-      <View style={styles.container}>
-        <TextInput
-          style={styles.inputBox}
-          placeholderTextColor="grey"
-          placeholder="User Name"
-          returnKeyType="next"
-          autoCorrect={true}
-          onSubmitEditing={() => this.userPassword.focus()}
-          onChangeText={userName => this.setState({ userName })}
-        />
-        <TextInput
-          style={styles.inputBox}
-          placeholderTextColor="grey"
-          placeholder="Password"
-          returnKeyType="next"
-          secureTextEntry={true}
-          ref={input => (this.userPassword = input)}
-          onSubmitEditing={() => this.schoolCode.focus()}
-          onChangeText={userPassword => this.setState({ userPassword })}
-        />
-        <TextInput
-          style={styles.inputBox}
-          placeholderTextColor="grey"
-          placeholder="School Code"
-          autoCorrect={true}
-          returnKeyType="go"
-          ref={input => (this.schoolCode = input)}
-          onChangeText={schoolCode => this.setState({ schoolCode })}
-        />
-        <TouchableOpacity
-          style={{
-            backgroundColor: buttonBg,
-            width: 300,
-            paddingVertical: 8,
-            marginVertical: 10,
-            borderRadius: 5,
-            borderColor: "#2b388f",
-            borderWidth: 2
-          }}
-        >
-          <View>
-            <Text style={styles.buttonText} onPress={this.loginAction}>
-              Login
+      <View style={{ backgroundColor: 'white', flex: 1, alignItems: 'center' }}>
+        <View style={{ backgroundColor: 'white', flex: 1, justifyContent: 'center' }}>
+          <Text style={{ fontSize: 30, color: '#006600' }}> ParentzApp </Text>
+        </View>
+        <View style={{ backgroundColor: 'white', flex: 1 }}>
+
+
+          <TextInput
+            style={styles.inputBox}
+            placeholderTextColor="grey"
+            placeholder="User Name"
+            returnKeyType="next"
+            autoCorrect={true}
+            onSubmitEditing={() => this.userPassword.focus()}
+            onChangeText={userName => this.setState({ userName })}
+          />
+          <TextInput
+            style={styles.inputBox}
+            placeholderTextColor="grey"
+            placeholder="Password"
+            returnKeyType="next"
+            secureTextEntry={true}
+            ref={input => (this.userPassword = input)}
+            onSubmitEditing={() => this.schoolCode.focus()}
+            onChangeText={userPassword => this.setState({ userPassword })}
+          />
+          <TextInput
+            style={styles.inputBox}
+            placeholderTextColor="grey"
+            placeholder="School Code"
+            autoCorrect={true}
+            returnKeyType="go"
+            ref={input => (this.schoolCode = input)}
+            onChangeText={schoolCode => this.setState({ schoolCode })}
+          />
+          <TouchableOpacity
+            style={{
+              backgroundColor: buttonBg,
+              width: 300,
+              paddingVertical: 8,
+              marginVertical: 10,
+              borderRadius: 5,
+              borderColor: "#2b388f",
+              borderWidth: 2
+            }}
+          >
+            <View>
+              <Text style={styles.buttonText} onPress={this.loginAction}>
+                Login
             </Text>
-          </View>
-        </TouchableOpacity>
+            </View>
+          </TouchableOpacity>
+
+        </View>
+
+
       </View>
       // style={styles.customButton} color='#ff00ff'
       // <Button title="LOGIN" style={styles.customButton} onPress={this.loginAction}
