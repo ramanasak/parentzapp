@@ -213,34 +213,10 @@ import { ExpandableCalendar, AgendaList, CalendarProvider, Calendar } from 'reac
 //     { title: dates[10], data: [{ hour: '12am', duration: '1h', title: 'Ashtanga Yoga' }] }
 // ];
 //let ITEMS = [];
+
 export default class AttendanceScreen extends Component {
 
-    componentDidMount() {
 
-        return fetch("http://192.168.1.99:8080/digitalcampus.in/ParentzApp/studentAttendanceReport.jsp?studentId=PP1203&schoolCode=MER-MP1819")
-            .then((response) => response.json())
-            .then((responseJson) => {
-                console.log("attendance");
-                console.log(responseJson);
-                this.setState({
-                    dataSource: responseJson.AbsentDates,
-                    isLoading: false
-                }, function () { }
-                );
-                console.log("dataSource=" + this.state.dataSource);
-                //ITEMS = this.state.dataSource.Attendance;
-                //ITEMS = this.state.dataSource.Attendance;
-                const ITEMS = [
-                    { title: "10-10-2019" },
-                    { title: this.state.dataSource.Attendance[0].date },
-                    { title: this.state.dataSource.Attendance[1].date },
-                    { title: this.state.dataSource.Attendance[2].date },
-                ];
-                console.log("ITEMS=" + JSON.stringify(ITEMS));
-            }).catch((error) => {
-                console.log(error)
-            })
-    }//compo
 
 
 
@@ -356,13 +332,40 @@ export default class AttendanceScreen extends Component {
     //PP1203&schoolCode=MER-MP1819
     getMarkedDates = () => {
         console.log("getMarkedDates");
-        console.log("getMarkedDates ITEMS =" + ITEMS);
+        //
+
+        //return
+        fetch("http://192.168.1.99:8080/digitalcampus.in/ParentzApp/studentAttendanceReport.jsp?studentId=PP1203&schoolCode=MER-MP1819")
+            .then((response) => response.json())
+            .then((responseJson) => {
+                console.log("attendance fetch");
+                //console.log(responseJson);
+                this.setState({
+                    dataSource: responseJson.AbsentDates,
+                    isLoading: false
+                }, function () { }
+                );
+                //console.log("dataSource=" + this.state.dataSource);
+                var ITEMS = this.state.dataSource.Attendance;
+                //ITEMS = this.state.dataSource.Attendance;
+                // ITEMS = [
+                //     { title: "10-10-2019" },
+                //     { title: this.state.dataSource.Attendance[0].date },
+                //     { title: this.state.dataSource.Attendance[1].date },
+                //     { title: this.state.dataSource.Attendance[2].date },
+                // ];
+                //console.log("ITEMS=" + JSON.stringify(ITEMS));
+            }).catch((error) => {
+                console.log(error)
+            });
+
+        //
         const marked = {};
         ITEMS.forEach(item => {
             // only mark dates with data
             //if (item.date && item.date.length > 0 && !_.isEmpty(item.Attendance[0])) {
             console.log("getMarkedDates 1");
-            console.log("getMarkedDates item =" + item);
+            console.log("getMarkedDates item =" + item + "=");
             console.log("getMarkedDates item =" + item.date);
             marked[item.title] = { marked: true, dotColor: 'red' };
             //}
