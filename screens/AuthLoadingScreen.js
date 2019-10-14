@@ -44,12 +44,12 @@ export default class AuthLoadingScreen extends React.Component {
     render() {
         //console.log("isLoggedIn 1=" + this._loadData());
         return (
-            <View style={{ backgroundColor: '#3f51b5', flex: 1, justifyContent: 'center' }}>
+            <View style={{ backgroundColor: 'white', flex: 1, justifyContent: 'center' }}>
                 {/* <Text> AuthLoadingScreen </Text> */}
                 {/* <ActivityIndicator size="large" color="#0000ff" />
+                <ActivityIndicator size="small" color="#00ff00" />
                 <ActivityIndicator size="small" color="#00ff00" /> */}
-                <ActivityIndicator size="large" color="#00ff00" />
-                {/* <ActivityIndicator size="small" color="#00ff00" /> */}
+                <ActivityIndicator size="large" color="green" />
 
             </View>
         );

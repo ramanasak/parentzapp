@@ -1,203 +1,46 @@
-// import React, { Fragment } from 'react';
-// import {
-//     SafeAreaView,
-//     StyleSheet,
-//     ScrollView,
-//     View,
-//     Text,
-//     StatusBar,
-//     Button,
-//     FlatList,
-//     ActivityIndicator,
-//     TouchableOpacity,
-//     ToastAndroid,
-//     Image,
-//     Dimensions
-// } from 'react-native';
-// import {
-//     Header,
-//     LearnMoreLinks,
-//     Colors,
-//     DebugInstructions,
-//     ReloadInstructions,
-// } from 'react-native/Libraries/NewAppScreen';
-// import Icon from 'react-native-vector-icons/Feather';
-// import Pdf from 'react-native-pdf';
-// import StudentInfoScreen from './StudentInfoScreen';
-// import AttendanceGraphScreen from './AttendanceGraphScreen';
-// import { Calendar, CalendarList, Agenda } from 'react-native-calendars';
-
-// export default class AttendanceScreen extends React.Component {
-//     static navigationOptions = {
-//         //title: 'Attendance',
-//     };
-//     //http://digitalcampus.in/AppJSPFile/ParentAttendanceReport.jsp?username=1387&password=weghak&schoolcode=MER-KP
-//     //https://github.com/wix/react-native-calendars/blob/master/example/src/screens/expandableCalendar.js
-//     render() {
-//         return (
-//             <ScrollView style={{ color: "white", fontSize: 18, textAlign: 'center' }}>
-//                 <View>
-//                     <StudentInfoScreen />
-//                 </View>
-
-//                 <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-
-//                     <Text style={{ fontSize: 18, marginTop: 35 }}> Attendance </Text>
-//                     {/* <Button title="SignUp"
-//             onPress={() => alert("signup")} /> */}
-//                     <View >
-//                         <Calendar
-//                             //Collection of dates that have to be marked.Default = {}
-//                             markedDates={{
-//                                 '2019-08-21': { selected: true, marked: true, selectedColor: 'green' },
-//                                 '2012-05-17': { marked: true },
-//                                 '2012-05-18': { marked: true, dotColor: 'red', activeOpacity: 0 },
-//                                 '2012-05-19': { disabled: true, disableTouchEvent: true }
-//                             }}
-//                         />
-//                     </View>
-//                     <View style={{ marginTop: 35 }}>
-//                         {/* <Text style={{ fontSize: 18, marginTop: 35 }}> AttendanceGraphScreen </Text> */}
-//                         <View style={{ alignItems: "center", justifyContent: "center" }}>
-//                             <Button title="Graphical View"
-//                                 onPress={() => this.props.navigation.navigate('AttendanceGraphScreen')} />
-//                         </View>
-//                         {/* <AttendanceGraphScreen /> */}
-//                     </View>
-//                 </View>
-//             </ScrollView>
-//         );
-//     }
-// }
-
-
-// const styles = StyleSheet.create({
-//     scrollView: {
-//         backgroundColor: Colors.lighter,
-//     },
-//     engine: {
-//         position: 'absolute',
-//         right: 0,
-//     },
-//     body: {
-//         backgroundColor: Colors.white,
-//     },
-//     sectionContainer: {
-//         marginTop: 32,
-//         paddingHorizontal: 24,
-//     },
-//     sectionTitle: {
-//         fontSize: 24,
-//         fontWeight: '600',
-//         color: Colors.black,
-//     },
-//     sectionDescription: {
-//         marginTop: 8,
-//         fontSize: 18,
-//         fontWeight: '400',
-//         color: Colors.dark,
-//     },
-//     highlight: {
-//         fontWeight: '700',
-//     },
-//     footer: {
-//         color: Colors.dark,
-//         fontSize: 12,
-//         fontWeight: '600',
-//         padding: 4,
-//         paddingRight: 12,
-//         textAlign: 'right',
-//     },
-//     buttonText: {
-//         fontSize: 18,
-//         fontWeight: '900',
-//         color: "#fff",
-//         textAlign: "center",
-//     },
-//     container: {
-//         backgroundColor: "#fff",
-//         marginTop: 15,
-//         //justifyContent: "center",
-//         alignItems: "center",
-//         flex: 1,
-//     },
-//     menuButtons: {
-//         backgroundColor: "#3f51b5",
-//         width: 300,
-//         paddingVertical: 8,
-//         marginVertical: 10,
-//         borderRadius: 5,
-//         borderWidth: 1,
-//         borderColor: "#2b388f"
-//     },
-//     list: {
-//         backgroundColor: "white",
-//         width: 500,
-//         paddingVertical: 0,
-//         marginVertical: 0,
-//         borderRadius: 10
-//     },
-//     imageView: {
-//         width: 70,
-//         height: 70,
-//         borderRadius: 50
-//     },
-//     imageView2: {
-//         width: 75,
-//         height: 75,
-//         borderRadius: 37.5,
-//         marginLeft: 15
-//     },
-//     pdfcontainer: {
-//         flex: 1,
-//         justifyContent: 'flex-start',
-//         alignItems: 'center',
-//         marginTop: 25,
-//     },
-//     pdf: {
-//         flex: 1,
-//         width: Dimensions.get('window').width,
-//     }
-// });
-
-
-
-
-
-
-
 import _ from 'lodash';
 import React, { Component } from 'react';
 import {
     Platform,
     Alert,
+    SafeAreaView,
     StyleSheet,
+    ScrollView,
     View,
     Text,
+    StatusBar,
+    Button,
+    FlatList,
+    ActivityIndicator,
     TouchableOpacity,
-    Button
+    ToastAndroid,
+    Image,
+    Dimensions
 } from 'react-native';
-import { ExpandableCalendar, AgendaList, CalendarProvider, Calendar } from 'react-native-calendars';
+import { CalendarList, ExpandableCalendar, AgendaList, CalendarProvider, Calendar } from 'react-native-calendars';
+import Icon from 'react-native-vector-icons/Feather';
+import Pdf from 'react-native-pdf';
+import StudentInfoScreen from './StudentInfoScreen';
+import AttendanceGraphScreen from './AttendanceGraphScreen';
 
+const today = new Date().toISOString().split('T')[0];
+const fastDate = getPastDate(3);
+const futureDates = getFutureDates(9);
+const dates = [fastDate, today].concat(futureDates);
 
-// const today = new Date().toISOString().split('T')[0];
-// const fastDate = getPastDate(3);
-// const futureDates = getFutureDates(9);
-// const dates = [fastDate, today].concat(futureDates);
+function getFutureDates(days) {
+    const array = [];
+    for (let index = 1; index <= days; index++) {
+        const date = new Date(Date.now() + (864e5 * index)); // 864e5 == 86400000 == 24*60*60*1000
+        const dateString = date.toISOString().split('T')[0];
+        array.push(dateString);
+    }
+    return array;
+}
 
-// function getFutureDates(days) {
-//     const array = [];
-//     for (let index = 1; index <= days; index++) {
-//         const date = new Date(Date.now() + (864e5 * index)); // 864e5 == 86400000 == 24*60*60*1000
-//         const dateString = date.toISOString().split('T')[0];
-//         array.push(dateString);
-//     }
-//     return array;
-// }
-
-// function getPastDate(days) {
-//     return new Date(Date.now() - (864e5 * days)).toISOString().split('T')[0];
-// }
+function getPastDate(days) {
+    return new Date(Date.now() - (864e5 * days)).toISOString().split('T')[0];
+}
 
 // const ITEMS = [
 //     { title: dates[0], data: [{ hour: '12am', duration: '1h', title: 'Ashtanga Yoga' }] },
@@ -212,11 +55,53 @@ import { ExpandableCalendar, AgendaList, CalendarProvider, Calendar } from 'reac
 //     { title: dates[9], data: [{ hour: '1pm', duration: '1h', title: 'Ashtanga Yoga' }, { hour: '2pm', duration: '1h', title: 'Deep Streches' }, { hour: '3pm', duration: '1h', title: 'Private Yoga' }] },
 //     { title: dates[10], data: [{ hour: '12am', duration: '1h', title: 'Ashtanga Yoga' }] }
 // ];
-//let ITEMS = [];
+// const ITEMS = [
+//     { title: dates[0] },
+//     { title: dates[1] },
+//     { title: dates[2] },
+//     { title: dates[3] },
+//     { title: dates[4] },
+//     { title: dates[5] },
+//     { title: dates[6] },
+//     { title: dates[7] },
+
+// ];
+
+
+
+
 
 export default class AttendanceScreen extends Component {
+    constructor(props) {
+        super(props);
+        this.state =
+            {
+                absentDates: [],
+                holidayDates: [],
+                presentDates: [],
+            }
 
+    }
+    componentDidMount() {
 
+        return fetch("http://www.digitalcampus.in/ParentzApp/studentAttendanceReport.jsp?studentId=" + studentId + "&schoolCode=" + schoolCode)
+            .then((response) => response.json())
+            .then((responseJson) => {
+                console.log("attendance");
+                console.log(responseJson);
+                this.setState({
+                    absentDates: responseJson.AbsentDates,
+                    holidayDates: responseJson.HolidayDates,
+                    //presentDates: responseJson.AbsentDates,
+                    isLoading: false
+                }, function () { }
+                );
+                console.log("dataSource=" + this.state.absentDates);
+                //const ITEMS = dataSource;
+            }).catch((error) => {
+                console.log(error)
+            })
+    }//compo
 
 
 
@@ -252,178 +137,139 @@ export default class AttendanceScreen extends Component {
         );
     }
 
-    // renderItem = ({ item }) => {
-    //     if (_.isEmpty(item)) {
-    //         return this.renderEmptyItem();
-    //     }
 
-    //     return (
-    //         <TouchableOpacity
-    //             onPress={() => this.itemPressed(item.title)}
-    //             style={styles.item}
-    //         >
-    //             <View>
-    //                 <Text style={styles.itemHourText}>{item.hour}</Text>
-    //                 <Text style={styles.itemDurationText}>{item.duration}</Text>
-    //             </View>
-    //             <Text style={styles.itemTitleText}>{item.title}</Text>
-    //             <View style={styles.itemButtonContainer}>
-    //                 <Button title={'Info'} onPress={this.buttonPressed} />
-    //             </View>
-    //         </TouchableOpacity>
-    //     );
-    // }
-
-
-
-    // getTheme = () => {
-    //     const themeColor = '#0059ff';
-    //     const lightThemeColor = '#e6efff';
-    //     const disabledColor = '#a6acb1';
-    //     const black = '#20303c';
-    //     const white = '#ffffff';
-
-    //     return {
-    //         // arrows
-    //         arrowColor: black,
-    //         arrowStyle: { padding: 0 },
-    //         // month
-    //         monthTextColor: black,
-    //         textMonthFontSize: 16,
-    //         textMonthFontFamily: 'HelveticaNeue',
-    //         textMonthFontWeight: 'bold',
-    //         // day names
-    //         textSectionTitleColor: black,
-    //         textDayHeaderFontSize: 12,
-    //         textDayHeaderFontFamily: 'HelveticaNeue',
-    //         textDayHeaderFontWeight: 'normal',
-    //         // today
-    //         todayBackgroundColor: lightThemeColor,
-    //         todayTextColor: themeColor,
-    //         // dates
-    //         dayTextColor: themeColor,
-    //         textDayFontSize: 18,
-    //         textDayFontFamily: 'HelveticaNeue',
-    //         textDayFontWeight: '500',
-    //         textDayStyle: { marginTop: Platform.OS === 'android' ? 2 : 4 },
-    //         // selected date
-    //         selectedDayBackgroundColor: themeColor,
-    //         selectedDayTextColor: white,
-    //         // disabled date
-    //         textDisabledColor: disabledColor,
-    //         // dot (marked date)
-    //         dotColor: themeColor,
-    //         selectedDotColor: white,
-    //         disabledDotColor: disabledColor,
-    //         dotStyle: { marginTop: -2 }
-    //     };
-    // }
 
     // getMarkedDates = () => {
     //     const marked = {};
     //     ITEMS.forEach(item => {
     //         // only mark dates with data
-    //         if (item.data && item.data.length > 0 && !_.isEmpty(item.data[0])) {
+    //       //  if (item.data && item.data.length > 0 && !_.isEmpty(item.data[0])) {
     //             marked[item.title] = { marked: true, dotColor: 'red' };
-    //         }
+    //        // }
     //     });
-    //     return marked;
-    // }
-    //PP1203&schoolCode=MER-MP1819
+
+
+
     getMarkedDates = () => {
-        console.log("getMarkedDates");
-        //
-
-        //return
-        fetch("http://192.168.1.99:8080/digitalcampus.in/ParentzApp/studentAttendanceReport.jsp?studentId=PP1203&schoolCode=MER-MP1819")
-            .then((response) => response.json())
-            .then((responseJson) => {
-                console.log("attendance fetch");
-                //console.log(responseJson);
-                this.setState({
-                    dataSource: responseJson.AbsentDates,
-                    isLoading: false
-                }, function () { }
-                );
-                //console.log("dataSource=" + this.state.dataSource);
-                var ITEMS = this.state.dataSource.Attendance;
-                //ITEMS = this.state.dataSource.Attendance;
-                // ITEMS = [
-                //     { title: "10-10-2019" },
-                //     { title: this.state.dataSource.Attendance[0].date },
-                //     { title: this.state.dataSource.Attendance[1].date },
-                //     { title: this.state.dataSource.Attendance[2].date },
-                // ];
-                //console.log("ITEMS=" + JSON.stringify(ITEMS));
-            }).catch((error) => {
-                console.log(error)
-            });
-
-        //
         const marked = {};
-        ITEMS.forEach(item => {
-            // only mark dates with data
-            //if (item.date && item.date.length > 0 && !_.isEmpty(item.Attendance[0])) {
-            console.log("getMarkedDates 1");
-            console.log("getMarkedDates item =" + item + "=");
-            console.log("getMarkedDates item =" + item.date);
-            marked[item.title] = { marked: true, dotColor: 'red' };
-            //}
-        });
-        console.log("getMarkedDates return" + marked);
+
+        console.log("getMarkedDates absentDates=" + JSON.stringify(this.state.absentDates));
+
+        const absent_dates = this.state.absentDates;
+        // const present_dates = this.state.absentDates;
+        const holidays_dates = this.state.absentDates;
+        //abscent 
+        if (this.state.absentDates && this.state.absentDates === 'undefined') {
+            // Object is NOT empty
+            console.log("###################################   ");
+
+        } else {
+            absent_dates.forEach(item => {
+                console.log("item===  " + item);
+                // only mark dates with data
+                //  if (item.data && item.data.length > 0 && !_.isEmpty(item.data[0])) {
+                //marked[item] = { marked: true, dotColor: 'red', selectedColor: 'red' };
+                marked[item] = { selected: true, marked: true, selectedColor: '#ff7373' };
+                // }
+            });
+        }
+        //holidays
+        // if (this.state.holidays_dates && this.state.holidays_dates === 'undefined') {
+        //     // Object is NOT empty
+        //     console.log("###################################   ");
+
+        // } else {
+        //     holidays_dates.forEach(item => {
+        //         console.log("item===  " + item);
+        //         // only mark dates with data
+        //         //  if (item.data && item.data.length > 0 && !_.isEmpty(item.data[0])) {
+        //         //marked[item] = { marked: true, dotColor: 'red', selectedColor: 'red' };
+        //         marked[item] = { selected: true, marked: true, selectedColor: '#c9c9ff' };
+        //         // }
+        //     });
+        // }
+
+
+        // ITEMS.forEach(item => {
+        //     // only mark dates with data
+        //     //  if (item.data && item.data.length > 0 && !_.isEmpty(item.data[0])) {
+        //     console.log("item.title===  " + item.title);
+        //     //marked[item.title] = { marked: true, dotColor: 'red' };
+        //     // }
+        // });
         return marked;
     }
 
+    static navigationOptions = {
+        title: 'Attendance',
+    };
+    //http://digitalcampus.in/AppJSPFile/ParentAttendanceReport.jsp?username=1387&password=weghak&schoolcode=MER-KP
+    //https://github.com/wix/react-native-calendars/blob/master/example/src/screens/expandableCalendar.js
     render() {
         return (
+            <ScrollView style={{ color: "white", fontSize: 18, textAlign: 'center' }}>
+                <View>
+                    <StudentInfoScreen />
+                </View>
 
+                <View style={{
+                    flex: 1, alignItems: "center", justifyContent: "center",
+                    backgroundColor: 'white', marginTop: 50
+                }}>
 
-            <Calendar
-                //Collection of dates that have to be marked.Default = {}
-                // markedDates={{
-                //     '2019-08-21': { selected: true, marked: true, selectedColor: 'green' },
-                //     '2012-05-17': { marked: true },
-                //     '2012-05-18': { marked: true, dotColor: 'red', activeOpacity: 0 },
-                //     '2012-05-19': { disabled: true, disableTouchEvent: true }
-                // }}
-                markedDates={this.getMarkedDates()}
-            />
+                    {/* <Text style={{ fontSize: 18, marginTop: 35 }}> Attendance </Text> */}
 
+                    {/* <View style={{
+                        flex: 1, alignItems: "center", justifyContent: "center",
+                        borderWidth: 0.5, marginTop: 25
+                    }} >
 
+                        <CalendarList
+                            style={{
+                                borderWidth: 1,
+                                borderColor: 'gray',
+                                height: 350,
+                                width: 400,
 
+                            }}
+                            markedDates={this.getMarkedDates()} />
+                    </View> */}
+                    <View style={{
+                        flex: 1, alignItems: "center", justifyContent: "center",
+                        borderWidth: 0.5, marginTop: 25
+                    }} >
 
-            // <CalendarProvider
-            //     date={ITEMS[0].title}
-            //     onDateChanged={this.onDateChanged}
-            //     onMonthChange={this.onMonthChange}
-            //     theme={{ todayButtonTextColor: '#0059ff' }}
-            //     showTodayButton
-            //     disabledOpacity={0.6}
-            // // todayBottomMargin={16}
-            // >
-            // <ExpandableCalendar
-            //     // horizontal={false}
-            //     // hideArrows
-            //     // disablePan
-            //     // hideKnob
-            //     // initialPosition={ExpandableCalendar.positions.OPEN}
-            //     firstDay={1}
-            //     markedDates={this.getMarkedDates()} // {'2019-06-01': {marked: true}, '2019-06-02': {marked: true}, '2019-06-03': {marked: true}};
-            //     theme={this.getTheme()}
-            //leftArrowImageSource={require('../img/previous.png')}
-            //rightArrowImageSource={require('../img/next.png')}
-            // calendarStyle={styles.calendar}
-            // headerStyle={styles.calendar} // for horizontal only
-            // />
-            // <AgendaList
-            //     sections={ITEMS}
-            //     extraData={this.state}
-            //     renderItem={this.renderItem}
-            // // sectionStyle={styles.section}
-            // />
-            // </CalendarProvider >
+                        <Calendar
+                            style={{
+                                borderWidth: 0.5,
+                                borderColor: 'green',
+                                height: 350,
+                                width: 350,
+
+                            }}
+
+                            markedDates={this.getMarkedDates()} />
+                    </View>
+                    {/* <View style={{ flexDirection: 'row', marginTop: 35 }}>
+                        <Icon name="circle" size={20} />
+                        <Icon name="circle" size={20} />
+                        <Icon name="circle" size={20} />
+                    </View> */}
+
+                    {/* <View style={{ marginTop: 35 }}>
+                        <Text style={{ fontSize: 18, marginTop: 35 }}> AttendanceGraphScreen </Text>
+                        <View style={{ alignItems: "center", justifyContent: "center" }}>
+                            <Button title="Graphical View"
+                                onPress={() => this.props.navigation.navigate('AttendanceGraphScreen')} />
+                        </View>
+                        <AttendanceGraphScreen />
+                    </View> */}
+                </View>
+            </ScrollView >
         );
     }
+
+
 }
 
 const styles = StyleSheet.create({

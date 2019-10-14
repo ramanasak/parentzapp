@@ -25,9 +25,13 @@ export default class LoginForm extends React.Component {
       //userPassword: 'gaurav',//local single
       // schoolCode: 'MER-BJ1920',//local
 
-      userName: '1387',//online single
-      userPassword: 'weghak',//online single
-      schoolCode: 'MER-KP',//online
+      // userName: '1387',//online single
+      // userPassword: 'weghak',//online single
+      // schoolCode: 'MER-KP',//online
+
+      userName: 'PP033',//online single
+      userPassword: 'meghgfss',//online single
+      schoolCode: 'VERSION-DEMO',//online
 
       // userName: "11352", //online double
       // userPassword: "Digital@123", //online double
@@ -77,22 +81,22 @@ export default class LoginForm extends React.Component {
     //     { cancelable: false },
     // );
 
-    console.log("LOGIN FORM ");
+    //console.log("LOGIN FORM ");
     const R = this.props.navigation.getParam("R");
-    console.log("R " + R);
+    //console.log("R " + R);
 
     const newState = !this.state.button_toggle;
     this.setState({ button_toggle: newState });
-    console.log("ACTION");
+    // console.log("ACTION");
     const { userName } = this.state;
     const { userPassword } = this.state;
     const { schoolCode } = this.state;
     const { loading } = this.state;
     this.setState({ loading: true });
-    console.log("fetch before");
-    console.log({ userName });
-    console.log({ userPassword });
-    console.log({ schoolCode });
+    //console.log("fetch before");
+    // console.log({ userName });
+    //console.log({ userPassword });
+    // console.log({ schoolCode });
 
     //"http://192.168.1.99:8080/school.digitalcampus.in/returnjson.jsp?userName="userName"&password="userPassword"&schoolCode="schoolCode""
     //var url = 'exampleapi/parameter?class='+this.state.classid+'&section='this.state.secid;
@@ -131,9 +135,9 @@ export default class LoginForm extends React.Component {
         // console.log("test-" + responseJson.test[0].C);
 
         //global.student_res = responseJson;//IMP WORKING REMV FOR ASYNC IN SIB INFO SCREEN
-        console.log("STORE CALL");
+        //  console.log("STORE CALL");
         this._storeData(JSON.stringify(responseJson));
-        console.log("STORE CALL 2");
+        // console.log("STORE CALL 2");
 
 
         //console.log("student_res-" + student_res);

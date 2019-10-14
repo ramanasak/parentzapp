@@ -1116,6 +1116,29 @@ const AttendanceStackNavigator = createStackNavigator(
     AttendanceScreen: { screen: AttendanceScreen },
     AttendanceGraphScreen: { screen: AttendanceGraphScreen }
   }
+  ,
+  {
+    defaultNavigationOptions: ({ navigation }) => {
+      return {
+        headerLeft: (
+          <Icon
+            name="home"
+            size={30}
+            style={{ paddingLeft: 10 }}
+            onPress={() => navigation.navigate("Dashboard")}
+          />
+        ),//woring
+        headerTitle: <HeaderComponent />,
+        // headerRight: (
+        //   <Button
+        //     onPress={() => alert('This is a button!')}
+        //     title="Info"
+        //     color="#fff"
+        //   />
+        // ),//working
+      };
+    }
+  },
   //,
   // {
   //   navigationOptions: ({ navigation }) => {
@@ -1137,13 +1160,12 @@ const AuthStack = createStackNavigator(
 const AppDrawerNavigator = createDrawerNavigator(
   {
     //LoginScreen: { screen: LoginForm },
-    Dashboard: {
-      screen: DashboardStackNavigator
-    },
+    Dashboard: { screen: DashboardStackNavigator },
+    Attendance: { screen: AttendanceStackNavigator },
     //Notices: { screen: NoticesStackNavigator },
     Notices: { screen: NoticeTabNavigator },
     Gallery: { screen: GalleryStackNavigator },
-    Attendance: { screen: AttendanceStackNavigator },
+
     Fee: { screen: FeeTabNavigator },
     Test: { screen: TestStack }
   },
