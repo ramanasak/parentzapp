@@ -157,7 +157,7 @@ export default class AttendanceScreen extends Component {
 
         const absent_dates = this.state.absentDates;
         // const present_dates = this.state.absentDates;
-        const holidays_dates = this.state.absentDates;
+        const holidays_dates = this.state.holidayDates;
         //abscent 
         if (this.state.absentDates && this.state.absentDates === 'undefined') {
             // Object is NOT empty
@@ -165,7 +165,7 @@ export default class AttendanceScreen extends Component {
 
         } else {
             absent_dates.forEach(item => {
-                console.log("item===  " + item);
+                console.log("A item===  " + item);
                 // only mark dates with data
                 //  if (item.data && item.data.length > 0 && !_.isEmpty(item.data[0])) {
                 //marked[item] = { marked: true, dotColor: 'red', selectedColor: 'red' };
@@ -173,22 +173,26 @@ export default class AttendanceScreen extends Component {
                 // }
             });
         }
+        console.log("absent_dates marked===  " + JSON.stringify(marked));
         //holidays
-        // if (this.state.holidays_dates && this.state.holidays_dates === 'undefined') {
-        //     // Object is NOT empty
-        //     console.log("###################################   ");
+        if (this.state.holidays_dates && this.state.holidays_dates === 'undefined') {
+            // Object is NOT empty
+            console.log("###################################   ");
 
-        // } else {
-        //     holidays_dates.forEach(item => {
-        //         console.log("item===  " + item);
-        //         // only mark dates with data
-        //         //  if (item.data && item.data.length > 0 && !_.isEmpty(item.data[0])) {
-        //         //marked[item] = { marked: true, dotColor: 'red', selectedColor: 'red' };
-        //         marked[item] = { selected: true, marked: true, selectedColor: '#c9c9ff' };
-        //         // }
-        //     });
-        // }
-
+        } else {
+            holidays_dates.forEach(item => {
+                console.log("H item===  " + item);
+                // only mark dates with data
+                //  if (item.data && item.data.length > 0 && !_.isEmpty(item.data[0])) {
+                //marked[item] = { marked: true, dotColor: 'red', selectedColor: 'red' };
+                // selectedColor: '#c9c9ff'
+                //marked["2019-10-15"] = { selected: true, marked: true, dotColor: 'red' };
+                //marked["2019-10-15"] = { marked: true, selected: true };
+                //marked[item] = { marked: true, selected: true };//working
+                // }
+            });
+        }
+        console.log("holidays_dates marked===  " + JSON.stringify(marked));
 
         // ITEMS.forEach(item => {
         //     // only mark dates with data
@@ -250,12 +254,15 @@ export default class AttendanceScreen extends Component {
 
                             markedDates={this.getMarkedDates()} />
                     </View>
-                    {/* <View style={{ flexDirection: 'row', marginTop: 35 }}>
-                        <Icon name="circle" size={20} />
-                        <Icon name="circle" size={20} />
-                        <Icon name="circle" size={20} />
-                    </View> */}
 
+                    <View style={{
+                        flexDirection: 'row', fles: 1, marginTop: 35, backgroundColor: 'white'
+                        , justifyContent: 'center', alignItems: 'center'
+                    }}>
+                        <View style={styles.circleAb} /><Text style={{ marginLeft: 5, marginRight: 5 }}> Absent </Text>
+                        <View style={styles.circleHd} /><Text style={{ marginLeft: 5, marginRight: 5 }} > Present </Text>
+                        {/* <View style={styles.circlePd} /><Text style={{ marginLeft: 5, marginRight: 5 }} > Present </Text> */}
+                    </View>
                     {/* <View style={{ marginTop: 35 }}>
                         <Text style={{ fontSize: 18, marginTop: 35 }}> AttendanceGraphScreen </Text>
                         <View style={{ alignItems: "center", justifyContent: "center" }}>
@@ -276,6 +283,23 @@ const styles = StyleSheet.create({
     calendar: {
         paddingLeft: 20,
         paddingRight: 20
+    },
+    circleAb: {
+        width: 30,
+        height: 30,
+        borderRadius: 30 / 2,
+        backgroundColor: '#ff7373'
+    },
+    circleHd: {
+        width: 30,
+        height: 30,
+        borderRadius: 30 / 2,
+        backgroundColor: '#0e9ed8'
+    }, circlePd: {
+        width: 30,
+        height: 30,
+        borderRadius: 30 / 2,
+        backgroundColor: '#006600'
     },
     section: {
         backgroundColor: '#f0f4f7',

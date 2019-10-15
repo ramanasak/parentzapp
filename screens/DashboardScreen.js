@@ -154,16 +154,17 @@ onPress={() => this.props.navigation.navigate('Fee')}  */}
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.menuButtons}>
                         <View>
-                            <Text style={styles.buttonText} >
-                                <Icon name="film" size={20} />   Gallery</Text>
-                        </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.menuButtons}>
-                        <View>
                             <Text style={styles.buttonText} onPress={() => this.props.navigation.navigate('Attendance')} >
                                 <Icon name="calendar" size={20} />   Attendance</Text>
                         </View>
                     </TouchableOpacity>
+                    <TouchableOpacity style={styles.menuButtons}>
+                        <View>
+                            <Text style={styles.buttonText} >
+                                <Icon name="film" size={20} />   Gallery</Text>
+                        </View>
+                    </TouchableOpacity>
+
                     <TouchableOpacity style={styles.menuButtons}>
                         <View>
                             <Text style={styles.buttonText}

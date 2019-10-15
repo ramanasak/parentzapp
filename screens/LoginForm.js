@@ -11,7 +11,9 @@ import {
   TouchableNativeFeedback,
   TouchableHighlight,
   Alert,
-  ScrollView, AsyncStorage
+  ScrollView, AsyncStorage,
+  Image,
+  StatusBar
 } from "react-native";
 
 export default class LoginForm extends React.Component {
@@ -25,13 +27,13 @@ export default class LoginForm extends React.Component {
       //userPassword: 'gaurav',//local single
       // schoolCode: 'MER-BJ1920',//local
 
-      // userName: '1387',//online single
-      // userPassword: 'weghak',//online single
-      // schoolCode: 'MER-KP',//online
+      userName: '1387',//online single
+      userPassword: 'weghak',//online single
+      schoolCode: 'MER-KP',//online
 
-      userName: 'PP033',//online single
-      userPassword: 'meghgfss',//online single
-      schoolCode: 'VERSION-DEMO',//online
+      // userName: 'PP033',//online single
+      // userPassword: 'meghgfss',//online single
+      // schoolCode: 'VERSION-DEMO',//online
 
       // userName: "11352", //online double
       // userPassword: "Digital@123", //online double
@@ -193,11 +195,60 @@ export default class LoginForm extends React.Component {
   render() {
     const { button_toggle } = this.state;
     //const buttonBg = button_toggle ? "#3700b3" : "#ff00ff"; //dark purple and magenta
+    //studentpic
+    //source={require('../images/logo.png')}
     const buttonBg = button_toggle ? "#2b388f" : "#3f51b5"; //dark purple and magenta
     return (
       <View style={{ backgroundColor: 'white', flex: 1, alignItems: 'center' }}>
-        <View style={{ backgroundColor: 'white', flex: 1, justifyContent: 'center' }}>
-          <Text style={{ fontSize: 30, color: '#006600' }}> ParentzApp </Text>
+        <StatusBar backgroundColor="white" barStyle="dark-content" />
+        <View style={{ backgroundColor: 'white', justifyContent: 'center' }}>
+          {/* <Image style={{
+            backgroundColor: 'white', alignItems: 'center',
+            width: 75,
+            height: 75,
+            borderRadius: 37.5,
+            marginLeft: 15
+          }}
+            source={require('./../studentpic.jpg')} /> */}
+          {/* <Image style={{
+            backgroundColor: 'white', alignItems: 'center',
+            width: 100,
+            height: 100,
+
+          }}
+            source={require('./../studentpic.jpg')} /> */}
+          {/* <Image style={{
+            backgroundColor: 'black', alignItems: 'center',
+            width: 75,
+            height: 75,
+            borderRadius: 37.5,
+            marginLeft: 15
+          }}
+            source={require('../images/logo.png')} /> */}
+          {/* <Image style={{
+            backgroundColor: 'white', alignItems: 'center',
+            width: 110,
+            height: 70,
+            //borderRadius: 37.5,
+            //marginLeft: 15
+          }}
+            source={require('../images/logo.jpg')} /> */}
+        </View>
+
+        <View style={{ backgroundColor: 'white', flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+          <Image style={{
+            backgroundColor: 'white', alignItems: 'center',
+            width: 110,
+            height: 70,
+            justifyContent: 'center',
+            alignItems: 'center'
+            //borderRadius: 37.5,
+            //marginLeft: 15
+          }}
+            source={require('../images/logo.jpg')} />
+
+          {/* #006600 */}
+          <Text style={{ fontSize: 30, color: '#4f7528' }}> ParentzApp </Text>
         </View>
         <View style={{ backgroundColor: 'white', flex: 1 }}>
 
@@ -251,7 +302,7 @@ export default class LoginForm extends React.Component {
         </View>
 
 
-      </View>
+      </View >
       // style={styles.customButton} color='#ff00ff'
       // <Button title="LOGIN" style={styles.customButton} onPress={this.loginAction}
       //     accessibilityLabel="Click to Login" color='#ff00ff' />
@@ -277,6 +328,18 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     flex: 1
+  },
+  circleAb: {
+    width: 30,
+    height: 30,
+    borderRadius: 30 / 2,
+    backgroundColor: '#ff7373'
+  },
+  circleHd: {
+    width: 30,
+    height: 30,
+    borderRadius: 30 / 2,
+    backgroundColor: '#0e9ed8'
   },
   inputBox: {
     width: 300,

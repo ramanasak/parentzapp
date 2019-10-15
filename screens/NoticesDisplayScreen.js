@@ -172,8 +172,9 @@ export default class NoticesDisplayScreen extends React.Component {
 
                 <StudentInfoScreen />
                 <View style={{ marginTop: 10 }}>
-                    <Text style={{ color: "#303f9f", fontSize: 20, textAlign: 'center', marginBottom: 15, marginTop: 10 }}>
-                        <Icon name="file-text" size={20} />  NOTICES</Text>
+                    {/* #303f9f */}
+                    <Text style={{ color: "#0e9ed8", fontSize: 20, textAlign: 'center', marginBottom: 15, marginTop: 10 }}>
+                        <Icon name="file-text" size={20} color={'#303f9f'} />  NOTICES</Text>
                 </View>
                 <View>
                     <FlatList

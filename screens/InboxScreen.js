@@ -182,9 +182,10 @@ export default class InboxScreen extends React.Component {
                 <StatusBar backgroundColor="#fff" barStyle="dark-content" />
 
                 <StudentInfoScreen />
+                {/* //#303f9f */}
                 <View style={{ marginTop: 10 }}>
-                    <Text style={{ color: "#303f9f", fontSize: 20, textAlign: 'center', marginBottom: 15, marginTop: 10 }}>
-                        <Icon name="mail" size={20} />  INBOX</Text>
+                    <Text style={{ color: "#0e9ed8", fontSize: 20, textAlign: 'center', marginBottom: 15, marginTop: 10 }}>
+                        <Icon name="mail" size={20} color={'#303f9f'} />  ANNOUNCEMENTS</Text>
                 </View>
                 <View style={{ width: Dimensions.get("window").width }}>
                     <FlatList

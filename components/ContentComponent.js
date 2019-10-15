@@ -188,7 +188,39 @@ export default class ContentContainer extends Component {
                 </View>
               </TouchableHighlight>
             </View>
-
+            <View
+              style={{
+                flex: 1,
+                backgroundColor: "white",
+                alignItems: "flex-start",
+                height: 40,
+                justifyContent: "center",
+                marginLeft: 20,
+                marginBottom: 10
+              }}
+            >
+              <TouchableHighlight underColor={"rgba(0,0,0,0.2)"}>
+                <View
+                  style={{
+                    //flex: 1,
+                    flexDirection: "row",
+                    backgroundColor: "white"
+                    //alignItems: "center"
+                  }}
+                >
+                  {/* onPress={() => this.props.navigation.navigate("Gallery")}
+                
+                onPress={() => this.props.navigation.navigate("Welcome")}
+                onPress={() => this.props.navigation.navigate("Fee")} */}
+                  <Text
+                    style={styles.buttonText}
+                    onPress={() => this.props.navigation.navigate("Attendance")}
+                  >
+                    <Icon name="calendar" size={20} color={'#0000ff'} /> Attendance
+                  </Text>
+                </View>
+              </TouchableHighlight>
+            </View>
             <View
               style={{
                 flex: 1,
@@ -220,39 +252,7 @@ export default class ContentContainer extends Component {
               </TouchableHighlight>
             </View>
 
-            <View
-              style={{
-                flex: 1,
-                backgroundColor: "white",
-                alignItems: "flex-start",
-                height: 40,
-                justifyContent: "center",
-                marginLeft: 20,
-                marginBottom: 10
-              }}
-            >
-              <TouchableHighlight underColor={"rgba(0,0,0,0.2)"}>
-                <View
-                  style={{
-                    //flex: 1,
-                    flexDirection: "row",
-                    backgroundColor: "white"
-                    //alignItems: "center"
-                  }}
-                >
-                  {/* onPress={() => this.props.navigation.navigate("Gallery")}
-                onPress={() => this.props.navigation.navigate("Attendance")}
-                onPress={() => this.props.navigation.navigate("Welcome")}
-                onPress={() => this.props.navigation.navigate("Fee")} */}
-                  <Text
-                    style={styles.buttonText}
 
-                  >
-                    <Icon name="calendar" size={20} color={'#0000ff'} /> Attendance
-                  </Text>
-                </View>
-              </TouchableHighlight>
-            </View>
 
             <View
               style={{

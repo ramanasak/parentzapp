@@ -1058,15 +1058,7 @@ const InboxStack = createStackNavigator(
 // },
 const NoticeTabNavigator = createBottomTabNavigator(
   {
-    Inbox: {
-      screen: InboxStack,
-      navigationOptions: {
-        tabBarLabel: 'Inbox',
-        tabBarIcon: ({ tintColor }) => (
-          <Icon name="mail" color={tintColor} size={24} />
-        )
-      }
-    },
+
     Notices: {
       screen: NoticesStackNavigator,
       navigationOptions: {
@@ -1075,7 +1067,16 @@ const NoticeTabNavigator = createBottomTabNavigator(
           <Icon name="file-text" color={tintColor} size={24} />
         )
       }
-    }
+    },
+    Inbox: {
+      screen: InboxStack,
+      navigationOptions: {
+        tabBarLabel: 'ANNOUNCEMENTS',
+        tabBarIcon: ({ tintColor }) => (
+          <Icon name="mail" color={tintColor} size={24} />
+        )
+      }
+    },
     //A,
 
   },
@@ -1170,6 +1171,7 @@ const AppDrawerNavigator = createDrawerNavigator(
     Test: { screen: TestStack }
   },
   {
+    //initialRouteName: 'Attendance',
     initialRouteName: 'Dashboard',
     //contentComponent: ContentComponent,
     contentComponent: props => <ContentComponent {...props} />,
