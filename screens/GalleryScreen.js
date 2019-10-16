@@ -34,74 +34,23 @@ export default class GalleryScreen extends React.Component {
     //https://facebook.github.io/react-native/movies.json
     //https://jsonplaceholder.typicode.com/posts
 
-    renderSeparator = () => {
-        return (
-            <View style={{ height: 1, width: '100%', backgroundColor: 'grey' }}>
-            </View>
-        )
-    }
-    renderItem = ({ item }) => {
-        return (
-            <TouchableOpacity style={styles.list} onPress={() => ToastAndroid.show(item.title, ToastAndroid.SHORT)}>
-                <View style={{ flex: 1, flexDirection: 'row', backgroundColor: 'white', justifyContent: 'center' }}>
-                    <View style={{
-                        flex: 2, justifyContent: 'center', marginLeft: 15, backgroundColor: 'white',
-                        borderColor: 'black', borderWidth: 1, borderRadius: 10, borderColor: 'white'
-                    }}>
-                        <Text
-                            style={{
-                                fontSize: 18, color: '#3f51b5', marginBottom: 1, marginTop: 1,
-                                justifyContent: 'center', marginLeft: 20
-                            }}
-                            onPress={() => this.props.navigation.navigate('NoticesDisplayPdfScreen')} >
-                            {item.title}, {item.releaseYear} AA
-              </Text>
-                        <Text style={{ fontSize: 14, color: '#3f51b5', marginBottom: 5, marginLeft: 20 }}>
-                            {item.releaseYear}
-                        </Text>
-                    </View>
-                    <View style={{ flex: 1, justifyContent: 'center', backgroundColor: 'white' }}>
-                        <Text style={{ fontSize: 18, color: '#3f51b5', marginBottom: 1, marginTop: 1, justifyContent: 'center' }}>
-                            <Icon name="paperclip" size={20} />
-                        </Text>
-                    </View>
-                </View>
-            </TouchableOpacity>
 
-        )
-    }
 
-    componentDidMount() {
 
-        return fetch('https://facebook.github.io/react-native/movies.json')
-            .then((response) => response.json())
-            .then((responseJson) => {
-                console.log(responseJson);
-                this.setState({
-                    dataSource: responseJson.movies,
-                    isLoading: false
-                }, function () { }
-                );
-
-            }).catch((error) => {
-                console.log(error)
-            })
-
-    }
 
 
     render() {
 
-        if (this.state.isLoading) {
-            return (
-                <View style={{ flex: 1, padding: 20 }}>
-                    {/* <ActivityIndicator /> */}
-                    <View style={[styles.container, styles.horizontal]}>
-                        <ActivityIndicator size="large" color="green" />
-                    </View>
-                </View>
-            )
-        }
+        // if (this.state.isLoading) {
+        //     return (
+        //         <View style={{ flex: 1, padding: 20 }}>
+        //             {/* <ActivityIndicator /> */}
+        //             <View style={[styles.container, styles.horizontal]}>
+        //                 <ActivityIndicator size="large" color="green" />
+        //             </View>
+        //         </View>
+        //     )
+        // }
         //style={{ backgroundColor: 'white' }}
         return (
             <ScrollView style={{ color: "white", fontSize: 18, textAlign: 'center' }}>
@@ -111,15 +60,19 @@ export default class GalleryScreen extends React.Component {
                     <Text style={{ color: "#303f9f", fontSize: 20, textAlign: 'center', marginBottom: 15, marginTop: 10 }}>
                         <Icon name="file-text" size={20} />  Gallery</Text>
                 </View>
-                <View>
-                    <FlatList
-                        //ItemSeparatorComponent={this.renderSeparator}
-                        data={this.state.dataSource}
-                        renderItem={this.renderItem}
-                        keyExtractor={({ id }, index) => id}
-                        ItemSeparatorComponent={this.renderSeparator}
-                    />
-                </View>
+                <ScrollView style={{ flex: 1 }}>
+                    {/* <Image style={styles.imageView2} source={require('./../galleryimages/17.png')} />
+                    <Image style={styles.imageView2} source={require('./../galleryimages/2.jpg')} />
+                    <Image style={styles.imageView2} source={require('./../galleryimages/3.jpg')} />
+                    <Image style={styles.imageView2} source={require('./../galleryimages/4.jpg')} />
+                    <Image style={styles.imageView2} source={require('./../galleryimages/5.jpg')} />
+                    <Image style={styles.imageView2} source={require('./../galleryimages/6.jpg')} />
+                    <Image style={styles.imageView2} source={require('./../galleryimages/7.jpg')} />
+                    <Image style={styles.imageView2} source={require('./../galleryimages/8.jpg')} />
+                    <Image style={styles.imageView2} source={require('./../galleryimages/9.jpg')} />
+                    <Image style={styles.imageView2} source={require('./../galleryimages/10.jpg')} />
+                    <Image style={styles.imageView2} source={require('./../galleryimages/11.jpg')} /> */}
+                </ScrollView>
 
 
             </ScrollView>
@@ -201,10 +154,14 @@ const styles = StyleSheet.create({
         borderRadius: 50
     },
     imageView2: {
-        width: 75,
-        height: 75,
-        borderRadius: 37.5,
-        marginLeft: 15
+        width: 375,
+        height: 200,
+        marginTop: 8,
+        marginBottom: 8,
+        //borderRadius: 37.5,
+        marginLeft: 5,
+        marginRight: 5,
+        flex: 1
     },
     pdfcontainer: {
         flex: 1,

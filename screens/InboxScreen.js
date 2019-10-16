@@ -24,8 +24,11 @@ import {
 import Icon from 'react-native-vector-icons/Feather';
 import Pdf from 'react-native-pdf';
 import StudentInfoScreen from './StudentInfoScreen';
-export default class NoticesDisplayScreen extends React.Component {
 
+export default class InboxScreen extends React.Component {
+    static navigationOptions = {
+        title: " "
+    };
     constructor(props) {
         super(props);
         this.state = { isLoading: true }
@@ -53,34 +56,42 @@ export default class NoticesDisplayScreen extends React.Component {
     }
     renderItem = ({ item }) => {
         return (
-            <TouchableOpacity style={styles.list} onPress={() => ToastAndroid.show(item.PdfNoticeHeading, ToastAndroid.SHORT)}>
-                <View style={{ flex: 1, flexDirection: 'row', backgroundColor: 'white', justifyContent: 'center' }}>
+            <TouchableOpacity style={styles.list} onPress={() => ToastAndroid.show(item.noticeHeading, ToastAndroid.SHORT)}>
+
+                <View style={{
+                    flex: 1, flexDirection: 'row', backgroundColor: 'white', justifyContent: 'center',
+                    width: Dimensions.get("window").width
+                }}>
+                    <View style={{ flex: 1, justifyContent: 'center', backgroundColor: 'white', alignItems: 'center' }}>
+                        <Text style={{ fontSize: 18, color: '#3f51b5', marginBottom: 1, marginTop: 1, justifyContent: 'center' }}>
+                            <Icon name="message-square" size={20} color={"#004ea8"} />
+                        </Text>
+                    </View>
+
                     <View style={{
-                        flex: 2, justifyContent: 'center', marginLeft: 15, backgroundColor: 'white',
-                        borderColor: 'black', borderWidth: 1, borderRadius: 10, borderColor: 'white'
+                        flex: 11, justifyContent: 'flex-start', marginLeft: 1, backgroundColor: 'white',
+                        borderColor: 'black', borderWidth: 1, borderRadius: 10, borderColor: 'white',
                     }}>
                         <Text
                             style={{
                                 fontSize: 18, color: 'black', marginBottom: 1, marginTop: 1,
-                                justifyContent: 'center', marginLeft: 20
+                                justifyContent: 'center', marginLeft: 2
                             }}
                         >
-                            {item.PdfNoticeHeading}
+                            {item.noticeHeading}
                         </Text>
-                        <Text style={{ fontSize: 14, color: 'green', marginBottom: 5, marginLeft: 20 }}>
-                            {item.pdfNoticeDate}
+
+                        <Text style={{ fontSize: 14, color: 'green', marginBottom: 5, marginLeft: 2, flexWrap: "wrap" }}>
+                            {item.noticeContent}
                         </Text>
                     </View>
-                    <View style={{ flex: 1, justifyContent: 'center', backgroundColor: 'white' }}>
+                    {/* <View style={{ flex: 1, justifyContent: 'center', backgroundColor: 'white' }}>
                         <Text style={{ fontSize: 18, color: '#3f51b5', marginBottom: 1, marginTop: 1, justifyContent: 'center' }}>
-                            <Icon name="paperclip" size={20} color={"#004ea8"}
-                                onPress={() => this.props.navigation.navigate('NoticesDisplayPdfScreen', {
-                                    pdfUrl: item.pdfUrl
-                                })} />
+                            {/* <Icon name="paperclip" size={20} color={"#004ea8"} 
                         </Text>
-                    </View>
+                    </View> */}
                 </View>
-            </TouchableOpacity>
+            </TouchableOpacity >
 
         )
     }
@@ -88,13 +99,13 @@ export default class NoticesDisplayScreen extends React.Component {
     //studentId=13207&password=Digital@123&schoolCode=VERSION-DEMO&classNo=31&section=A
     componentDidMount() {
 
-        return fetch("http://www.digitalcampus.in/ParentzApp/notices.jsp?studentId=" + studentId + "&schoolCode=" + schoolCode + "&classNo=" + classId + "&section=" + studentSection)
+        return fetch("http://digitalcampus.in/ParentzApp/notices.jsp?studentId=" + studentId + "&schoolCode=" + schoolCode + "&classNo=" + classId + "&section=" + studentSection)
             .then((response) => response.json())
             .then((responseJson) => {
                 console.log("Notices");
                 console.log(responseJson);
                 this.setState({
-                    dataSource: responseJson.studentNoticePdf,
+                    dataSource: responseJson.studentNotice,
                     isLoading: false
                 }, function () { }
                 );
@@ -171,12 +182,12 @@ export default class NoticesDisplayScreen extends React.Component {
                 <StatusBar backgroundColor="#fff" barStyle="dark-content" />
 
                 <StudentInfoScreen />
+                {/* //#303f9f */}
                 <View style={{ marginTop: 10 }}>
-                    {/* #303f9f */}
                     <Text style={{ color: "#0e9ed8", fontSize: 20, textAlign: 'center', marginBottom: 15, marginTop: 10 }}>
-                        <Icon name="file-text" size={20} color={'#303f9f'} />  NOTICES</Text>
+                        <Icon name="mail" size={20} color={'#303f9f'} />  ANNOUNCEMENTS</Text>
                 </View>
-                <View>
+                <View style={{ width: Dimensions.get("window").width }}>
                     <FlatList
                         //ItemSeparatorComponent={this.renderSeparator}
                         data={this.state.dataSource}

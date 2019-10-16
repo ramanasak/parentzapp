@@ -1,3 +1,11 @@
+/**
+ * Sample React Native App
+ * https://github.com/facebook/react-native
+ *
+ * @format
+ * @flow
+ */
+
 import React, { Fragment } from 'react';
 import {
     SafeAreaView,
@@ -12,7 +20,9 @@ import {
     TouchableOpacity,
     ToastAndroid,
     Image,
-    Dimensions
+    Dimensions,
+    Switch, CheckBox,
+    modal
 } from 'react-native';
 
 import {
@@ -24,54 +34,26 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 import Icon from 'react-native-vector-icons/Feather';
 import Pdf from 'react-native-pdf';
-export default class NoticesDisplayPdfScreen extends React.Component {
+import { Calendar, CalendarList, Agenda } from 'react-native-calendars';
+import {
+    createStackNavigator, createAppContainer, createDrawerNavigator, createSwitchNavigator,
+    createBottomTabNavigator, createMaterialTopTabNavigator, router
+} from "react-navigation";
 
+export default class FeeDetailsView extends React.Component {
     static navigationOptions = {
-        title: 'Attachments',
+        title: 'Fee Details View',
     };
     render() {
-        const pdfUrl = this.props.navigation.getParam("pdfUrl");
-        console.log("pdfUrl====" + pdfUrl);
-        //const source = { uri: 'http://temp.digitalcampus.in/schoollogos/Barasat Indira Gandhi Memorial High School/NoticeFiles/6-23-04-2019.pdf', cache: true };
-        const source = { uri: pdfUrl, cache: true };
-
-        //const source = require('./test.pdf');  // ios only
-        //const source = {uri:'bundle-assets://test.pdf'};
-        //http://samples.leanpub.com/thereactnativebook-sample.pdf
-        //
-        //const source = {uri:'file:///sdcard/test.pdf'};
-        //const source = {uri:"data:application/pdf;base64,..."};
-
         return (
-            <View style={styles.pdfcontainer}>
-                {/* <Text>Attached Documents </Text> */}
-                <Pdf
-                    source={source}
-                    onLoadComplete={(numberOfPages, filePath) => {
-                        console.log(`number of pages: ${numberOfPages}`);
-                        //alert("onLoadComplete");
-                    }}
-                    onPageChanged={(page, numberOfPages) => {
-                        console.log(`current page: ${page}`);
-                        //alert("onPageChanged");
-                    }}
-                    onError={(error) => {
-                        console.log(error);
-                        alert(error);
-                        this.props.navigation.goBack();
-                    }}
-                    style={styles.pdf} />
+            <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+                <Text>Fee Details View </Text>
             </View>
-        )
+        );
     }
 }
-const HeaderComponent = () => {
-    return (
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'white', paddingRight: 50 }}>
-            <Text style={{ fontSize: 18, justifyContent: 'center', alignItems: 'center', fontWeight: 'bold' }}>Parentz App</Text>
-        </View>
-    )
-}
+
+
 const styles = StyleSheet.create({
     scrollView: {
         backgroundColor: Colors.lighter,
@@ -124,6 +106,15 @@ const styles = StyleSheet.create({
     },
     menuButtons: {
         backgroundColor: "#3f51b5",
+        width: 300,
+        paddingVertical: 8,
+        marginVertical: 10,
+        borderRadius: 5,
+        borderWidth: 1,
+        borderColor: "#2b388f"
+    },
+    PModeButtons: {
+        backgroundColor: "#199af8",
         width: 300,
         paddingVertical: 8,
         marginVertical: 10,
