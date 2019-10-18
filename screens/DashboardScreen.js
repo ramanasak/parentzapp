@@ -160,7 +160,7 @@ onPress={() => this.props.navigation.navigate('Fee')}  */}
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.menuButtons}>
                         <View>
-                            <Text style={styles.buttonText} >
+                            <Text style={styles.buttonText} onPress={() => this.props.navigation.navigate('Gallery')}>
                                 <Icon name="film" size={20} />   Gallery</Text>
                         </View>
                     </TouchableOpacity>

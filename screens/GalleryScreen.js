@@ -34,7 +34,23 @@ export default class GalleryScreen extends React.Component {
     //https://facebook.github.io/react-native/movies.json
     //https://jsonplaceholder.typicode.com/posts
 
+    componentDidMount() {
 
+        return fetch("http://www.digitalcampus.in/ParentzApp/events.jsp?schoolCode=" + schoolCode)
+            .then((response) => response.json())
+            .then((responseJson) => {
+                console.log("events");
+                console.log(responseJson);
+                this.setState({
+                    //dataSource: responseJson.events,
+                    isLoading: false
+                }, function () { }
+                );
+                // console.log("dataSource =" + dataSource);
+            }).catch((error) => {
+                console.log(error)
+            })
+    }//compo
 
 
 

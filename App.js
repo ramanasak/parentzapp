@@ -1171,8 +1171,8 @@ const AppDrawerNavigator = createDrawerNavigator(
     Test: { screen: TestStack }
   },
   {
-    //initialRouteName: 'Attendance',
-    initialRouteName: 'Dashboard',
+    initialRouteName: 'Gallery',
+    //initialRouteName: 'Dashboard',
     //contentComponent: ContentComponent,
     contentComponent: props => <ContentComponent {...props} />,
     drawerWidth: 300,

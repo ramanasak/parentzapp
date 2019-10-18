@@ -92,7 +92,7 @@ export default class AttendanceScreen extends Component {
                 this.setState({
                     absentDates: responseJson.AbsentDates,
                     holidayDates: responseJson.HolidayDates,
-                    //presentDates: responseJson.AbsentDates,
+                    presentDates: responseJson.PresentDates,
                     isLoading: false
                 }, function () { }
                 );
@@ -156,7 +156,7 @@ export default class AttendanceScreen extends Component {
         console.log("getMarkedDates absentDates=" + JSON.stringify(this.state.absentDates));
 
         const absent_dates = this.state.absentDates;
-        // const present_dates = this.state.absentDates;
+        const present_dates = this.state.presentDates;
         const holidays_dates = this.state.holidayDates;
         //abscent 
         if (this.state.absentDates && this.state.absentDates === 'undefined') {
@@ -175,12 +175,12 @@ export default class AttendanceScreen extends Component {
         }
         console.log("absent_dates marked===  " + JSON.stringify(marked));
         //holidays
-        if (this.state.holidays_dates && this.state.holidays_dates === 'undefined') {
+        if (this.state.present_dates && this.state.present_dates === 'undefined') {
             // Object is NOT empty
             console.log("###################################   ");
 
         } else {
-            holidays_dates.forEach(item => {
+            present_dates.forEach(item => {
                 console.log("H item===  " + item);
                 // only mark dates with data
                 //  if (item.data && item.data.length > 0 && !_.isEmpty(item.data[0])) {
@@ -188,7 +188,7 @@ export default class AttendanceScreen extends Component {
                 // selectedColor: '#c9c9ff'
                 //marked["2019-10-15"] = { selected: true, marked: true, dotColor: 'red' };
                 //marked["2019-10-15"] = { marked: true, selected: true };
-                //marked[item] = { marked: true, selected: true };//working
+                marked[item] = { marked: true, selected: true };//working
                 // }
             });
         }

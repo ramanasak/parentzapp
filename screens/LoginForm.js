@@ -25,23 +25,23 @@ export default class LoginForm extends React.Component {
 
       //userName: '4681',//local single
       //userPassword: 'gaurav',//local single
-      // schoolCode: 'MER-BJ1920',//local
+      // schoolCode: 'MER-BJ1920',//locals
 
       // userName: '1387',//online single
       // userPassword: 'weghak',//online single
       // schoolCode: 'MER-KP',//online
 
-      // userName: 'PP033',//online single
-      // userPassword: 'meghgfss',//online single
-      // schoolCode: 'VERSION-DEMO',//online
+      userName: 'PP033',//online single
+      userPassword: 'meghgfss',//online single
+      schoolCode: 'VERSION-DEMO',//online
 
       // userName: "11352", //online double
       // userPassword: "Digital@123", //online double
       // schoolCode: "VERSION-DEMO", //online double
 
-      userName: '',
-      userPassword: '',
-      schoolCode: '',
+      // userName: '',
+      // userPassword: '',
+      // schoolCode: '',
       loading: false,
       button_toggle: false
     };
@@ -185,7 +185,7 @@ export default class LoginForm extends React.Component {
         }
       })
       .catch(error => {
-        //console.log(error);
+        console.log(error);
         //alert("" + error);
       });
   }; //ACTION
