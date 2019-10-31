@@ -160,6 +160,12 @@ onPress={() => this.props.navigation.navigate('Fee')}  */}
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.menuButtons}>
                         <View>
+                            <Text style={styles.buttonText} onPress={() => this.props.navigation.navigate('Communication')} >
+                                <Icon name="send" size={20} />   Communication</Text>
+                        </View>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.menuButtons}>
+                        <View>
                             <Text style={styles.buttonText} onPress={() => this.props.navigation.navigate('Gallery')}>
                                 <Icon name="film" size={20} />   Gallery</Text>
                         </View>
@@ -173,7 +179,8 @@ onPress={() => this.props.navigation.navigate('Fee')}  */}
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.menuButtons}>
                         <View>
-                            <Text style={styles.buttonText}><Icon name="send" size={20} />   Communication</Text>
+                            <Text style={styles.buttonText}><Icon name="send" size={20}
+                                onPress={() => this.props.navigation.navigate('Attendance')} />   Communication</Text>
                         </View>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.menuButtons}>

@@ -73,6 +73,10 @@ import LoginTest from "./screens/LoginTest";
 import FirstPage from "./screens/FirstPage";
 import SecondPage from "./screens/SecondPage";
 import InboxScreen from "./screens/InboxScreen";
+import CommunicationInbox from "./screens/CommunicationInbox";
+import CommunicationSentbox from "./screens/CommunicationSentbox";
+import SentboxView from "./screens/SentboxView";
+import InboxView from "./screens/InboxView";
 
 import AuthLoadingScreen from "./screens/AuthLoadingScreen";
 
@@ -1091,13 +1095,103 @@ const NoticeTabNavigator = createBottomTabNavigator(
   }
 );
 
+const CommunicationSentboxStack = createStackNavigator(
+  {
+    CommunicationSentbox,
+    SentboxView
+  },
+  {
+    defaultNavigationOptions: ({ navigation }) => {
+      return {
+        headerLeft: (
+          <Icon
+            name="home"
+            size={30}
+            style={{ paddingLeft: 10 }}
+            onPress={() => navigation.navigate("Dashboard")}
+          />
+        ),//woring
+        headerTitle: <HeaderComponent />,
+      };
+    }
+  },
+  {
+    navigationOptions: ({ navigation }) => {
+      const { routeName } = navigation.state.routes[navigation.state.index];
+      return {
+        headerTitle: routeName
+      };
+    }
+  }
+);
+const CommunicationInboxStack = createStackNavigator(
+  {
+    CommunicationInbox,
+    InboxView
+  },
+  {
+    defaultNavigationOptions: ({ navigation }) => {
+      return {
+        headerLeft: (
+          <Icon
+            name="home"
+            size={30}
+            style={{ paddingLeft: 10 }}
+            onPress={() => navigation.navigate("Dashboard")}
+          />
+        ),//woring
+        headerTitle: <HeaderComponent />,
+      };
+    }
+  },
+  {
+    navigationOptions: ({ navigation }) => {
+      const { routeName } = navigation.state.routes[navigation.state.index];
+      return {
+        headerTitle: routeName
+      };
+    }
+  }
+);
+
+const CommunicationTabNavigator = createBottomTabNavigator(
+  {
 
 
+    CommunicationInbox: {
+      screen: CommunicationInboxStack,
+      navigationOptions: {
+        tabBarLabel: 'Inbox',
+        tabBarIcon: ({ tintColor }) => (
+          <Icon name="mail" color={tintColor} size={24} />
+        )
+      }
+    }, CommunicationSentbox: {
+      screen: CommunicationSentboxStack,
+      navigationOptions: {
+        tabBarLabel: 'Sentbox',
+        tabBarIcon: ({ tintColor }) => (
+          <Icon name="send" color={tintColor} size={24} />
+        )
+      }
+    },
+    //A,
+
+  },
+  {
+    navigationOptions: ({ navigation }) => {
+      const { routeName } = navigation.state.routes[navigation.state.index];
+      return {
+        //header: null,
+        headerTitle: routeName
+      };
+    }
+  }
+);
 
 
 const GalleryStackNavigator = createStackNavigator(
   {
-    // NoticeTabNavigator: NoticeTabNavigator
     GalleryScreen: { screen: GalleryScreen }
   }
   //,
@@ -1113,11 +1207,10 @@ const GalleryStackNavigator = createStackNavigator(
 );
 const AttendanceStackNavigator = createStackNavigator(
   {
-    // NoticeTabNavigator: NoticeTabNavigator
+
     AttendanceScreen: { screen: AttendanceScreen },
     AttendanceGraphScreen: { screen: AttendanceGraphScreen }
-  }
-  ,
+  },
   {
     defaultNavigationOptions: ({ navigation }) => {
       return {
@@ -1165,13 +1258,14 @@ const AppDrawerNavigator = createDrawerNavigator(
     Attendance: { screen: AttendanceStackNavigator },
     //Notices: { screen: NoticesStackNavigator },
     Notices: { screen: NoticeTabNavigator },
+    Communication: { screen: CommunicationTabNavigator },
     Gallery: { screen: GalleryStackNavigator },
 
     Fee: { screen: FeeTabNavigator },
     Test: { screen: TestStack }
   },
   {
-    initialRouteName: 'Gallery',
+    initialRouteName: 'Communication',
     //initialRouteName: 'Dashboard',
     //contentComponent: ContentComponent,
     contentComponent: props => <ContentComponent {...props} />,
