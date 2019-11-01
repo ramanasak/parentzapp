@@ -32,6 +32,29 @@ export default class InboxView extends React.Component {
     static navigationOptions = {
         title: 'Attachments',
     };
+
+
+    attachmentUrlFun(Url) {
+        console.log("attachmentUrl fun==" + Url);
+
+        if (Url.includes(".pdf") || Url.includes(".PDF")) {
+
+            this.props.navigation.navigate('CommunicationAttachmentView', {
+                pdfUrl: Url
+            });
+
+        }
+        else {
+            alert("ok");
+            this.props.navigation.navigate('CommunicationAttachmentView', {
+                pdfUrl: Url
+            })
+        }
+
+    }
+
+
+
     render() {
         const from = this.props.navigation.getParam("from");
         //const cc = this.props.navigation.getParam("cc");
@@ -41,7 +64,8 @@ export default class InboxView extends React.Component {
         //const msg = this.props.navigation.getParam("msg");
         const json = this.props.navigation.getParam("json");
         const cc = json.details[0].cc;
-        const msg = json.details[0].message;
+        var msg = json.details[0].message;
+        //var msg = JSON.parse(json.details[0].message);
         const attachmentUrl = json.details[0].attach[0].path_name;
 
 
@@ -52,6 +76,15 @@ export default class InboxView extends React.Component {
         console.log("subject====" + subject);
         console.log("attachment====" + attachment);
         console.log("msg====" + msg);
+        console.log("typeOf====" + typeof msg);
+        //msg = msg.replace("-------forwarded message------", '')
+        //str.replace(/Microsoft/g,"W3Schools");
+        //msg = msg.replace(/<br>|<font>|<[/]font>|<[/]b>|<b>/g, '')
+        //msg = msg.replace(/<b>/g, '')
+        //msg = msg.replace(/<font>/g, '')
+
+        console.log("msg====" + msg);
+        //console.log("msg====" + JSON.parse(msg));
         console.log("json====" + JSON.stringify(json.details[0].cc));
         console.log("json====" + JSON.stringify(json.details[0].attach[0].path_name));
         //console.log("INB details====" + details);
@@ -89,17 +122,24 @@ export default class InboxView extends React.Component {
                         <Text style={{ fontWeight: 'bold' }}>Message :  </Text>
                         <Text> {msg} </Text>
                     </View>
-                    {/* <View style={{ flexDirection: 'row', backgroundColor: 'white', marginLeft: 5 }}>
+                    <View style={{ flexDirection: 'row', backgroundColor: 'white', marginLeft: 5 }}>
                         <Text style={{ fontWeight: 'bold' }}>Attachment :  </Text>
                         <Text> {attachment} </Text>
-                    </View> */}
-                    <TouchableOpacity onPress={() => this.props.navigation.navigate('CommunicationAttachmentView', {
+                    </View>
+
+                    {/* <TouchableOpacity onPress={() => this.props.navigation.navigate('CommunicationAttachmentView', {
                         pdfUrl: attachmentUrl
                     })}>
                         <View style={{ flexDirection: 'row', backgroundColor: 'white', justifyContent: 'flex-end' }}>
-
                             <Icon name="paperclip" size={30} color={"grey"} />
+                        </View>
+                    </TouchableOpacity> */}
 
+
+
+                    <TouchableOpacity onPress={() => this.attachmentUrlFun(attachmentUrl)}>
+                        <View style={{ flexDirection: 'row', backgroundColor: 'white', justifyContent: 'flex-end' }}>
+                            <Icon name="paperclip" size={30} color={"grey"} />
                         </View>
                     </TouchableOpacity>
                 </View>

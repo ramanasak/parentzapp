@@ -77,6 +77,7 @@ import CommunicationInbox from "./screens/CommunicationInbox";
 import CommunicationSentbox from "./screens/CommunicationSentbox";
 import SentboxView from "./screens/SentboxView";
 import InboxView from "./screens/InboxView";
+import CommunicationAttachmentView from "./screens/CommunicationAttachmentView";
 
 import AuthLoadingScreen from "./screens/AuthLoadingScreen";
 
@@ -1127,7 +1128,8 @@ const CommunicationSentboxStack = createStackNavigator(
 const CommunicationInboxStack = createStackNavigator(
   {
     CommunicationInbox,
-    InboxView
+    InboxView,
+    CommunicationAttachmentView
   },
   {
     defaultNavigationOptions: ({ navigation }) => {
