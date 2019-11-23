@@ -30,6 +30,7 @@ export default class NoticesDisplayPdfScreen extends React.Component {
         title: 'Attachments',
     };
     render() {
+        
         const pdfUrl = this.props.navigation.getParam("pdfUrl");
         console.log("pdfUrl====" + pdfUrl);
         //const source = { uri: 'http://temp.digitalcampus.in/schoollogos/Barasat Indira Gandhi Memorial High School/NoticeFiles/6-23-04-2019.pdf', cache: true };

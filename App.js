@@ -78,6 +78,7 @@ import CommunicationSentbox from "./screens/CommunicationSentbox";
 import SentboxView from "./screens/SentboxView";
 import InboxView from "./screens/InboxView";
 import CommunicationAttachmentView from "./screens/CommunicationAttachmentView";
+import CommunicationCompose from "./screens/CommunicationCompose";
 
 import AuthLoadingScreen from "./screens/AuthLoadingScreen";
 
@@ -1156,10 +1157,49 @@ const CommunicationInboxStack = createStackNavigator(
   }
 );
 
+const CommunicationComposeStack = createStackNavigator(
+  {
+    CommunicationCompose,
+  },
+  {
+    defaultNavigationOptions: ({ navigation }) => {
+      return {
+        headerLeft: (
+          <Icon
+            name="home"
+            size={30}
+            style={{ paddingLeft: 10 }}
+            onPress={() => navigation.navigate("Dashboard")}
+          />
+        ),//woring
+        headerTitle: <HeaderComponent />,
+      };
+    }
+  },
+  {
+    navigationOptions: ({ navigation }) => {
+      const { routeName } = navigation.state.routes[navigation.state.index];
+      return {
+        headerTitle: routeName
+      };
+    }
+  }
+);
+
+
 const CommunicationTabNavigator = createBottomTabNavigator(
   {
 
 
+    CommunicationCompose: {
+      screen: CommunicationComposeStack,
+      navigationOptions: {
+        tabBarLabel: 'Compose',
+        tabBarIcon: ({ tintColor }) => (
+          <Icon name="edit" color={tintColor} size={24} />
+        )
+      }
+    },
     CommunicationInbox: {
       screen: CommunicationInboxStack,
       navigationOptions: {
@@ -1176,7 +1216,7 @@ const CommunicationTabNavigator = createBottomTabNavigator(
           <Icon name="send" color={tintColor} size={24} />
         )
       }
-    },
+    }
     //A,
 
   },

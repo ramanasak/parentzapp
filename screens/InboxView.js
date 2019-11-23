@@ -27,31 +27,87 @@ import Pdf from 'react-native-pdf';
 
 import CommunicationAttachmentView from './CommunicationAttachmentView';
 
+import RNFetchBlob from 'rn-fetch-blob';
+
 export default class InboxView extends React.Component {
 
     static navigationOptions = {
         title: 'Attachments',
     };
 
+    // download() {
+    //     var date = new Date();
+    //     var url = "http://www.clker.com/cliparts/B/B/1/E/y/r/marker-pin-google-md.png";
+    //     var ext = this.extention(url);
+    //     ext = "." + ext[0];
+    //     const { config, fs } = RNFetchBlob
+    //     let PictureDir = fs.dirs.PictureDir
+    //     let options = {
+    //         fileCache: true,
+    //         addAndroidDownloads: {
+    //             useDownloadManager: true,
+    //             notification: true,
+    //             path: PictureDir + "/image_" + Math.floor(date.getTime() + date.getSeconds() / 2) + ext,
+    //             description: 'Image'
+    //         }
+    //     }
+    //     config(options).fetch('GET', url).then((res) => {
+    //         Alert.alert("Success Downloaded");
+    //     });
+    // }
 
-    attachmentUrlFun(Url) {
-        console.log("attachmentUrl fun==" + Url);
-
-        if (Url.includes(".pdf") || Url.includes(".PDF")) {
-
-            this.props.navigation.navigate('CommunicationAttachmentView', {
-                pdfUrl: Url
+    // extention(filename) {
+    //     return (/[.]/.exec(filename)) ? /[^.]+$/.exec(filename) : undefined;
+    // }
+    //http://temp.digitalcampus.in/schoollogos/Barasat Indira Gandhi Memorial High School/NoticeFiles/94-10-05-2019.pdf
+    //http://example.com/file/somefile
+    download(Url) {
+        alert("download Url--->" + Url);
+        RNFetchBlob
+            .config({
+                addAndroidDownloads: {
+                    useDownloadManager: true, // <-- this is the only thing required
+                    // Optional, override notification setting (default to true)
+                    notification: false,
+                    // Optional, but recommended since android DownloadManager will fail when
+                    // the url does not contains a file extension, by default the mime type will be text/plain
+                    mime: 'text/plain',
+                    description: 'File downloaded by download manager.'
+                }
+            })
+            .fetch('GET', Url)
+            .then((resp) => {
+                // the path of downloaded file
+                resp.path()
+            }).catch(error => {
+                console.log(error);
+                //alert("e=>" + error);
             });
 
-        }
-        else {
-            alert("ok");
-            this.props.navigation.navigate('CommunicationAttachmentView', {
-                pdfUrl: Url
-            })
-        }
 
     }
+
+
+    // attachmentUrlFun(Url) {
+    //     console.log("attachmentUrl fun==" + Url);
+
+    //     if (Url.includes(".pdf") || Url.includes(".PDF")) {
+
+    //         this.props.navigation.navigate('CommunicationAttachmentView', {
+    //             pdfUrl: Url
+    //         });
+
+    //     }
+    //     else {
+    //         alert("ok");
+    //         // this.props.navigation.navigate('CommunicationAttachmentView', {
+    //         //     pdfUrl: Url
+    //         // })
+    //         this.download(Url);
+    //         alert("ok");
+    //     }
+
+    // }
 
 
 
@@ -79,7 +135,7 @@ export default class InboxView extends React.Component {
         console.log("typeOf====" + typeof msg);
         //msg = msg.replace("-------forwarded message------", '')
         //str.replace(/Microsoft/g,"W3Schools");
-        //msg = msg.replace(/<br>|<font>|<[/]font>|<[/]b>|<b>/g, '')
+        msg = msg.replace(/<br>|<font>|<[/]font>|<[/]b>|<b>/g, '')
         //msg = msg.replace(/<b>/g, '')
         //msg = msg.replace(/<font>/g, '')
 
@@ -122,10 +178,10 @@ export default class InboxView extends React.Component {
                         <Text style={{ fontWeight: 'bold' }}>Message :  </Text>
                         <Text> {msg} </Text>
                     </View>
-                    <View style={{ flexDirection: 'row', backgroundColor: 'white', marginLeft: 5 }}>
+                    {/* <View style={{ flexDirection: 'row', backgroundColor: 'white', marginLeft: 5 }}>
                         <Text style={{ fontWeight: 'bold' }}>Attachment :  </Text>
                         <Text> {attachment} </Text>
-                    </View>
+                    </View> */}
 
                     {/* <TouchableOpacity onPress={() => this.props.navigation.navigate('CommunicationAttachmentView', {
                         pdfUrl: attachmentUrl
@@ -137,9 +193,12 @@ export default class InboxView extends React.Component {
 
 
 
-                    <TouchableOpacity onPress={() => this.attachmentUrlFun(attachmentUrl)}>
-                        <View style={{ flexDirection: 'row', backgroundColor: 'white', justifyContent: 'flex-end' }}>
-                            <Icon name="paperclip" size={30} color={"grey"} />
+                    <TouchableOpacity onPress={() => this.download(attachmentUrl)}>
+                        <View style={{
+                            flexDirection: 'row', backgroundColor: 'white',
+                            justifyContent: 'center'
+                        }}>
+                            <Text style={{ fontWeight: 'bold' }}>Attachment :  <Icon name="download" size={30} color={"#4f7528"} /></Text>
                         </View>
                     </TouchableOpacity>
                 </View>
@@ -234,7 +293,7 @@ const styles = StyleSheet.create({
     },
     Viewcontainer: {
         borderColor: 'grey',
-        borderWidth: 2,
+        borderWidth: 0,
         width: Dimensions.get('window').width,
         marginTop: 10,
         justifyContent: 'space-around',

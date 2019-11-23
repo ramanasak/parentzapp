@@ -299,7 +299,6 @@ export default class LoginForm extends React.Component {
             </Text>
             </View>
           </TouchableOpacity>
-
         </View>
 
 
