@@ -173,7 +173,7 @@ onPress={() => this.props.navigation.navigate('Fee')}  */}
 
                     <TouchableOpacity style={styles.menuButtons}>
                         <View>
-                            <Text style={styles.buttonText}
+                            <Text style={styles.buttonText} onPress={() => this.props.navigation.navigate('Examination')}
                             ><Icon name="bar-chart-2" size={20} />   Progress Report</Text>
                         </View>
                     </TouchableOpacity>

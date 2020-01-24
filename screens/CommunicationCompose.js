@@ -1,18 +1,24 @@
 import React, { Component } from "react";
 import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  Slider,
-  ScrollView,
-  Dimensions,
-  TextInput,
-  Image
+    View,
+    Text,
+    StyleSheet,
+    TouchableOpacity,
+    Slider,
+    ScrollView,
+    Dimensions,
+    TextInput,
+    StatusBar,
+    Image,
+    Picker
 } from "react-native";
 import Modal from "react-native-modalbox";
 import Button from "react-native-button";
 import Icon from "react-native-vector-icons/Feather";
+
+import StudentInfoScreen from './StudentInfoScreen';
+
+
 /**
  * Store - holds our state - THERE IS ONLY ONE STATE
  * Action - State can be modified using actions - SIMPLE OBJECTS
@@ -39,74 +45,108 @@ import Icon from "react-native-vector-icons/Feather";
 // const store = createStore(reducer)
 var screen = Dimensions.get("window");
 class ModalExp extends Component {
-  constructor() {
-    super();
-    this.state = {
-      isOpen: false,
-      isDisabled: false,
-      swipeToClose: true,
-      sliderValue: 0.3
-    };
-  }
-
-  onClose() {
-    console.log("Modal just closed");
-  }
-
-  onOpen() {
-    console.log("Modal just opened");
-  }
-
-  onClosingState(state) {
-    console.log("the open/close of the swipeToClose just changed");
-  }
-
-  renderList() {
-    var list = [];
-
-    for (var i = 0; i < 50; i++) {
-      list.push(
-        <Text style={styles.text} key={i}>
-          Elem {i}
-        </Text>
-      );
+    constructor() {
+        super();
+        this.state = {
+            isOpen: false,
+            isDisabled: false,
+            swipeToClose: true,
+            sliderValue: 0.3,
+            userTypes: [{ userType: 'admin', userName: 'Admin User' }, { userType: 'employee', userName: 'Employee User' }, { userType: 'dev', userName: 'Developer User' }],
+            selectedUserType: ''
+        };
     }
 
-    return list;
-  }
+    onClose() {
+        console.log("Modal just closed");
+    }
 
-  render() {
-    var BContent = (
-      <Button
-        onPress={() => this.setState({ isOpen: false })}
-        style={[styles.btn, styles.btnModal]}
-      >
-        X
+    onOpen() {
+        console.log("Modal just opened");
+    }
+
+    onClosingState(state) {
+        console.log("the open/close of the swipeToClose just changed");
+    }
+    loadUserTypes() {
+        return this.state.userTypes.map(user => (
+            <Picker.Item label={user.userName} value={user.userType} />
+        ))
+    }
+
+    renderList() {
+        var list = [];
+
+        for (var i = 0; i < 50; i++) {
+            list.push(
+                <Text style={styles.text} key={i}>
+                    Elem {i}
+                </Text>
+            );
+        }
+
+        return list;
+    }
+
+    render() {
+        var BContent = (
+            <Button
+                onPress={() => this.setState({ isOpen: false })}
+                style={[styles.btn, styles.btnModal]}
+            >
+                X
       </Button>
-    );
+        );
 
-    return (
-      // <Provider store={store}>
-      //   <CounterApp />
-      // </Provider>
-      // <Form />
-      // <Notice />
-      <View style={styles.wrapper}>
-        <Text>welcome </Text>
+        return (
+            // <ScrollView style={{ flex: 2, backgroundColor: "black" }}>
+            //     <StatusBar backgroundColor="#fff" barStyle="dark-content" />
 
-        <Button onPress={() => this.refs.modal1.open()} style={styles.btn}>
+            //     <StudentInfoScreen />
+
+
+            //     <View style={{ marginTop: 10 }}>
+            //         <Text style={{ color: "#0e9ed8", fontSize: 20, textAlign: 'center', marginBottom: 15, marginTop: 10 }}>
+            //             <Icon name="mail" size={20} color={'#303f9f'} />  Compose</Text>
+            //     </View>
+
+
+            <View style={styles.wrapper}>
+                <StatusBar backgroundColor="#fff" barStyle="dark-content" />
+                {/* <StudentInfoScreen /> */}
+                <View style={{ marginTop: 10 }}>
+                    <Text style={{ color: "#0e9ed8", fontSize: 20, textAlign: 'center', marginBottom: 15, marginTop: 10 }}>
+                        <Icon name="edit" size={20} color={'#303f9f'} />  Compose</Text>
+                </View>
+
+                {/* <Button onPress={() => this.refs.modal1.open()} style={styles.btn}>
           Basic modal
         </Button>
         <Button onPress={() => this.refs.modal2.open()} style={styles.btn}>
           Position top
-        </Button>
-        <Button onPress={() => this.refs.modal3.open()} style={styles.btn}>
-          Position centered + backdrop + disable
-        </Button>
-        <Button onPress={() => this.refs.modal4.open()} style={styles.btn}>
+        </Button> */}
+
+                {/* <Button onPress={() => this.refs.modal3.open()} style={styles.btn}>
+                    Position centered + backdrop + disable
+                </Button> */}
+
+                <TouchableOpacity onPress={() => this.refs.modal3.open()} style={styles.btn}>
+                    <Text>To :  </Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity onPress={() => this.refs.modal3.open()} style={styles.btn}>
+                    <Text>Cc :  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => this.refs.modal3.open()} style={styles.btn}>
+                    <Text>Sub :  </Text>
+                </TouchableOpacity>
+
+
+
+                {/* <Button onPress={() => this.refs.modal4.open()} style={styles.btn}>
           Position bottom + backdrop + slider
-        </Button>
-        <Button
+        </Button> */}
+                {/* <Button
           onPress={() => this.setState({ isOpen: true })}
           style={styles.btn}
         >
@@ -117,132 +157,88 @@ class ModalExp extends Component {
         </Button>
         <Button onPress={() => this.refs.modal7.open()} style={styles.btn}>
           Modal with keyboard support
-        </Button>
+        </Button> */}
 
-        <Modal
-          style={[styles.modal, styles.modal1]}
-          ref={"modal1"}
-          swipeToClose={this.state.swipeToClose}
-          onClosed={this.onClose}
-          onOpened={this.onOpen}
-          onClosingState={this.onClosingState}
-        >
-          <Text style={styles.text}>Basic modal</Text>
-          <Button
-            onPress={() =>
-              this.setState({ swipeToClose: !this.state.swipeToClose })
-            }
-            style={styles.btn}
-          >
-            Disable swipeToClose({this.state.swipeToClose ? "true" : "false"})
-          </Button>
-        </Modal>
 
-        <Modal
-          style={[styles.modal, styles.modal2]}
-          backdrop={false}
-          position={"top"}
-          ref={"modal2"}
-        >
-          <Text style={[styles.text, { color: "white" }]}>Modal on top</Text>
-        </Modal>
 
-        <Modal
-          style={[styles.modal, styles.modal3]}
-          position={"center"}
-          ref={"modal3"}
-          isDisabled={this.state.isDisabled}
-        >
-          <Text style={styles.text}>Modal centered</Text>
-          <Button
-            onPress={() =>
-              this.setState({ isDisabled: !this.state.isDisabled })
-            }
-            style={styles.btn}
-          >
-            Disable ({this.state.isDisabled ? "true" : "false"})
-          </Button>
-        </Modal>
 
-        <Modal
+
+                <Modal
+                    style={[styles.modal, styles.modal3]}
+                    position={"center"}
+                    ref={"modal3"}
+                    isDisabled={this.state.isDisabled}
+                >
+                    <Text style={styles.text}>Teachers List</Text>
+                    <TouchableOpacity onPress={() => this.refs.modal7.open()} style={styles.btn}>
+                        <Text>Teachers List </Text>
+                    </TouchableOpacity>
+                    {/* <Picker
+                        selectedValue={this.state.language}
+                        style={{ height: 50, width: 100 }}
+                        onValueChange={(itemValue, itemIndex) =>
+                            this.setState({ language: itemValue })
+                        }>
+                        <Picker.Item label="Java sfsdfff " value="java" />
+                        <Picker.Item label="JavaScript  sdfsdff" value="js" />
+                    </Picker> */}
+                    <TouchableOpacity onPress={() => this.refs.modal.open()} style={styles.btn}>
+                        <Text>Administration List </Text>
+                    </TouchableOpacity>
+
+                    {/* <Text style={styles.text}>Teachers List</Text> */}
+                    {/* <Picker
+                        selectedValue={this.state.language}
+                        style={{ height: 50, width: 100 }}
+                        onValueChange={(itemValue, itemIndex) =>
+                            this.setState({ language: itemValue })
+                        }>
+                        <Picker.Item label="Java df fsdf sf   dsf sd" value="java" />
+                        <Picker.Item label="JavaScript sdfs sdfdsff sf dsf " value="js" />
+                    </Picker> */}
+                    {/* <View>
+                        <Picker
+                            selectedValue={this.state.selectedUserType}
+                            onValueChange={(itemValue, itemIndex) =>
+                                this.setState({ selectedUserType: itemValue })}> */}
+                    {/* // Dynamically loads Picker.Values from this.state.userTypes. */}
+                    {/* {this.loadUserTypes()}
+                        </Picker> */}
+                    {/* <Picker
+                            selectedValue={this.state.language}
+                            style={{ height: 50, width: 100 }}
+                            onValueChange={(itemValue, itemIndex) =>
+                                this.setState({ language: itemValue })
+                            }>
+                            <Picker.Item label="Java" value="java" />
+                            <Picker.Item label="JavaScript" value="js" />
+                        </Picker> */}
+
+                    {/* </View> */}
+
+
+
+
+
+
+                    <Button
+                        onPress={() =>
+                            this.setState({ isDisabled: !this.state.isDisabled })
+                        }
+                        style={styles.btn}
+                    >
+                        Disable ({this.state.isDisabled ? "true" : "false"})
+                     </Button>
+                </Modal>
+
+                {/* <Modal
           style={[styles.modal, styles.modal4]}
           position={"bottom"}
           ref={"modal4"}
-        >
-          <Text style={{ fontSize: 18, fontWeight: "bold" }}> ramana </Text>
-          {/* <Text style={styles.text}>Modal on bottom with backdrop</Text>
-                    <Slider style={{ width: 200 }} value={this.state.sliderValue} onValueChange={(value) => this.setState({ sliderValue: value })} /> */}
-          {/* <View>
-                <TouchableOpacity style={{marginTop:50}}> */}
+        >        
+        </Modal> */}
 
-          <View
-            style={{
-              flex: 2,
-              backgroundColor: "red",
-              alignItems: "center",
-              flexDirection: "row",
-              marginTop: 5,
-              justifyContent: "center"
-            }}
-          >
-            <View
-              style={{
-                flex: 1,
-                alignItems: "flex-start",
-                backgroundColor: "white"
-              }}
-            >
-              <Image
-                source={require("./../studentpic.jpg")}
-                style={{
-                  width: 50,
-                  height: 50,
-                  marginTop: 5,
-                  borderRadius: 37.5,
-                  marginLeft: 15
-                }}
-              />
-            </View>
-            <View
-              style={{
-                flex: 3,
-                marginLeft: 5,
-                alignItems: "flex-start",
-                backgroundColor: "white",
-                flexDirection: "row"
-              }}
-            >
-              <View
-                style={{
-                  flex: 2,
-                  alignItems: "flex-start",
-                  backgroundColor: "white"
-                }}
-              >
-                {/* <Text style={{ fontSize: 14, fontWeight: 'bold' }}>{item.studentName}</Text> */}
-                <Text style={{ fontSize: 18, fontWeight: "bold" }}>
-                  {" "}
-                  ramana sakhavarapu
-                </Text>
-              </View>
-              <View
-                style={{
-                  flex: 1,
-                  alignItems: "center",
-                  backgroundColor: "white"
-                }}
-              >
-                <Icon name="chevron-right" size={30} color={"grey"} />
-              </View>
-            </View>
-          </View>
-
-          {/* </TouchableOpacity>
-                
-    </View>      */}
-        </Modal>
-
-        <Modal
+                {/* <Modal
           isOpen={this.state.isOpen}
           onClosed={() => this.setState({ isOpen: false })}
           style={[styles.modal, styles.modal4]}
@@ -250,9 +246,9 @@ class ModalExp extends Component {
           backdropContent={BContent}
         >
           <Text style={styles.text}>Modal with backdrop content</Text>
-        </Modal>
+        </Modal> */}
 
-        <Modal
+                {/* <Modal
           style={[styles.modal, styles.modal4]}
           position={"bottom"}
           ref={"modal6"}
@@ -263,75 +259,81 @@ class ModalExp extends Component {
               {this.renderList()}
             </View>
           </ScrollView>
-        </Modal>
+        </Modal> */}
 
-        <Modal
-          ref={"modal7"}
-          style={[styles.modal, styles.modal4]}
-          position={"center"}
-        >
-          <View>
-            <TextInput
-              style={{ height: 50, width: 200, backgroundColor: "#DDDDDD" }}
-            />
-          </View>
-        </Modal>
-      </View>
-    );
-  }
+                <Modal
+                    ref={"modal7"}
+                    style={[styles.modal, styles.modal4]}
+                    position={"center"}
+                >
+
+                    <View>
+                        {/* <FlatList
+                            //ItemSeparatorComponent={this.renderSeparator}
+                            data={this.state.dataSource}
+                            renderItem={this.renderItem}
+                            keyExtractor={({ id }, index) => id}
+                            ItemSeparatorComponent={this.renderSeparator}
+                        /> */}
+                    </View>
+
+
+                </Modal>
+
+            </View>
+
+        );
+    }
 }
 
 export default ModalExp;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center"
-  },
-  wrapper: {
-    paddingTop: 50,
-    flex: 1
-  },
-
-  modal: {
-    justifyContent: "center",
-    alignItems: "center"
-  },
-
-  modal2: {
-    height: 230,
-    backgroundColor: "#3B5998"
-  },
-
-  modal3: {
-    height: 300,
-    width: 300
-  },
-
-  modal4: {
-    height: 200
-  },
-
-  btn: {
-    margin: 10,
-    backgroundColor: "#3B5998",
-    color: "white",
-    padding: 10
-  },
-
-  btnModal: {
-    position: "absolute",
-    top: 0,
-    right: 0,
-    width: 50,
-    height: 50,
-    backgroundColor: "transparent"
-  },
-  text: {
-    color: "black",
-    fontSize: 22
-  }
+    container: {
+        flex: 1,
+        alignItems: "center",
+        justifyContent: "center"
+    },
+    wrapper: {
+        paddingTop: 50,
+        flex: 1,
+        //backgroundColor: "blue"
+    },
+    modal: {
+        justifyContent: "center",
+        alignItems: "center"
+    },
+    modal2: {
+        height: 230,
+        backgroundColor: "#3B5998"
+    },
+    modal3: {
+        height: 300,
+        width: Dimensions.get('window').width,
+        // backgroundColor: 'red'
+    },
+    modal4: {
+        height: 200
+    },
+    btn: {
+        margin: 10,
+        //backgroundColor: "#3B5998",
+        color: "white",
+        padding: 10,
+        borderWidth: 2
+    },
+    btnModal: {
+        position: "absolute",
+        top: 0,
+        right: 0,
+        width: 50,
+        height: 50,
+        backgroundColor: "transparent"
+    },
+    text: {
+        color: "black",
+        fontSize: 22
+    }
 });
 
 
@@ -341,7 +343,7 @@ const styles = StyleSheet.create({
 
 
 
-// import React, { Fragment } from 'react';
+// import React, {Fragment} from 'react';
 // import {
 //     SafeAreaView,
 //     StyleSheet,
@@ -366,9 +368,10 @@ const styles = StyleSheet.create({
 //     DebugInstructions,
 //     ReloadInstructions,
 // } from 'react-native/Libraries/NewAppScreen';
-// import Icon from 'react-native-vector-icons/Feather';
+
 // import Pdf from 'react-native-pdf';
 // import StudentInfoScreen from './StudentInfoScreen';
+// import Icon from 'react-native-vector-icons/Feather';
 
 // export default class CommunicationCompose extends React.Component {
 //     static navigationOptions = {

@@ -1,14 +1,5 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- * 
- * version 1 launch on 7-10-2019 
- */
 
-import React, { Fragment } from "react";
+import React, { Fragment, Component } from "react";
 import {
   SafeAreaView,
   StyleSheet,
@@ -50,6 +41,10 @@ import {
   router
 } from "react-navigation";
 
+import { WebView } from 'react-native-webview';
+
+
+
 //importing screens
 import GalleryScreen from "./screens/GalleryScreen";
 import NoticesDisplayScreen from "./screens/NoticesDisplayScreen";
@@ -79,9 +74,12 @@ import SentboxView from "./screens/SentboxView";
 import InboxView from "./screens/InboxView";
 import CommunicationAttachmentView from "./screens/CommunicationAttachmentView";
 import CommunicationCompose from "./screens/CommunicationCompose";
+import ReportSelectionScreen from "./screens/ReportSelectionScreen";
+import ReportDisplayScreen from "./screens/ReportDisplayScreen";
+
 
 import AuthLoadingScreen from "./screens/AuthLoadingScreen";
-
+import WebviewScreen from "./screens/WebviewScreen";
 
 
 import ContentComponent from "./components/ContentComponent";
@@ -810,6 +808,31 @@ class Test extends React.Component {
     );
   }
 } //test
+
+
+
+
+class MyWeb extends Component {
+  render() {
+    return (
+      <WebView
+        source={{ uri: 'https://github.com/facebook/react-native' }}
+        style={{ marginTop: 20 }}
+      />
+    );
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
 const HeaderComponent = () => {
   return (
     <View
@@ -885,6 +908,7 @@ const TestStack = createStackNavigator(
     //AndroidFonts: AndroidFonts,
     //Firstpage: FirstPage,
     //SecondPage: SecondPage,
+    Webview: WebviewScreen,
     Test: Test,
     success: success,
     SiblingSelect: SiblingSelect
@@ -1247,6 +1271,27 @@ const GalleryStackNavigator = createStackNavigator(
   //   }
   // }
 );
+const ExaminationStackNavigator = createStackNavigator(
+  {
+    ReportSelectionScreen: { screen: ReportSelectionScreen },
+    ReportDisplayScreen: { screen: ReportDisplayScreen }
+  },
+  {
+    defaultNavigationOptions: ({ navigation }) => {
+      return {
+        headerLeft: (
+          <Icon
+            name="home"
+            size={30}
+            style={{ paddingLeft: 10 }}
+            onPress={() => navigation.navigate("Dashboard")}
+          />
+        ),
+        headerTitle: <HeaderComponent />,
+      };
+    }
+  }
+);
 const AttendanceStackNavigator = createStackNavigator(
   {
 
@@ -1265,13 +1310,7 @@ const AttendanceStackNavigator = createStackNavigator(
           />
         ),//woring
         headerTitle: <HeaderComponent />,
-        // headerRight: (
-        //   <Button
-        //     onPress={() => alert('This is a button!')}
-        //     title="Info"
-        //     color="#fff"
-        //   />
-        // ),//working
+     
       };
     }
   },
@@ -1302,13 +1341,14 @@ const AppDrawerNavigator = createDrawerNavigator(
     Notices: { screen: NoticeTabNavigator },
     Communication: { screen: CommunicationTabNavigator },
     Gallery: { screen: GalleryStackNavigator },
-
+    Examination: { screen: ExaminationStackNavigator },
     Fee: { screen: FeeTabNavigator },
     Test: { screen: TestStack }
   },
   {
-    initialRouteName: 'Communication',
-    //initialRouteName: 'Dashboard',
+    //initialRouteName: 'Communication',
+    //initialRouteName: 'Gallery', 
+    initialRouteName: 'Examination',
     //contentComponent: ContentComponent,
     contentComponent: props => <ContentComponent {...props} />,
     drawerWidth: 300,

@@ -12,7 +12,7 @@ import {
     TouchableOpacity,
     ToastAndroid,
     Image,
-    Dimensions
+    Dimensions,
 } from 'react-native';
 
 import {
@@ -33,7 +33,80 @@ export default class GalleryScreen extends React.Component {
 
     //https://facebook.github.io/react-native/movies.json
     //https://jsonplaceholder.typicode.com/posts
+    renderItem = ({ item }) => {
+        var ImageUrl = "http://" + item.location;
+        return (
+            <TouchableOpacity style={styles.list}
+                onPress={() => ToastAndroid.show(item.eventName, ToastAndroid.SHORT)}>
+                {/* styles.container */}
+                {/* { width: 100, height: 200, marginTop: 5, marginBottom: 5, borderRadius: 37.5, marginLeft: 15 } */}
+                <View style={{
+                    backgroundColor: 'white',
+                    borderColor: 'green', marginBottom: 5, marginTop: 10, borderWidth: 0.5
+                }}>
+                    <Image
+                        source={{ uri: ImageUrl }}
+                        style={styles.imageView2}
+                    />
+                    {/* Event Name :  */}
+                    <Text style={{ marginTop: 2, color: '#00205b', fontSize: 18, fontWeight: '900' }}>   {item.eventName}</Text>
+                    <Text style={{
+                        marginTop: 2, marginBottom: 8, color: '#0f4c81', fontSize: 18, fontWeight: '500',
+                        flexWrap: "wrap"
+                    }}>  {item.description} </Text>
 
+                </View>
+
+
+                {/* <View style={{
+                    flex: 1, flexDirection: 'row', backgroundColor: 'white', justifyContent: 'center',
+                    width: Dimensions.get("window").width
+                }}>
+                    <View style={{ flex: 1, justifyContent: 'center', backgroundColor: 'white', alignItems: 'center' }}>
+                        <Text style={{ fontSize: 18, color: '#3f51b5', marginBottom: 1, marginTop: 1, justifyContent: 'center' }}>
+                            <Icon name="message-square" size={20} color={"#004ea8"} />
+                        </Text>
+                    </View>
+                    <Image
+                        source={{ uri: ImageUrl }}
+                        style={{
+                            width: 50,
+                            height: 50,
+                            marginTop: 5,
+                            marginBottom: 5,
+                            borderRadius: 37.5,
+                            marginLeft: 15
+                        }}
+                    />
+                    <View style={{
+                        flex: 11, justifyContent: 'flex-start', marginLeft: 1, backgroundColor: 'white',
+                        borderColor: 'black', borderWidth: 1, borderRadius: 10, borderColor: 'white',
+                    }}>
+                        <Text
+                            style={{
+                                fontSize: 18, color: 'black', marginBottom: 1, marginTop: 1,
+                                justifyContent: 'center', marginLeft: 2
+                            }}
+                        >
+                            {item.eventName}
+                        </Text>
+
+                        <Text style={{ fontSize: 14, color: 'green', marginBottom: 5, marginLeft: 2, flexWrap: "wrap" }}>
+                            {item.description}
+                        </Text>
+                    </View> */}
+
+
+                {/* <View style={{ flex: 1, justifyContent: 'center', backgroundColor: 'white' }}>
+                        <Text style={{ fontSize: 18, color: '#3f51b5', marginBottom: 1, marginTop: 1, justifyContent: 'center' }}>
+                            {/* <Icon name="paperclip" size={20} color={"#004ea8"} 
+                        </Text>
+                    </View> */}
+                {/* </View> */}
+            </TouchableOpacity >
+
+        )
+    }
     componentDidMount() {
 
         return fetch("http://www.digitalcampus.in/ParentzApp/events.jsp?schoolCode=" + schoolCode)
@@ -42,11 +115,11 @@ export default class GalleryScreen extends React.Component {
                 console.log("events");
                 console.log(responseJson);
                 this.setState({
-                    //dataSource: responseJson.events,
+                    dataSource: responseJson.events,
                     isLoading: false
                 }, function () { }
                 );
-                // console.log("dataSource =" + dataSource);
+                console.log("dataSource =" + this.state.dataSource);
             }).catch((error) => {
                 console.log(error)
             })
@@ -74,9 +147,25 @@ export default class GalleryScreen extends React.Component {
 
                 <View style={{ marginTop: 10 }}>
                     <Text style={{ color: "#303f9f", fontSize: 20, textAlign: 'center', marginBottom: 15, marginTop: 10 }}>
-                        <Icon name="file-text" size={20} />  Gallery</Text>
+                        <Icon name="instagram" size={20} />  Event Gallery</Text>
                 </View>
-                <ScrollView style={{ flex: 1 }}>
+                <ScrollView style={{ flex: 1, alignitems: 'center', backgroundColor: 'white' }}>
+
+
+                    <FlatList
+                        //ItemSeparatorComponent={this.renderSeparator}
+                        data={this.state.dataSource}
+                        renderItem={this.renderItem}
+                        //keyExtractor={({ id }, index) => id}
+                        keyExtractor={item => item.eventId}
+                    //ItemSeparatorComponent={this.renderSeparator}
+                    />
+
+
+
+
+
+
                     {/* <Image style={styles.imageView2} source={require('./../galleryimages/17.png')} />
                     <Image style={styles.imageView2} source={require('./../galleryimages/2.jpg')} />
                     <Image style={styles.imageView2} source={require('./../galleryimages/3.jpg')} />
@@ -143,7 +232,7 @@ const styles = StyleSheet.create({
     },
     container: {
         backgroundColor: "#fff",
-        marginTop: 15,
+        //marginTop: 15,
         //justifyContent: "center",
         alignItems: "center",
         flex: 1,
@@ -170,9 +259,9 @@ const styles = StyleSheet.create({
         borderRadius: 50
     },
     imageView2: {
-        width: 375,
+        width: Dimensions.get("window").width,
         height: 200,
-        marginTop: 8,
+        marginTop: 1,
         marginBottom: 8,
         //borderRadius: 37.5,
         marginLeft: 5,

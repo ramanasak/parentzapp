@@ -100,7 +100,6 @@ export default class SiblingInfoScreen extends React.Component {
 
   componentDidMount() {
     //console.log(global.student_res);
-
     console.log("_retrieveData=");
     this._retrieveData();
     console.log("_retrieveData   2");
@@ -237,10 +236,6 @@ export default class SiblingInfoScreen extends React.Component {
           />
         </View>
         {/* </ScrollView > */}
-
-
-
-
 
 
         {/* // <View style={{ 
