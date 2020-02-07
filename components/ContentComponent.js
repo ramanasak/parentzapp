@@ -244,7 +244,7 @@ export default class ContentContainer extends Component {
 
                   <Text
                     style={styles.buttonText}
-
+                    onPress={() => this.props.navigation.navigate('Gallery')}
                   >
                     <Icon name="film" size={20} color={'#660066'} /> Gallery
                   </Text>
@@ -276,7 +276,7 @@ export default class ContentContainer extends Component {
                 >
                   <Text
                     style={styles.buttonText}
-
+                    onPress={() => this.props.navigation.navigate('Examination')}
                   >
                     <Icon name="bar-chart-2" size={20} color={'#f7347a'} /> Progress Report
                   </Text>

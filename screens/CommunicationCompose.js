@@ -74,6 +74,30 @@ class ModalExp extends Component {
         ))
     }
 
+
+    componentDidMount() {
+        return fetch("http://digitalcampus.in/ParentzApp/parentinbox.jsp?username=11352&schoolcode=VERSION-DEMO&classNo=" + classId + "&section=" + studentSection)
+            .then((response) => response.json())
+            .then((responseJson) => {
+                console.log("inbox");
+                console.log(responseJson);
+
+                this.setState({
+                    dataSource: responseJson.inbox,
+                    isLoading: false
+                }, function () { }
+                );
+
+            }).catch((error) => {
+                console.log(error)
+            })
+    }//compo
+
+
+
+
+
+
     renderList() {
         var list = [];
 

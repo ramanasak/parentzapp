@@ -128,7 +128,7 @@ export default class ReportSelectionScreen extends Component {
                     />
                     <TouchableOpacity
                         onPress={() => this.props.navigation.navigate('ReportDisplayScreen', {
-                            reportType: "OverAll",
+                            reportType: "Overall",
                         })}>
                         <Text style={{
                             marginTop: 2, marginBottom: 3,

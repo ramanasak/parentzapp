@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import { WebView } from 'react-native-webview';
 import Icon from 'react-native-vector-icons/Feather';
+import coalesceNonElementChildren from "react-native-button/coalesceNonElementChildren";
 export default class ReportDisplayScreen extends Component {
     state = {
         WEBVIEW_REF: "weViewRed",
@@ -35,6 +36,9 @@ export default class ReportDisplayScreen extends Component {
         console.log("report display ", reportType)
         console.log("report id ", id)
         console.log("report desc ", desc)
+        console.log("http://www.digitalcampus.in/ParentzApp/examinationReportDisplay.jsp?studentId="
+            + studentId + "&schoolCode=" + schoolCode + "&classNo=" + classId + "&section="
+            + studentSection + "&id=" + id + "&desc=" + desc + "&reportType=" + reportType + "&schoolName=" + schoolName)
         return (
             <View style={{ flex: 1 }}>
                 <Header loading={this.state.loading} />
@@ -43,8 +47,9 @@ export default class ReportDisplayScreen extends Component {
                     source={{
                         uri: "http://www.digitalcampus.in/ParentzApp/examinationReportDisplay.jsp?studentId="
                             + studentId + "&schoolCode=" + schoolCode + "&classNo=" + classId + "&section="
-                            + studentSection + "&id=" + id + "&desc=" + desc + "&reportType=" + reportType
+                            + studentSection + "&id=" + id + "&desc=" + desc + "&reportType=" + reportType + "&schoolName=" + schoolName
                     }}
+
                     ref={this.state.WEBVIEW_REF}
                     onLoadStart={() => this.setState({ loading: true })}
                     onLoadEnd={() => this.setState({ loading: false })}

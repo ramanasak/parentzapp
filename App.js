@@ -1310,7 +1310,7 @@ const AttendanceStackNavigator = createStackNavigator(
           />
         ),//woring
         headerTitle: <HeaderComponent />,
-     
+
       };
     }
   },
@@ -1348,7 +1348,7 @@ const AppDrawerNavigator = createDrawerNavigator(
   {
     //initialRouteName: 'Communication',
     //initialRouteName: 'Gallery', 
-    initialRouteName: 'Examination',
+    //initialRouteName: 'Examination',
     //contentComponent: ContentComponent,
     contentComponent: props => <ContentComponent {...props} />,
     drawerWidth: 300,

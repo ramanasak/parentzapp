@@ -11,7 +11,8 @@ import {
   TouchableNativeFeedback,
   TouchableHighlight,
   Alert,
-  ScrollView, AsyncStorage,
+  ScrollView,
+  AsyncStorage,
   Image,
   StatusBar
 } from "react-native";
@@ -36,9 +37,9 @@ export default class LoginForm extends React.Component {
       // schoolCode: 'VERSION-DEMO',//online
 
 
-      userName: "11352", //online double
-      userPassword: "Digital@123", //online double
-      schoolCode: "VERSION-DEMO", //online double
+      //userName: "11352", //online double
+      //userPassword: "Digital@123", //online double
+      //schoolCode: "VERSION-DEMO", //online double
 
       //userName: "11352", //online 
       //userPassword: "Digital@123", //online 
@@ -47,6 +48,21 @@ export default class LoginForm extends React.Component {
       // userName: '1589',
       // userPassword: 'Srija_Kumar540',
       // schoolCode: 'MER-MP1920',
+
+
+      // 1589
+      // Srija_Kumar540
+      // MER-MP1920
+
+
+      // 3317
+      // sdkjkt
+      // MER-MP1920
+
+      userName: "1589", //online double
+      userPassword: "Srija_Kumar540", //online double
+      schoolCode: "MER-MP1920", //online double
+
       loading: false,
       button_toggle: false
     };
