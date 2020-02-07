@@ -59,9 +59,13 @@ export default class LoginForm extends React.Component {
       // sdkjkt
       // MER-MP1920
 
-      userName: "1589", //online double
-      userPassword: "Srija_Kumar540", //online double
-      schoolCode: "MER-MP1920", //online double
+      //userName: "1589", //online double
+      //// userPassword: "Srija_Kumar540", //online double
+      // schoolCode: "MER-MP1920", //online double
+
+      userName: "", //online double
+      userPassword: "", //online double
+      schoolCode: "", //online double
 
       loading: false,
       button_toggle: false
