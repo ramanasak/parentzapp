@@ -175,7 +175,7 @@ onPress={() => this.props.navigation.navigate('Fee')}  */}
                     <TouchableOpacity style={styles.menuButtons}>
                         {/* onPress={() => this.props.navigation.navigate('Communication')}  */}
                         <View>
-                            <Text style={styles.buttonText} >
+                            <Text style={styles.buttonText} onPress={() => this.props.navigation.navigate('Communication')} >
                                 <Icon name="send" size={20} />   Communication</Text>
                         </View>
                     </TouchableOpacity>
