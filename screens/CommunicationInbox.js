@@ -65,7 +65,7 @@ export default class CommunicationInbox extends React.Component {
                     msg: item.msg,
                     attachment: item.attachment,
                     json: item,
-                    
+
                 })}>
 
                 <View style={{
@@ -108,7 +108,7 @@ export default class CommunicationInbox extends React.Component {
     //digitalcampus.in/ParentzApp/notices.jsp?
     //studentId=13207&password=Digital@123&schoolCode=VERSION-DEMO&classNo=31&section=A
     componentDidMount() {
-        return fetch("http://192.168.1.99:8080/digitalcampus.in/ParentzApp/parentinbox.jsp?username=11352&schoolcode=VERSION-DEMO&classNo=" + classId + "&section=" + studentSection)
+        return fetch("http://digitalcampus.in/ParentzApp/parentinbox.jsp?username=" + userName + "&schoolcode=" + schoolCode + "&classNo=" + classId + "&section=" + studentSection)
             .then((response) => response.json())
             .then((responseJson) => {
                 console.log("inbox");

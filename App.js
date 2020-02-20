@@ -1215,15 +1215,15 @@ const CommunicationTabNavigator = createBottomTabNavigator(
   {
 
 
-    CommunicationCompose: {
-      screen: CommunicationComposeStack,
-      navigationOptions: {
-        tabBarLabel: 'Compose',
-        tabBarIcon: ({ tintColor }) => (
-          <Icon name="edit" color={tintColor} size={24} />
-        )
-      }
-    },
+    // CommunicationCompose: {
+    //   screen: CommunicationComposeStack,
+    //   navigationOptions: {
+    //     tabBarLabel: 'Compose',
+    //     tabBarIcon: ({ tintColor }) => (
+    //       <Icon name="edit" color={tintColor} size={24} />
+    //     )
+    //   }
+    // },
     CommunicationInbox: {
       screen: CommunicationInboxStack,
       navigationOptions: {

@@ -1,5 +1,19 @@
 import React, { Component } from 'react'
-import { View, Text, Image } from 'react-native'
+import {
+    View,
+    Image,
+    StyleSheet,
+    Text,
+    ScrollView,
+    TouchableHighlight,
+    ActivityIndicator,
+    TouchableOpacity,
+    FlatList,
+    Dimensions,
+    CheckBox,
+    Alert
+} from 'react-native'
+import Icon from 'react-native-vector-icons/Feather';
 import SelectMultiple from 'react-native-select-multiple'
 
 const fruits = ['Apples', 'Oranges', 'Pears']
@@ -35,14 +49,19 @@ export default class CommunicationCompose extends Component {
     }
 
     componentDidMount() {
-        return fetch("http://digitalcampus.in/ParentzApp/communicationCompose.jsp?username=11352&schoolcode=VERSION-DEMO&classNo=" + classId + "&section=" + studentSection)
+        console.log("http://www.digitalcampus.in/ParentzApp/communication.jsp");
+        //return fetch("http://digitalcampus.in/ParentzApp/communicationCompose.jsp?username=11352&schoolcode=VERSION-DEMO&classNo=" + classId + "&section=" + studentSection)
+        return fetch("http://www.digitalcampus.in/ParentzApp/communication.jsp?studentId="
+            + studentId + "&schoolCode=" + schoolCode + "&classNo=" + classId + "&section=" + studentSection)
+            // return fetch("http://www.digitalcampus.in/ParentzApp/communication.jsp")
             .then((response) => response.json())
             .then((responseJson) => {
-                console.log("communicationCompose");
+                console.log("communication Compose");
                 console.log(responseJson);
-
+                //alert("ok");
                 this.setState({
-                    dataSource: responseJson.inbox,
+                    dataSourceT: responseJson.teacherArray,
+                    dataSourceA: responseJson.adminArray,
                     isLoading: false
                 }, function () { }
                 );
@@ -52,15 +71,110 @@ export default class CommunicationCompose extends Component {
             })
     }//compo
 
-    render() {
+    renderTeachers = () => {
+
+
         return (
-            <View>
-                <Text> Teachers list </Text>
-                <SelectMultiple
-                    items={fruits}
+            <View style={{ flex: 1, alignItems: 'center' }}>
+                {/* <SelectMultiple
+                    items={this.state.dataSourceT}
                     renderLabel={renderLabel}
                     selectedItems={this.state.selectedFruits}
-                    onSelectionsChange={this.onSelectionsChange} />
+                    onSelectionsChange={this.onSelectionsChange}
+                    style={{ flex: 1, width: Dimensions.get('window').width }} /> */}
+                <ScrollView style={{ width: Dimensions.get('window').width }}>
+                    <FlatList
+                        data={this.state.dataSourceT}
+                        renderItem={({ item }) =>
+                            // <TouchableOpacity
+                            //     onPress={() => this.props.navigation.navigate('ReportDisplayScreen', {
+                            //         reportType: "Exam",
+                            //         id: item.examId,
+                            //         desc: item.examDesc,
+                            //     })}>
+                            //     <CheckBox></CheckBox>
+                            //     <Text style={{
+                            //         marginTop: 2, marginBottom: 3,
+                            //         textAlign: 'center', color: 'green',
+                            //         fontWeight: 'bold', fontSize: 18
+                            //     }}> {item.emp_Name}</Text>
+                            // </TouchableOpacity>
+                            // <TouchableOpacity
+                            // >
+
+                            // , Alert.alert("check")
+
+                            <View style={{ flexDirection: 'row' }}>
+                                <CheckBox
+                                    value={this.state.checked}
+                                    onValueChange={() => this.setState({ checked: !this.state.checked })}
+                                />
+                                <Text style={{ marginTop: 5 }}> {item.emp_Name} </Text>
+                            </View>
+                            // {/* </TouchableOpacity> */}
+                        }
+                        keyExtractor={item => item.emp_Id}
+                    />
+
+                </ScrollView>
+
+                {/* <ScrollView style={{ flexDirection: 'column' }}>
+                    <CheckBox />
+                    <View style={{ flexDirection: 'row' }}>
+                        <CheckBox
+                            value={this.state.checked}
+                            onValueChange={() => this.setState({ checked: !this.state.checked })}
+                        />
+                        <Text style={{ marginTop: 5 }}> this is checkbox</Text>
+                    </View>
+                </ScrollView> */}
+
+            </View>
+
+
+        );
+
+    }
+    renderAdmins = () => {
+
+
+        return (
+            <SelectMultiple
+                items={fruits}
+                renderLabel={renderLabel}
+                selectedItems={this.state.selectedFruits}
+                onSelectionsChange={this.onSelectionsChange} />
+        );
+
+    }
+    render() {
+        return (
+            <View style={{ flex: 1, alignItems: 'center' }}>
+                <TouchableHighlight style={styles.menuButtons}
+                    onPress={() => this.setState({ teachers: !this.state.teachers, administrators: false })}>
+                    <View>
+                        <Text style={styles.buttonText}>
+                            <Icon name="book-open" size={20} />  Teachers List</Text>
+                    </View>
+                </TouchableHighlight>
+
+                {/* {this.state.teachers ? this.renderTeachers() : null} */}
+                {this.state.teachers ? this.renderTeachers() : this.renderTeachers()}
+
+                {/* {this.renderTerms()} */}
+
+                <TouchableHighlight style={styles.menuButtons}
+                    onPress={() => this.setState({ administrators: !this.state.administrators, teachers: false })}>
+                    <View>
+                        <Text style={styles.buttonText}>
+                            <Icon name="book-open" size={20} />  Submit </Text>
+                    </View>
+                </TouchableHighlight>
+
+                {/* {this.state.administrators ? this.renderAdmins() : null} */}
+
+
+
             </View>
         )
     }
@@ -417,7 +531,7 @@ export default class CommunicationCompose extends Component {
 //     },
 //     modal3: {
 //         height: 300,
-//         width: Dimensions.get('window').width,
+//          ,
 //         // backgroundColor: 'red'
 //     },
 //     modal4: {
@@ -650,3 +764,45 @@ export default class CommunicationCompose extends Component {
 // //         borderWidth: 2,
 // //     }
 // // });
+const styles = StyleSheet.create({
+    header: {
+        paddingTop: 30,
+        paddingBottom: 10,
+        backgroundColor: "white"
+    },
+    title: {
+        color: "green",
+        fontSize: 20,
+        fontWeight: "bold",
+        textAlign: "center"
+    },
+    icon: {
+        //color: "#fff",
+        fontSize: 20,
+        fontWeight: "bold",
+        textAlign: "center"
+    },
+    footer: {
+        padding: 10,
+        flexDirection: "row",
+        justifyContent: "space-around",
+        backgroundColor: "white"
+    },
+    menuButtons: {
+        backgroundColor: "#3f51b5",
+        //width: 300,
+        width: Dimensions.get("window").width,
+        paddingVertical: 8,
+        marginVertical: 10,
+        borderRadius: 5,
+        borderWidth: 1,
+        borderColor: "#2b388f"
+    },
+    buttonText: {
+        fontSize: 18,
+        fontWeight: '900',
+        color: "#fff",
+        textAlign: "center",
+    }
+});
+//0c084c

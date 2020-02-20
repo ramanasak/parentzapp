@@ -304,7 +304,10 @@ export default class ContentContainer extends Component {
                     //alignItems: "center"
                   }}
                 >
-                  <Text style={styles.buttonText}>
+                  <Text
+                    style={styles.buttonText}
+                    onPress={() => this.props.navigation.navigate('Communication')}
+                  >
                     <Icon name="send" size={20} color={'#ffa500'} /> Communication
                   </Text>
                 </View>

@@ -131,8 +131,8 @@ android {
         applicationId "com.parentzapp"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 5
-        versionName "2.5"
+        versionCode 8
+        versionName "3.0"
     }
     splits {
         abi {
